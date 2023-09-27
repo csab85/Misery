@@ -345,7 +345,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9110296520517975847, guid: fdd6ac1590ec81a479a1bab18eefbad7, type: 3}
       propertyPath: cameraDrift
-      value: 0.2
+      value: 0.1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
