@@ -1,0 +1,5 @@
+folders ---> Normal Case
+assets/spritesheets/audios ---> snake_case
+game objects ---> Normal Case
+scripts ---> PascalCase
+
