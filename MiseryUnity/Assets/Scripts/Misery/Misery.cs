@@ -4,20 +4,21 @@ using UnityEngine;
 
 public class Misery : MonoBehaviour
 {
-    //==============================================================================================STATS===================================================================================================================
+    //STATS
+    //========================
     public string state;
     public float speed;
     public Vector3 velocity;
     public Vector3 maxVelocity;
     public float acceleration;
+    //========================
 
-
-    //===============================================================================FUNCTIONS==============================================================================================================================
-
-    //Movement--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    //FUNCTIONS
+    //========================
+    //MOVEMENT
     IEnumerator Walk()
     {
-        if(Input.GetAxis("Horizontal") != 0)
+        if (Input.GetAxis("Horizontal") != 0)
         {
             velocity.x = Input.GetAxis("Horizontal") * acceleration;
         }
@@ -35,7 +36,7 @@ public class Misery : MonoBehaviour
 
         yield return new WaitForSecondsRealtime(0);
     }
-
+    //========================
 
     void Start()
     {
