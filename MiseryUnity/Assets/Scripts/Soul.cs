@@ -13,6 +13,9 @@ public class Soul : MonoBehaviour
     public int mood;
     int lastMood;
 
+    public float maxAlpha;
+    Color color; //this will be set on the function that chooses archetype (and color)
+
     public float speed;
     public Vector3 velocity;
     public Vector3 maxVelocity;
@@ -35,6 +38,60 @@ public class Soul : MonoBehaviour
 
         transform.GetChild(mood).gameObject.SetActive(true);//activate new face
     }
+
+    /// <summary>
+    /// Makes the soul go invisible or visible
+    /// </summary>
+    /// <param name="invisibling">defines if the soul will get invisible (true) or visible (false)</param>
+    /// <param name="invisilationRate">how much alpha the soul earns/loses per cycle</param>
+    void Invisilate(float invisilationRate, bool invisibling = true)
+    {
+        float alpha = transform.GetComponent<SpriteRenderer>().color.a;
+
+        int i = 0;
+
+        if (invisibling == true)
+        {
+            if (alpha <= 0)
+            {
+                return;
+            }
+
+            i = -1;
+            //transform.GetComponent<SpriteRenderer>().color = new Color(color.r, color.g, color.b, maxAlpha + 0.1f);
+        }
+
+        if (invisibling == false)
+        {
+            if (alpha >= maxAlpha)
+            {
+                return;
+            }
+
+            i = 1;
+        }
+
+        alpha += invisilationRate * i * 0.001f;
+
+        transform.GetComponent<SpriteRenderer>().color = new Color(color.r, color.g, color.b, alpha);
+    }
+
+    void Walk(bool leftRight = true)
+    {
+        if (leftRight)
+        {
+            transform.position += new Vector3(speed, 0, 0) * Time.deltaTime;
+            transform.GetComponent<SpriteRenderer>().flipX = true;
+            transform.GetChild(mood).gameObject.transform.GetComponent<SpriteRenderer>().flipX = true;
+        }
+
+        if (leftRight == false)
+        {
+            transform.position -= new Vector3(speed, 0, 0) * Time.deltaTime;
+            transform.GetComponent<SpriteRenderer>().flipX = false;
+            transform.GetChild(mood).gameObject.transform.GetComponent<SpriteRenderer>().flipX = false;
+        }
+    }
     //========================
 
     // Start is called before the first frame update
@@ -46,6 +103,7 @@ public class Soul : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        Invisilate(0.5f, false);
+        Walk();
     }
 }
