@@ -206,7 +206,7 @@ GameObject:
   - component: {fileID: 6403014385240101292}
   - component: {fileID: 6403014385240101283}
   - component: {fileID: 6403014385240101294}
-  - component: {fileID: 6403014385240101293}
+  - component: {fileID: 1104839011961411328}
   m_Layer: 0
   m_Name: Soul
   m_TagString: Untagged
@@ -307,7 +307,7 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
---- !u!114 &6403014385240101293
+--- !u!114 &1104839011961411328
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -319,19 +319,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 69ec9ff91039ad54789aaf56372f2a74, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  states: []
-  state: 0
+  speed: 2
+  maxVelocity: {x: 5, y: 0, z: 0}
+  acceleration: 1
+  walkRange: 30
+  states:
+  - visilating
+  - walking
+  - invisilating
+  state: visilating
   moods:
   - hapi
   - OoO
   - sad
   - poker
   - roblox
-  mood: 0
-  speed: 0
-  velocity: {x: 0, y: 0, z: 0}
-  maxVelocity: {x: 0, y: 0, z: 0}
-  acceleration: 0
+  mood: 
+  maxAlpha: 0.7
 --- !u!1 &6403014385334010046
 GameObject:
   m_ObjectHideFlags: 0

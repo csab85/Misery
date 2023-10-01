@@ -6,37 +6,50 @@ public class Soul : MonoBehaviour
 {
     //STATS
     //========================
-    public string[] states = {};
-    public int state;
+    
+    //Movement
+    public float speed;
+    Vector3 velocity;
+    public Vector3 maxVelocity;
+    public float acceleration;
+    public float walkRange;
+    float movement;
 
+    //State
+    public string[] states = {"visilating", "walking", "invisilating"};
+    public string state = "visilating";
+    int stateValue = 0;
+
+    //Mood
     public List<string> moods = new List<string> { "hapi", "OoO", "sad", "poker", "roblox"};
-    public int mood;
-    int lastMood;
+    public string mood;
+    int moodValue;
+    int lastMoodValue;
 
+    //Color
     public float maxAlpha;
     Color color; //this will be set on the function that chooses archetype (and color)
 
-    public float speed;
-    public Vector3 velocity;
-    public Vector3 maxVelocity;
-    public float acceleration;
+    //Gambiarras
+    bool leftStreet = true;
+    int directionValue = 1;
+
     //========================
 
     //FUNCTIONS
     //========================
-
     /// <summary>
     /// Changes the face of the soul
     /// </summary>
     /// <param name="mood">The mood the soul will be in (their face)</param>
-    void Change_Face(string newMood)
+    void ChangeFace(string newMood)
     {
-        transform.GetChild(lastMood).gameObject.SetActive(false);//deactivate current face
+        transform.GetChild(lastMoodValue).gameObject.SetActive(false);//deactivate current face
 
-        mood = moods.IndexOf(newMood);//get new face
-        lastMood = mood;//update last mood
+        mood = moods[moodValue];//get new face
+        lastMoodValue = moodValue;//update last mood
 
-        transform.GetChild(mood).gameObject.SetActive(true);//activate new face
+        transform.GetChild(moodValue).gameObject.SetActive(true);//activate new face
     }
 
     /// <summary>
@@ -44,7 +57,7 @@ public class Soul : MonoBehaviour
     /// </summary>
     /// <param name="invisibling">defines if the soul will get invisible (true) or visible (false)</param>
     /// <param name="invisilationRate">how much alpha the soul earns/loses per cycle</param>
-    void Invisilate(float invisilationRate, bool invisibling = true)
+    bool Invisilate(float invisilationRate, bool invisibling = true)
     {
         float alpha = transform.GetComponent<SpriteRenderer>().color.a;
 
@@ -54,7 +67,7 @@ public class Soul : MonoBehaviour
         {
             if (alpha <= 0)
             {
-                return;
+                return true;
             }
 
             i = -1;
@@ -65,7 +78,7 @@ public class Soul : MonoBehaviour
         {
             if (alpha >= maxAlpha)
             {
-                return;
+                return true;
             }
 
             i = 1;
@@ -74,36 +87,104 @@ public class Soul : MonoBehaviour
         alpha += invisilationRate * i * 0.001f;
 
         transform.GetComponent<SpriteRenderer>().color = new Color(color.r, color.g, color.b, alpha);
+
+        return false;
     }
 
-    void Walk(bool leftRight = true)
+    bool Walk(bool leftRight = true)
     {
         if (leftRight)
         {
             transform.position += new Vector3(speed, 0, 0) * Time.deltaTime;
             transform.GetComponent<SpriteRenderer>().flipX = true;
-            transform.GetChild(mood).gameObject.transform.GetComponent<SpriteRenderer>().flipX = true;
+            transform.GetChild(moodValue).gameObject.transform.GetComponent<SpriteRenderer>().flipX = true;
         }
 
         if (leftRight == false)
         {
             transform.position -= new Vector3(speed, 0, 0) * Time.deltaTime;
             transform.GetComponent<SpriteRenderer>().flipX = false;
-            transform.GetChild(mood).gameObject.transform.GetComponent<SpriteRenderer>().flipX = false;
+            transform.GetChild(moodValue).gameObject.transform.GetComponent<SpriteRenderer>().flipX = false;
         }
+
+        movement = walkRange - transform.position.x;
+
+        if (movement <= 0)
+        {
+            return true;
+        }
+
+        return false;
+    }
+
+    /// <summary>
+    /// Chooses the soul stats and color
+    /// </summary>
+    void ChooseColor()
+    {
+        color = new Color(Random.value, Random.value, Random.value, 0);
+        gameObject.GetComponent<SpriteRenderer>().color = color;
     }
     //========================
 
-    // Start is called before the first frame update
+
     void Start()
     {
-        Change_Face(moods[mood]);
+        ChangeFace(mood);
+        ChooseColor();
     }
 
-    // Update is called once per frame
+
     void Update()
     {
-        Invisilate(0.5f, false);
-        Walk();
+        switch (state)
+        {
+            case "visilating":
+
+                bool finishedVisilating = false;
+
+                if (transform.position.x > 0)//if it aint this then leftRight is already set right
+                {
+                    leftStreet = false;
+                }
+
+                finishedVisilating = Invisilate(0.1f, false);
+                Walk(leftStreet);
+                
+                if (finishedVisilating)
+                {
+                    stateValue += 1;
+                    state = states[stateValue];
+                }
+
+                break;
+
+            case "walking":
+
+                bool finishedWalking = false;
+                finishedWalking = Walk(leftStreet);
+                
+                if (finishedWalking)
+                {
+                    state = "invisilating";
+                }
+
+                break;
+
+            case "invisilating":
+
+                bool finishedInvisilating = false;
+
+                Walk(leftStreet);
+                finishedInvisilating = Invisilate(0.1f);
+
+                if (finishedInvisilating)
+                {
+                    Destroy(gameObject);
+                }
+
+                break;
+
+        }
     }
 }
