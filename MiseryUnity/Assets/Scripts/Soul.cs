@@ -13,7 +13,7 @@ public class Soul : MonoBehaviour
     public Vector3 maxVelocity;
     public float acceleration;
     public float walkRange;
-    float movement;
+    public float movement;
 
     //State
     public string[] states = {"visilating", "walking", "invisilating"};
@@ -132,6 +132,11 @@ public class Soul : MonoBehaviour
     {
         ChangeFace(mood);
         ChooseColor();
+
+        if (transform.position.x > 0)//if it aint this then leftRight is already set right
+        {
+            leftStreet = false;
+        }
     }
 
 
@@ -143,12 +148,7 @@ public class Soul : MonoBehaviour
 
                 bool finishedVisilating = false;
 
-                if (transform.position.x > 0)//if it aint this then leftRight is already set right
-                {
-                    leftStreet = false;
-                }
-
-                finishedVisilating = Invisilate(0.1f, false);
+                finishedVisilating = Invisilate(1f, false);
                 Walk(leftStreet);
                 
                 if (finishedVisilating)
