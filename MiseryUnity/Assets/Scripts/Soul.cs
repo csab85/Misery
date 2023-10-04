@@ -13,6 +13,7 @@ public class Soul : MonoBehaviour
     public Vector3 maxVelocity;
     public float acceleration;
     public float walkRange;
+    float startingX;
     public float movement;
 
     //State
@@ -55,15 +56,16 @@ public class Soul : MonoBehaviour
     /// <summary>
     /// Makes the soul go invisible or visible
     /// </summary>
-    /// <param name="invisibling">defines if the soul will get invisible (true) or visible (false)</param>
+    /// <param name="invisilating">defines if the soul will get invisible (true) or visible (false)</param>
     /// <param name="invisilationRate">how much alpha the soul earns/loses per cycle</param>
-    bool Invisilate(float invisilationRate, bool invisibling = true)
+    bool Invisilate(float invisilationRate, bool invisilating = true)
     {
         float alpha = transform.GetComponent<SpriteRenderer>().color.a;
 
         int i = 0;
 
         if (invisibling == true)
+        if (invisilating == true)
         {
             if (alpha <= 0)
             {
@@ -74,7 +76,7 @@ public class Soul : MonoBehaviour
             //transform.GetComponent<SpriteRenderer>().color = new Color(color.r, color.g, color.b, maxAlpha + 0.1f);
         }
 
-        if (invisibling == false)
+        if (invisilating == false)
         {
             if (alpha >= maxAlpha)
             {
@@ -91,11 +93,17 @@ public class Soul : MonoBehaviour
         return false;
     }
 
+    /// <summary>
+    /// Makes the soul move left or right, and sets the mirror accordingly
+    /// </summary>
+    /// <param name="leftRight">If true makes the soul go from left to right, if not the soul goes right to left</param>
+    /// <returns></returns>
     bool Walk(bool leftRight = true)
     {
         if (leftRight)
         {
             transform.position += new Vector3(speed, 0, 0) * Time.deltaTime;
+            movement += speed * Time.deltaTime;
             transform.GetComponent<SpriteRenderer>().flipX = true;
             transform.GetChild(moodValue).gameObject.transform.GetComponent<SpriteRenderer>().flipX = true;
         }
@@ -103,13 +111,12 @@ public class Soul : MonoBehaviour
         if (leftRight == false)
         {
             transform.position -= new Vector3(speed, 0, 0) * Time.deltaTime;
+            movement -= speed * Time.deltaTime;
             transform.GetComponent<SpriteRenderer>().flipX = false;
             transform.GetChild(moodValue).gameObject.transform.GetComponent<SpriteRenderer>().flipX = false;
         }
 
-        movement = walkRange - transform.position.x;
-
-        if (movement <= 0)
+        if (movement >= walkRange)
         {
             return true;
         }
@@ -137,6 +144,8 @@ public class Soul : MonoBehaviour
         {
             leftStreet = false;
         }
+
+        startingX = transform.position.x;
     }
 
 
@@ -148,7 +157,7 @@ public class Soul : MonoBehaviour
 
                 bool finishedVisilating = false;
 
-                finishedVisilating = Invisilate(1f, false);
+                finishedVisilating = Invisilate(1, false);
                 Walk(leftStreet);
                 
                 if (finishedVisilating)
@@ -176,7 +185,7 @@ public class Soul : MonoBehaviour
                 bool finishedInvisilating = false;
 
                 Walk(leftStreet);
-                finishedInvisilating = Invisilate(0.1f);
+                finishedInvisilating = Invisilate(4f);
 
                 if (finishedInvisilating)
                 {
