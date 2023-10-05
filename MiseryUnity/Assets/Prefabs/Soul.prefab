@@ -322,12 +322,13 @@ MonoBehaviour:
   speed: 2
   maxVelocity: {x: 5, y: 0, z: 0}
   acceleration: 1
-  walkRange: 30
+  walkRange: 10
+  movement: 0
   states:
   - visilating
   - walking
   - invisilating
-  state: visilating
+  state: unfading
   moods:
   - hapi
   - OoO

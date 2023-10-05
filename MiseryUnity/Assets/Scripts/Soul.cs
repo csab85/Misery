@@ -17,8 +17,8 @@ public class Soul : MonoBehaviour
     public float movement;
 
     //State
-    public string[] states = {"visilating", "walking", "invisilating"};
-    public string state = "visilating";
+    public string[] states = {"fading", "walking", "unfading"};
+    public string state = "unfading";
     int stateValue = 0;
 
     //Mood
@@ -56,37 +56,29 @@ public class Soul : MonoBehaviour
     /// <summary>
     /// Makes the soul go invisible or visible
     /// </summary>
-    /// <param name="invisibling">defines if the soul will get invisible (true) or visible (false)</param>
-    /// <param name="invisilationRate">how much alpha the soul earns/loses per cycle</param>
-    bool Invisilate(float invisilationRate, bool invisibling = true)
+    /// <param name="fading">defines if the soul will get invisible (true) or visible (false)</param>
+    /// <param name="fadingRate">how much alpha the soul earns/loses per cycle</param>
+    bool Fade(float fadingRate)
     {
         float alpha = transform.GetComponent<SpriteRenderer>().color.a;
 
-        int i = 0;
-
-        if (invisibling == true)
-        if (invisibling == true)
+        if (fadingRate < 0)
         {
             if (alpha <= 0)
             {
                 return true;
             }
-
-            i = -1;
-            //transform.GetComponent<SpriteRenderer>().color = new Color(color.r, color.g, color.b, maxAlpha + 0.1f);
         }
 
-        if (invisibling == false)
+        if (fadingRate > 0)
         {
             if (alpha >= maxAlpha)
             {
                 return true;
             }
-
-            i = 1;
         }
 
-        alpha += invisilationRate * i * 0.001f;
+        alpha += fadingRate * 0.001f;
 
         transform.GetComponent<SpriteRenderer>().color = new Color(color.r, color.g, color.b, alpha);
 
@@ -153,14 +145,15 @@ public class Soul : MonoBehaviour
     {
         switch (state)
         {
-            case "visilating":
+            case "unfading":
+                #region
 
-                bool finishedVisilating = false;
+                bool finishedUnfading = false;
 
-                finishedVisilating = Invisilate(1, false);
+                finishedUnfading = Fade(-1);
                 Walk(leftStreet);
                 
-                if (finishedVisilating)
+                if (finishedUnfading)
                 {
                     stateValue += 1;
                     state = states[stateValue];
@@ -168,7 +161,10 @@ public class Soul : MonoBehaviour
 
                 break;
 
+                #endregion
+
             case "walking":
+                #region
 
                 bool finishedWalking = false;
                 finishedWalking = Walk(leftStreet);
@@ -180,20 +176,24 @@ public class Soul : MonoBehaviour
 
                 break;
 
-            case "invisilating":
+                #endregion
 
-                bool finishedInvisilating = false;
+            case "fading":
+                #region
+
+                bool finishedFading = false;
 
                 Walk(leftStreet);
-                finishedInvisilating = Invisilate(4f);
+                finishedFading = Fade(4);
 
-                if (finishedInvisilating)
+                if (finishedFading)
                 {
                     Destroy(gameObject);
                 }
 
                 break;
 
+                #endregion
         }
     }
 }
