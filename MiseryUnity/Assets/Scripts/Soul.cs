@@ -56,16 +56,16 @@ public class Soul : MonoBehaviour
     /// <summary>
     /// Makes the soul go invisible or visible
     /// </summary>
-    /// <param name="invisilating">defines if the soul will get invisible (true) or visible (false)</param>
+    /// <param name="invisibling">defines if the soul will get invisible (true) or visible (false)</param>
     /// <param name="invisilationRate">how much alpha the soul earns/loses per cycle</param>
-    bool Invisilate(float invisilationRate, bool invisilating = true)
+    bool Invisilate(float invisilationRate, bool invisibling = true)
     {
         float alpha = transform.GetComponent<SpriteRenderer>().color.a;
 
         int i = 0;
 
         if (invisibling == true)
-        if (invisilating == true)
+        if (invisibling == true)
         {
             if (alpha <= 0)
             {
@@ -76,7 +76,7 @@ public class Soul : MonoBehaviour
             //transform.GetComponent<SpriteRenderer>().color = new Color(color.r, color.g, color.b, maxAlpha + 0.1f);
         }
 
-        if (invisilating == false)
+        if (invisibling == false)
         {
             if (alpha >= maxAlpha)
             {
