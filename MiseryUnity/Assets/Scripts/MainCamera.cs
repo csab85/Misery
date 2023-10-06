@@ -92,10 +92,38 @@ public class MainCamera : MonoBehaviour
     /// </summary>
     void CameraFollow()
 {
-    float cameraX = player.transform.position.x - Input.GetAxis("Horizontal") * camDelay;
-    float cameraY = player.transform.position.y - Input.GetAxis("Vertical") * camDelay;
+        float cameraX = player.transform.position.x - Input.GetAxis("Horizontal") * camDelay;
+        float cameraY = player.transform.position.y - Input.GetAxis("Vertical") * camDelay;
 
-    transform.position = new Vector3(cameraX, cameraY, -10);
+        if (transform.position.x > (cameraX - camDelay) && transform.position.x < (cameraX + camDelay) && transform.position.y > (cameraY - camDelay) && transform.position.y < (cameraY + camDelay))
+        {
+            transform.position = new Vector3(cameraX, cameraY, -10);
+        }
+
+        //arrange position
+        else
+        {
+            if (transform.position.x < cameraX)
+            {
+                transform.position += new Vector3(camTravelSpeed, 0, 0) * Time.deltaTime;
+            }
+
+            if (transform.position.x > cameraX)
+            {
+                transform.position -= new Vector3(camTravelSpeed, 0, 0) * Time.deltaTime;
+            }
+
+            if (transform.position.y < cameraY)
+            {
+                transform.position += new Vector3(0, camTravelSpeed, 0) * Time.deltaTime;
+            }
+
+            if (transform.position.y > cameraY)
+            {
+                transform.position -= new Vector3(0, camTravelSpeed, 0) * Time.deltaTime;
+            }
+        }
+            
 }
 
     /// <summary>
