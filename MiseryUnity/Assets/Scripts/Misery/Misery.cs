@@ -78,7 +78,7 @@ public class Misery : MonoBehaviour
         {
             if (cam.place == collision.tag)
             {
-                cam.place = "outside";
+                cam.place = "Outside";
             }
 
             else

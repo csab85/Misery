@@ -1,0 +1,3 @@
+BUGS
+
+- leaving/entering building while camera is changing messes the camera up

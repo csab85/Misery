@@ -196,7 +196,7 @@ public class MainCamera : MonoBehaviour
             #endregion
 
             //check all
-            if (correctSize && correctPositX && correctPositY && correctFadedRooftop && correctUnfadedRooftop)
+            if ((correctSize && correctPositX && correctPositY && correctFadedRooftop) | (correctSize && correctUnfadedRooftop && following))
             {
                 changed = true;
                 changing = false;
