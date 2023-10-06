@@ -4,19 +4,37 @@ using UnityEngine;
 
 public class Misery : MonoBehaviour
 {
-    //STATS
+    //IMPORTS
     //========================
+    #region
+
+    public MainCamera cam;
+
+    #endregion
+    //========================
+
+    //STATS AND VALUES
+    //========================
+    #region
+
     public string state;
     public float speed;
     public Vector3 velocity;
     public Vector3 maxVelocity;
     public float acceleration;
+
+    #endregion
     //========================
 
     //FUNCTIONS
     //========================
-    //MOVEMENT
-    IEnumerator Walk()
+    #region
+
+    /// <summary>
+    /// Move misery accordyingly to keyboard input
+    /// </summary>
+    /// <returns></returns>
+    void Walk()
     {
         if (Input.GetAxis("Horizontal") != 0)
         {
@@ -33,19 +51,45 @@ public class Misery : MonoBehaviour
         {
             transform.position += velocity * Time.deltaTime;
         }
-
-        yield return new WaitForSecondsRealtime(0);
     }
+
+    #endregion
     //========================
 
+    //RUNNING
+    //========================
+    #region
+
+    //Start
     void Start()
     {
-        
+
     }
 
-    // Update is called once per frame
+    // Update
     void Update()
     {
-        StartCoroutine(Walk());
+        Walk();
     }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (cam.changing == false)
+        {
+            if (cam.place == collision.tag)
+            {
+                cam.place = "outside";
+            }
+
+            else
+            {
+                cam.place = collision.tag;
+            }
+        }
+
+        cam.changing = true;
+    }
+
+    #endregion
+    //========================
 }

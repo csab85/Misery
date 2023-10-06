@@ -24,7 +24,7 @@ public class MainCamera : MonoBehaviour
 
     //camera settings
     public float camDelay;
-    public float camSpeed;
+    public float camTravelSpeed;
     public float zoomSpeed;
 
     //cam defining vars (defines the camera behaviour)
@@ -33,10 +33,12 @@ public class MainCamera : MonoBehaviour
     Vector2 camPosition;
 
     //flow vars (defines behaviours values)
-    string lastRooftop;
-    string actualRooftop;
+    public string lastRooftop;
+    public string actualRooftop;
     bool changed = true;
-    string place = "outside";
+    public string place = "Outside";
+
+    public bool changing = false; //call change ambient function on updadte
 
     #endregion
     //========================
@@ -53,31 +55,34 @@ public class MainCamera : MonoBehaviour
     /// <param name="fadingRate">how much alpha the rooftop earns/loses per cycle</param>
     bool Fade(string rooftopName, float fadingRate)
     {
-        GameObject rooftop = GameObject.Find(rooftopName);
-
-        float alpha = rooftop.GetComponent<SpriteRenderer>().color.a;
-
-        if (fadingRate < 0)
+        if (rooftopName != "Outside")
         {
-            if (alpha <= 0)
+            GameObject rooftop = GameObject.Find(rooftopName);
+
+            float alpha = rooftop.GetComponent<SpriteRenderer>().color.a;
+
+            if (fadingRate > 0)
             {
-                return true;
+                if (alpha <= 0)
+                {
+                    return true;
+                }
             }
-        }
 
-        if (fadingRate > 0)
-        {
-            if (alpha >= 1)
+            if (fadingRate < 0)
             {
-                return true;
+                if (alpha >= 1)
+                {
+                    return true;
+                }
             }
+
+            alpha -= fadingRate * 0.001f;
+
+            Color rooftopColor = rooftop.transform.GetComponent<SpriteRenderer>().color;
+
+            rooftop.transform.GetComponent<SpriteRenderer>().color = new Color(rooftopColor.r, rooftopColor.g, rooftopColor.b, alpha);
         }
-
-        alpha += fadingRate * 0.001f;
-
-        Color rooftopColor = rooftop.transform.GetComponent<SpriteRenderer>().color;
-
-        rooftop.transform.GetComponent<SpriteRenderer>().color = new Color(rooftopColor.r, rooftopColor.g, rooftopColor.b, alpha);
 
         return false;
     }
@@ -100,20 +105,23 @@ public class MainCamera : MonoBehaviour
     {
         if (changed)
         {
+            lastRooftop = actualRooftop;
+
             //outside
-            if (place == "outside")
+            if (place == "Outside")
             {
                 following = true;
                 camSize = 5;
-                actualRooftop = "outside";
+                actualRooftop = "Outside";
             }
 
             //experimental place
-            if (place == "experiment")
+            if (place == "House")
             {
                 following = false;
-                camSize = 3;
-                actualRooftop = "outside";
+                camPosition = new Vector2(-7, 0.7f);
+                camSize = 2.5f;
+                actualRooftop = "House Rooftop";
             }
 
             changed = false;
@@ -127,12 +135,12 @@ public class MainCamera : MonoBehaviour
 
             if (cam.orthographicSize < camSize)
             {
-                cam.orthographicSize += zoomSpeed;
+                cam.orthographicSize += zoomSpeed * Time.deltaTime;
             }
 
             if (cam.orthographicSize > camSize)
             {
-                cam.orthographicSize -= zoomSpeed;
+                cam.orthographicSize -= zoomSpeed * Time.deltaTime;
             }
 
             //check size
@@ -147,24 +155,24 @@ public class MainCamera : MonoBehaviour
             bool correctPositX = false;
             bool correctPositY = false;
 
-            if(camPosition.x < transform.position.x)
+            if(transform.position.x < camPosition.x)
             {
-                transform.position += new Vector3(camSpeed, 0, 0) * Time.deltaTime;
+                transform.position += new Vector3(camTravelSpeed, 0, 0) * Time.deltaTime;
             }
 
-            if (camPosition.x > transform.position.x)
+            if (transform.position.x > camPosition.x)
             {
-                transform.position -= new Vector3(camSpeed, 0, 0) * Time.deltaTime;
+                transform.position -= new Vector3(camTravelSpeed, 0, 0) * Time.deltaTime;
             }
 
-            if (camPosition.y < transform.position.y)
+            if (transform.position.y < camPosition.y)
             {
-                transform.position += new Vector3(0, camSpeed, 0) * Time.deltaTime;
+                transform.position += new Vector3(0, camTravelSpeed, 0) * Time.deltaTime;
             }
 
-            if (camPosition.y > transform.position.y)
+            if (transform.position.y > camPosition.y)
             {
-                transform.position -= new Vector3(0, camSpeed, 0) * Time.deltaTime;
+                transform.position -= new Vector3(0, camTravelSpeed, 0) * Time.deltaTime;
             }
 
             //check posit
@@ -182,8 +190,8 @@ public class MainCamera : MonoBehaviour
             //rooftop visibility
             #region
 
-            bool correctFadedRooftop = Fade(actualRooftop, 1);
-            bool correctUnfadedRooftop = Fade(lastRooftop, -1);
+            bool correctFadedRooftop = Fade(actualRooftop, 3);
+            bool correctUnfadedRooftop = Fade(lastRooftop, -3);
 
             #endregion
 
@@ -191,6 +199,7 @@ public class MainCamera : MonoBehaviour
             if (correctSize && correctPositX && correctPositY && correctFadedRooftop && correctUnfadedRooftop)
             {
                 changed = true;
+                changing = false;
             }
         }
     }
@@ -217,17 +226,11 @@ public class MainCamera : MonoBehaviour
         {
             CameraFollow();
         }
-    }
 
-    //Change ambient
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        
-    }
-
-    private void OnCollisionExit2D(Collision2D collision)
-    {
-        
+        if (changing)
+        {
+            ChangeAmbient();
+        }
     }
 
     #endregion
