@@ -30,12 +30,12 @@ public class MainCamera : MonoBehaviour
     //cam defining vars (defines the camera behaviour)
     bool following = true;
     float camSize;
-    Vector2 camPosition;
+    Vector2 camFixedPosition;
 
     //flow vars (defines behaviours values)
     public string lastRooftop;
     public string actualRooftop;
-    bool changed = true;
+    public bool changed = true;
     public string place = "Outside";
 
     public bool changing = false; //call change ambient function on updadte
@@ -147,7 +147,7 @@ public class MainCamera : MonoBehaviour
             if (place == "House")
             {
                 following = false;
-                camPosition = new Vector2(-7, 0.7f);
+                camFixedPosition = new Vector2(-7, 0.7f);
                 camSize = 2.5f;
                 actualRooftop = "House Rooftop";
             }
@@ -183,33 +183,33 @@ public class MainCamera : MonoBehaviour
             bool correctPositX = false;
             bool correctPositY = false;
 
-            if(transform.position.x < camPosition.x)
+            if(transform.position.x < camFixedPosition.x)
             {
                 transform.position += new Vector3(camTravelSpeed, 0, 0) * Time.deltaTime;
             }
 
-            if (transform.position.x > camPosition.x)
+            if (transform.position.x > camFixedPosition.x)
             {
                 transform.position -= new Vector3(camTravelSpeed, 0, 0) * Time.deltaTime;
             }
 
-            if (transform.position.y < camPosition.y)
+            if (transform.position.y < camFixedPosition.y)
             {
                 transform.position += new Vector3(0, camTravelSpeed, 0) * Time.deltaTime;
             }
 
-            if (transform.position.y > camPosition.y)
+            if (transform.position.y > camFixedPosition.y)
             {
                 transform.position -= new Vector3(0, camTravelSpeed, 0) * Time.deltaTime;
             }
 
             //check posit
-            if (transform.position.x > (camPosition.x - 0.1f) && transform.position.x < (camPosition.x + 0.1f))
+            if (transform.position.x > (camFixedPosition.x - 0.1f) && transform.position.x < (camFixedPosition.x + 0.1f))
             {
                 correctPositX = true;
             }
 
-            if (transform.position.y > (camPosition.y - 0.1f) && transform.position.y < (camPosition.y + 0.1f))
+            if (transform.position.y > (camFixedPosition.y - 0.1f) && transform.position.y < (camFixedPosition.y + 0.1f))
             {
                 correctPositY = true;
             }
