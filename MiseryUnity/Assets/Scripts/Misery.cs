@@ -13,18 +13,20 @@ public class Misery : MonoBehaviour
     #endregion
     //========================
 
+
     //STATS AND VALUES
     //========================
     #region
 
     public string state;
     public float speed;
-    public Vector3 velocity;
+    Vector3 velocity;
     public Vector3 maxVelocity;
     public float acceleration;
 
     #endregion
     //========================
+
 
     //FUNCTIONS
     //========================
@@ -55,6 +57,7 @@ public class Misery : MonoBehaviour
 
     #endregion
     //========================
+
 
     //RUNNING
     //========================

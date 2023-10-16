@@ -16,6 +16,7 @@ public class EgoMap : MonoBehaviour
     #endregion
     //========================
 
+
     //STATS AND VALUES
     //========================
     #region
@@ -40,11 +41,13 @@ public class EgoMap : MonoBehaviour
 
     //Function values
     string[] directions = { "up", "left", "right" };
+    public List<string> path;
 
     #endregion
     //========================
 
-    //FUNCTION
+
+    //FUNCTIONS
     //========================
     #region
 
@@ -115,19 +118,16 @@ public class EgoMap : MonoBehaviour
             if (direction == "up")
             {
                 newPosition.y += 1;
-                MonoBehaviour.print("up");
             }
 
             if (direction == "left")
             {
                 newPosition.x -= 1;
-                MonoBehaviour.print("left");
             }
 
             if (direction == "right")
             {
                 newPosition.x += 1;
-                MonoBehaviour.print("right");
             }
 
             //check if position is okay
@@ -136,16 +136,15 @@ public class EgoMap : MonoBehaviour
                 if (egoTilemap.GetTile(newPosition) != egoPath) //free slot
                 {
                     actualPosition = newPosition;
+                    path.Add(direction);
                     yield return new WaitForSecondsRealtime(1 / pathPaintSpeed);
                     paintNextTile = true;
-                    MonoBehaviour.print("sim");
                 }
 
                 if (egoTilemap.GetTile(newPosition) == egoPath)
                 {
                     newPosition = actualPosition;
                     paintNextTile = true;
-                    MonoBehaviour.print("nao");
                 }
             }
 
@@ -153,13 +152,13 @@ public class EgoMap : MonoBehaviour
             {
                 newPosition = actualPosition;
                 paintNextTile = true;
-                MonoBehaviour.print("nao");
             }
         }
     }
 
     #endregion
     //========================
+
 
     //RUNNING
     //========================
