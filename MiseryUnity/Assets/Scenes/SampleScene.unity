@@ -389,21 +389,9 @@ PrefabInstance:
       value: MainCamera
       objectReference: {fileID: 0}
     - target: {fileID: 9110296520517975847, guid: fdd6ac1590ec81a479a1bab18eefbad7, type: 3}
-      propertyPath: camDelay
-      value: 0.1
-      objectReference: {fileID: 0}
-    - target: {fileID: 9110296520517975847, guid: fdd6ac1590ec81a479a1bab18eefbad7, type: 3}
-      propertyPath: camSpeed
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 9110296520517975847, guid: fdd6ac1590ec81a479a1bab18eefbad7, type: 3}
-      propertyPath: zoomSpeed
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 9110296520517975847, guid: fdd6ac1590ec81a479a1bab18eefbad7, type: 3}
-      propertyPath: camTravelSpeed
-      value: 3
-      objectReference: {fileID: 0}
+      propertyPath: miseryScript
+      value: 
+      objectReference: {fileID: 1490878315}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fdd6ac1590ec81a479a1bab18eefbad7, type: 3}
 --- !u!114 &1237832002 stripped
@@ -417,58 +405,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 129adc0f28fcd2a49aeb33028d450652, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!1 &1637650732 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1520751745574699399, guid: b634a0d8e00dddc4293441d376d3ebd0, type: 3}
+--- !u!114 &1490878315 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1179788703071668237, guid: b634a0d8e00dddc4293441d376d3ebd0, type: 3}
   m_PrefabInstance: {fileID: 1676196063}
   m_PrefabAsset: {fileID: 0}
---- !u!50 &1637650733
-Rigidbody2D:
-  serializedVersion: 4
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1637650732}
-  m_BodyType: 0
-  m_Simulated: 1
-  m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDrag: 0
-  m_AngularDrag: 0.05
-  m_GravityScale: 0
-  m_Material: {fileID: 0}
-  m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 0
-  m_Constraints: 0
---- !u!61 &1637650734
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1637650732}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.57, y: 1.08}
-    newSize: {x: 0.57, y: 1.08}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 0.57, y: 1.08}
-  m_EdgeRadius: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bee226c3dd97fb742a33316ddb45f3d5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1676196063
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -527,10 +474,6 @@ PrefabInstance:
     - target: {fileID: 1520751745574699399, guid: b634a0d8e00dddc4293441d376d3ebd0, type: 3}
       propertyPath: m_Name
       value: Misery
-      objectReference: {fileID: 0}
-    - target: {fileID: 2413146976261694699, guid: b634a0d8e00dddc4293441d376d3ebd0, type: 3}
-      propertyPath: m_RootOrder
-      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b634a0d8e00dddc4293441d376d3ebd0, type: 3}

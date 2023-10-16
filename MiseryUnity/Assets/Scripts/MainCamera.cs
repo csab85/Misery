@@ -14,6 +14,9 @@ public class MainCamera : MonoBehaviour
     //Components
     Camera cam;
 
+    //Scripts
+    public Misery miseryScript;
+
     #endregion
     //========================
 
@@ -92,8 +95,8 @@ public class MainCamera : MonoBehaviour
     /// </summary>
     void CameraFollow()
 {
-        float cameraX = player.transform.position.x - Input.GetAxis("Horizontal") * camDelay;
-        float cameraY = player.transform.position.y - Input.GetAxis("Vertical") * camDelay;
+        float cameraX = player.transform.position.x - miseryScript.velocity.x * camDelay;
+        float cameraY = player.transform.position.y - miseryScript.velocity.y * camDelay;
 
         if (transform.position.x > (cameraX - camDelay) && transform.position.x < (cameraX + camDelay) && transform.position.y > (cameraY - camDelay) && transform.position.y < (cameraY + camDelay))
         {

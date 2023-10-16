@@ -39,7 +39,21 @@ public class UnitBehaviour : MonoBehaviour
 
     void Walk(string direction)
     {
-        
+        if (Input.GetAxis("Horizontal") != 0)
+        {
+            velocity.x = Input.GetAxis("Horizontal") * acceleration;
+        }
+
+        if (Input.GetAxis("Vertical") != 0)
+        {
+            velocity.y = Input.GetAxis("Vertical") * acceleration;
+        }
+
+        //move
+        if (velocity != new Vector3(0, 0, 0))
+        {
+            transform.position += velocity * Time.deltaTime;
+        }
     }
 
     #endregion

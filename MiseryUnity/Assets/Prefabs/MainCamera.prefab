@@ -98,11 +98,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 129adc0f28fcd2a49aeb33028d450652, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  camDelay: 0.1
-  camSpeed: 0.2
-  zoomSpeed: 0.2
+  miseryScript: {fileID: 0}
+  camDelay: 0.25
+  camTravelSpeed: 3
+  zoomSpeed: 1
   lastRooftop: Outside
   actualRooftop: Outside
+  changed: 1
   place: Outside
   changing: 0
 --- !u!114 &-6940618697671125120
