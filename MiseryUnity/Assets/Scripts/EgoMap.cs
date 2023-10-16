@@ -33,8 +33,8 @@ public class EgoMap : MonoBehaviour
     Vector3Int newPosition = new Vector3Int(0, 0, 0);
 
     //Functions progress
-    bool voidPainted = false;
-    bool pathPainted = true;
+    public bool voidPainted = false;
+    public bool pathPainted = true;
     bool paintNextTile = true;
 
     bool firstTilePainted = false; //refers only to the path's first tile

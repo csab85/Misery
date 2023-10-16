@@ -20,7 +20,7 @@ public class Misery : MonoBehaviour
 
     public string state;
     public float acceleration;
-    public float decelaration;
+    public float deceleration;
     public Vector3 maxVelocity;
     public Vector3 velocity;
     #endregion
@@ -37,27 +37,27 @@ public class Misery : MonoBehaviour
     /// <returns></returns>
     void Walk()
     {
-        Vector2 direction = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
+        Vector2 side = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
 
         //get input
         if (Input.GetButton("Horizontal"))
         {
-            velocity.x = Mathf.MoveTowards(velocity.x, (maxVelocity.x * direction.x), acceleration * Time.deltaTime);
+            velocity.x = Mathf.MoveTowards(velocity.x, (maxVelocity.x * side.x), acceleration * Time.deltaTime);
         }
 
         if (!Input.GetButton("Horizontal"))
         {
-            velocity.x = Mathf.MoveTowards(velocity.x, 0, decelaration * Time.deltaTime);
+            velocity.x = Mathf.MoveTowards(velocity.x, 0, deceleration * Time.deltaTime);
         }
 
         if (Input.GetButton("Vertical"))
         {
-            velocity.y = Mathf.MoveTowards(velocity.y, (maxVelocity.y * direction.y), acceleration * Time.deltaTime);
+            velocity.y = Mathf.MoveTowards(velocity.y, (maxVelocity.y * side.y), acceleration * Time.deltaTime);
         }
 
         if (!Input.GetButton("Vertical"))
         {
-            velocity.y = Mathf.MoveTowards(velocity.y, 0, decelaration * Time.deltaTime);
+            velocity.y = Mathf.MoveTowards(velocity.y, 0, deceleration * Time.deltaTime);
         }
 
 
