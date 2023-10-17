@@ -1,0 +1,13 @@
+Preto: Prédios, barracos, coisas para compor cenário e impedir a passagem do jogador.
+
+Verde: Rua
+
+Branco: Casa
+
+Vermelho: Bar
+
+Amarelo: Túnel
+
+Azul Escuro: Museu
+
+Roxo: Passagem secreta
