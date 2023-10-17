@@ -18,8 +18,8 @@ public class UnitBehaviour : MonoBehaviour
     //========================
     #region
 
-    //State
-    public string state;
+    //State (walking, attacking)
+    public string state = "walking";
 
     //Movement
     Vector3 velocity;
@@ -37,6 +37,9 @@ public class UnitBehaviour : MonoBehaviour
     int pathStep = 0;
     float movement = 0;
 
+    //Range and attacking
+    GameObject enemy;
+
     #endregion
     //========================
 
@@ -52,23 +55,23 @@ public class UnitBehaviour : MonoBehaviour
     void Walk(string direction)
     {
 
-        if (direction == "Right" | direction == "Up")
+        if (direction == "right" | direction == "up")
         {
             side = 1;
         }
 
-        if (direction == "Left" | direction == "Down")
+        if (direction == "left")
         {
             side = -1;
         }
 
         //get input
-        if (direction == "Right" | direction == "Left")
+        if (direction == "right" | direction == "left")
         {
             velocity.x = Mathf.MoveTowards(velocity.x, (maxVelocity.x * side), acceleration * Time.deltaTime);
         }
 
-        if (direction == "Up" | direction == "Down")
+        if (direction == "up")
         {
             velocity.y = Mathf.MoveTowards(velocity.y, (maxVelocity.y * side), acceleration * Time.deltaTime);
         }
@@ -94,18 +97,19 @@ public class UnitBehaviour : MonoBehaviour
     {
         Walk(egoMap.path[pathStep]);
 
-        if (egoMap.path[pathStep] == "Right" | egoMap.path[pathStep] == "Left")
+        if (egoMap.path[pathStep] == "right" | egoMap.path[pathStep] == "left")
         {
-            movement += velocity.x * Time.deltaTime;
+            movement += Mathf.Abs(velocity.x * Time.deltaTime);
         }
 
-        if (egoMap.path[pathStep] == "Up" | egoMap.path[pathStep] == "Down")
+        if (egoMap.path[pathStep] == "up")
         {
             movement += velocity.y * Time.deltaTime;
         }
 
         if (movement >= walkDistance)
         {
+            velocity = new Vector3(0, 0, 0);
             movement = 0;
             pathStep += 1;
         }
@@ -128,11 +132,19 @@ public class UnitBehaviour : MonoBehaviour
     //Update
     void Update()
     {
-        if (egoMap.pathPainted)
+        if (egoMap.voidPainted && egoMap.pathPainted)
         {
             ReadPath(egoMap.path);
         }
-        
+    }
+
+    //Range trigger
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        if (enemy == null | enemy.tag == "Dead")
+        {
+            enemy = collision.gameObject;
+        }
     }
 
     #endregion
