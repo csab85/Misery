@@ -9,6 +9,7 @@ public class UnitBehaviour : MonoBehaviour
     #region
 
     public EgoMap egoMap;
+    //enemy script
 
     #endregion
     //========================
@@ -132,18 +133,41 @@ public class UnitBehaviour : MonoBehaviour
     //Update
     void Update()
     {
-        if (egoMap.voidPainted && egoMap.pathPainted)
+        switch (state)
         {
-            ReadPath(egoMap.path);
+            case "walking":
+                #region
+
+                if (egoMap.voidPainted && egoMap.pathPainted)
+                {
+                    ReadPath(egoMap.path);
+                }
+
+                break;
+
+            #endregion
+
+            case "attacking":
+                #region
+
+                if (enemy.tag == "Dead")
+                {
+                    state = "walking";
+                }
+
+                break;
+
+                #endregion
         }
     }
 
     //Range trigger
     private void OnTriggerStay2D(Collider2D collision)
     {
-        if (enemy == null | enemy.tag == "Dead")
+        if (collision.tag == "EnemyAir" | collision.tag == "EnemyGround")
         {
             enemy = collision.gameObject;
+            state = "attacking";
         }
     }
 
