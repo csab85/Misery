@@ -23,7 +23,7 @@ public class UnitBehaviour : MonoBehaviour
     public string state = "walking";
 
     //Movement
-    Vector3 velocity;
+    public Vector3 velocity;
     public Vector3 maxVelocity;
     public float acceleration;
     public float deceleration;
@@ -37,6 +37,8 @@ public class UnitBehaviour : MonoBehaviour
     //read path
     int pathStep = 0;
     float movement = 0;
+    Vector3 initialPosit;
+    public Vector3 expectedPosit;
 
     //Range and attacking
     GameObject enemy;
@@ -96,25 +98,58 @@ public class UnitBehaviour : MonoBehaviour
     /// <param name="path">The path to be followed</param>
     void ReadPath(List<string> path)
     {
-        Walk(egoMap.path[pathStep]);
+        //Walk(path[pathStep]);
 
-        if (egoMap.path[pathStep] == "right" | egoMap.path[pathStep] == "left")
+        if (movement == 0)
         {
-            movement += Mathf.Abs(velocity.x * Time.deltaTime);
+            initialPosit = transform.position;
+            expectedPosit = initialPosit;
+
+            if (path[pathStep] == "right" | path[pathStep] == "left")
+            {
+                expectedPosit.x += walkDistance * side;
+            }
+
+            if (path[pathStep] == "up")
+            {
+                expectedPosit.y += walkDistance;
+            }
         }
 
-        if (egoMap.path[pathStep] == "up")
+        if (egoMap.path[pathStep] == "right" | egoMap.path[pathStep] == "up")
         {
+            side = 1;
+        }
+
+        if (egoMap.path[pathStep] == "left")
+        {
+            side = -1;
+        }
+
+        if (transform.position.x < expectedPosit.x | transform.position.x > expectedPosit.x)
+        {
+            movement += Mathf.Abs(velocity.x * Time.deltaTime);
+            velocity.x = Mathf.MoveTowards(velocity.x, (maxVelocity.x * side), acceleration * Time.deltaTime);
+            
+        }
+
+        if (transform.position.y < expectedPosit.y)
+        {
+            velocity.y = Mathf.MoveTowards(velocity.y, (maxVelocity.y * side), acceleration * Time.deltaTime);
             movement += velocity.y * Time.deltaTime;
+        }
+
+        //move
+        if (velocity != new Vector3(0, 0, 0))
+        {
+            transform.position += velocity * Time.deltaTime;
         }
 
         if (movement >= walkDistance)
         {
-            velocity = new Vector3(0, 0, 0);
             movement = 0;
             pathStep += 1;
         }
-
     }
 
     #endregion

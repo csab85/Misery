@@ -40,7 +40,7 @@ public class EgoMap : MonoBehaviour
     bool firstTilePainted = false; //refers only to the path's first tile
 
     //Function values
-    string[] directions = { "up", "left", "right" };
+    string[] directions = { "up", "left", "right"};
     public List<string> path;
 
     #endregion
