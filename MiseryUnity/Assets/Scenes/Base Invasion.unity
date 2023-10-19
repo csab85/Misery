@@ -226,11 +226,13 @@ MonoBehaviour:
   egoMap: {fileID: 89796036}
   state: walking
   velocity: {x: 0, y: 0, z: 0}
-  maxVelocity: {x: 2, y: 2, z: 0}
-  acceleration: 3
-  deceleration: 5
+  maxVelocity: {x: 1, y: 1, z: 0}
+  acceleration: 2
+  deceleration: 7
   walkDistance: 1
-  expectedPosit: {x: 0, y: 0, z: 0}
+  pathStep: 0
+  movement: 0
+  initialPosit: {x: 0, y: 0, z: 0}
 --- !u!50 &51440725
 Rigidbody2D:
   serializedVersion: 4

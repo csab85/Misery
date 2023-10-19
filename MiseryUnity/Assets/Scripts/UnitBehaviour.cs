@@ -35,10 +35,10 @@ public class UnitBehaviour : MonoBehaviour
     int side = 0;
 
     //read path
-    int pathStep = 0;
-    float movement = 0;
-    Vector3 initialPosit;
-    public Vector3 expectedPosit;
+    public int pathStep = 0;
+    public float movement = 0;
+    bool decelerating = false;
+    public Vector3 initialPosit;
 
     //Range and attacking
     GameObject enemy;
@@ -98,57 +98,100 @@ public class UnitBehaviour : MonoBehaviour
     /// <param name="path">The path to be followed</param>
     void ReadPath(List<string> path)
     {
-        //Walk(path[pathStep]);
-
+        //setup
         if (movement == 0)
         {
             initialPosit = transform.position;
-            expectedPosit = initialPosit;
+        }
 
-            if (path[pathStep] == "right" | path[pathStep] == "left")
+
+        //walk func
+        if (!decelerating)
+        {
+            Walk(path[pathStep]);
+        }
+
+
+        //decelerate
+        if (decelerating)
+        {
+            if (egoMap.path[pathStep] == "right" | egoMap.path[pathStep] == "left")
             {
-                expectedPosit.x += walkDistance * side;
+                float displacement = (Mathf.Pow((-maxVelocity.x), 2) / ((deceleration) * 2)) * Time.deltaTime;
+
+                if (movement >= walkDistance - displacement)
+                {
+                    Mathf.MoveTowards(velocity.x, 0, deceleration * Time.deltaTime);
+                    Debug.Log("parante horiz");
+
+                    if ((velocity.x * side) <= 0)
+                    {
+                        decelerating = false;
+                        movement = 0;
+                        pathStep += 1;
+                        Debug.Log("moved horiz");
+                    }
+                }
+
+                else
+                {
+                    Walk(path[pathStep]);
+                    Debug.Log("andante horiz");
+                }
             }
 
-            if (path[pathStep] == "up")
+            else if (egoMap.path[pathStep] == "up")
             {
-                expectedPosit.y += walkDistance;
+                float displacement = (Mathf.Pow((-maxVelocity.y), 2) / ((deceleration) * 2)) * Time.deltaTime;
+
+                if (movement >= (walkDistance) - displacement)
+                {
+                    Mathf.MoveTowards(velocity.y, 0, deceleration * Time.deltaTime);
+                    Debug.Log("parante up");
+
+                    if (velocity.y <= 0)
+                    {
+                        decelerating = false;
+                        movement = 0;
+                        pathStep += 1;
+                    }
+                }
+
+                else
+                {
+                    Walk(path[pathStep]);
+                    Debug.Log("andante up");
+                }
             }
         }
 
-        if (egoMap.path[pathStep] == "right" | egoMap.path[pathStep] == "up")
+
+        //movement calculus
+        if (egoMap.path[pathStep] == "right" | egoMap.path[pathStep] == "left")
         {
-            side = 1;
+            movement = Mathf.Abs(transform.position.x - initialPosit.x);
         }
 
-        if (egoMap.path[pathStep] == "left")
+        if (egoMap.path[pathStep] == "up")
         {
-            side = -1;
+            movement = Mathf.Abs(transform.position.y - initialPosit.y);
         }
 
-        if (transform.position.x < expectedPosit.x | transform.position.x > expectedPosit.x)
-        {
-            movement += Mathf.Abs(velocity.x * Time.deltaTime);
-            velocity.x = Mathf.MoveTowards(velocity.x, (maxVelocity.x * side), acceleration * Time.deltaTime);
-            
-        }
+        
 
-        if (transform.position.y < expectedPosit.y)
-        {
-            velocity.y = Mathf.MoveTowards(velocity.y, (maxVelocity.y * side), acceleration * Time.deltaTime);
-            movement += velocity.y * Time.deltaTime;
-        }
-
-        //move
-        if (velocity != new Vector3(0, 0, 0))
-        {
-            transform.position += velocity * Time.deltaTime;
-        }
-
+        //check if movement is enough
         if (movement >= walkDistance)
         {
-            movement = 0;
-            pathStep += 1;
+            if (egoMap.path[pathStep + 1] != egoMap.path[pathStep])
+            {
+                decelerating = true;
+            }
+
+            else if (egoMap.path[pathStep + 1] == egoMap.path[pathStep])
+            {
+                movement = 0;
+                pathStep += 1;
+            }
         }
     }
 
@@ -162,7 +205,7 @@ public class UnitBehaviour : MonoBehaviour
     //Start
     void Start()
     {
-
+        initialPosit = transform.position;
     }
 
     //Update
