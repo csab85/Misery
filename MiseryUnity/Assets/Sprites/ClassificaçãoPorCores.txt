@@ -6,8 +6,10 @@ Branco: Casa
 
 Vermelho: Bar
 
-Amarelo: Túnel
+Amarelo: Ponte
 
 Azul Escuro: Museu
 
-Roxo: Passagem secreta
+Roxo: Pier
+
+Azul Claro: Rio
