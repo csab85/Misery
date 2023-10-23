@@ -9,6 +9,7 @@ public class UnitBehaviour : MonoBehaviour
     #region
 
     public EgoMap egoMap;
+    public GameObject shot;
     //enemy script
 
     #endregion
@@ -185,6 +186,16 @@ public class UnitBehaviour : MonoBehaviour
                 pathStep += 1;
             }
         }
+    }
+
+    /// <summary>
+    /// Attacks the enemy indicated
+    /// </summary>
+    /// <param name="enemy">The target</param>
+    void Shoot(GameObject enemy)
+    {
+        Instantiate(shot);
+        shot.GetComponent<Rigidbody2D>().AddForce(new Vector3(1, 1));
     }
 
     #endregion
