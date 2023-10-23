@@ -86,10 +86,7 @@ public class UnitBehaviour : MonoBehaviour
         }
 
         //move
-        if (velocity != new Vector3(0, 0, 0))
-        {
-            transform.position += velocity * Time.deltaTime;
-        }
+        transform.position += velocity * Time.deltaTime;
     }
 
     /// <summary>
@@ -121,22 +118,19 @@ public class UnitBehaviour : MonoBehaviour
 
                 if (movement >= walkDistance - displacement)
                 {
-                    Mathf.MoveTowards(velocity.x, 0, deceleration * Time.deltaTime);
-                    Debug.Log("parante horiz");
+                    velocity.x = Mathf.MoveTowards(velocity.x, 0, deceleration * Time.deltaTime);
 
                     if ((velocity.x * side) <= 0)
                     {
                         decelerating = false;
                         movement = 0;
                         pathStep += 1;
-                        Debug.Log("moved horiz");
                     }
                 }
 
                 else
                 {
                     Walk(path[pathStep]);
-                    Debug.Log("andante horiz");
                 }
             }
 
@@ -146,8 +140,7 @@ public class UnitBehaviour : MonoBehaviour
 
                 if (movement >= (walkDistance) - displacement)
                 {
-                    Mathf.MoveTowards(velocity.y, 0, deceleration * Time.deltaTime);
-                    Debug.Log("parante up");
+                    velocity.y = Mathf.MoveTowards(velocity.y, 0, deceleration * Time.deltaTime);
 
                     if (velocity.y <= 0)
                     {
@@ -160,7 +153,6 @@ public class UnitBehaviour : MonoBehaviour
                 else
                 {
                     Walk(path[pathStep]);
-                    Debug.Log("andante up");
                 }
             }
         }
