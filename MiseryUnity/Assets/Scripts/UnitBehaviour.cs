@@ -192,10 +192,11 @@ public class UnitBehaviour : MonoBehaviour
     /// Attacks the enemy indicated
     /// </summary>
     /// <param name="enemy">The target</param>
-    void Shoot(GameObject enemy)
+    void Attack(GameObject enemy)
     {
-        Instantiate(shot);
-        shot.GetComponent<Rigidbody2D>().AddForce(new Vector3(1, 1));
+        Vector3 enemyPosit = enemy.transform.position;
+        Instantiate(shot, transform.position, transform.rotation);
+        shot.GetComponent<Rigidbody2D>().AddForce(enemyPosit);
     }
 
     #endregion
@@ -230,6 +231,8 @@ public class UnitBehaviour : MonoBehaviour
 
             case "attacking":
                 #region
+
+                Attack(enemy);
 
                 if (enemy.tag == "Dead")
                 {
