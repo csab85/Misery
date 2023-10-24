@@ -10,7 +10,6 @@ public class UnitBehaviour : MonoBehaviour
 
     public EgoMap egoMap;
     public GameObject shot;
-    //enemy script
 
     #endregion
     //========================
@@ -194,9 +193,8 @@ public class UnitBehaviour : MonoBehaviour
     /// <param name="enemy">The target</param>
     void Attack(GameObject enemy)
     {
-        Vector3 enemyPosit = enemy.transform.position;
-        Instantiate(shot, transform.position, transform.rotation);
-        shot.GetComponent<Rigidbody2D>().AddForce(enemyPosit);
+        Vector3 direction = enemy.transform.position - transform.position;
+        shot.GetComponent<Rigidbody2D>().AddForce(direction);
     }
 
     #endregion
@@ -234,9 +232,23 @@ public class UnitBehaviour : MonoBehaviour
 
                 Attack(enemy);
 
+                state = "waiting";
+
                 if (enemy.tag == "Dead")
                 {
                     state = "walking";
+                }
+
+                break;
+
+            #endregion
+
+            case "waiting":
+                #region
+
+                if (shot.transform.position == new Vector3(0, 0, 1))
+                {
+                    state = "attacking";
                 }
 
                 break;

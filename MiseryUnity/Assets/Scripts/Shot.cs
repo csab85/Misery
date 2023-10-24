@@ -4,15 +4,63 @@ using UnityEngine;
 
 public class Shot : MonoBehaviour
 {
-    // Start is called before the first frame update
+    //IMPORTS
+    //========================
+    #region
+
+
+
+    #endregion
+    //========================
+
+
+    //STATS AND VALUES
+    //========================
+    #region
+
+
+
+    #endregion
+    //========================
+
+
+    //FUNCTIONS
+    //========================
+    #region
+
+
+
+    #endregion
+    //========================
+
+
+    //RUNNING
+    //========================
+    #region
+
+    //Start
     void Start()
     {
-        
+
     }
 
-    // Update is called once per frame
+    //Update
     void Update()
     {
-        gameObject.GetComponent<Rigidbody2D>().AddForce(new Vector2(-1, 2));
+        //delete ball if gets too far
     }
+
+    //Collision
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.tag == "EnemyGround")
+        {
+            transform.position = transform.parent.transform.position;
+        }
+    }
+
+    #endregion
+    //========================
+
+
 }
