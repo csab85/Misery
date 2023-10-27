@@ -11,6 +11,8 @@ public class WorkingMainMenu : MonoBehaviour
     private GameObject PainelMenuInicial;
     [SerializeField]
     private GameObject PainelOpçoes;
+    [SerializeField]
+    private GameObject PainelSounds;
     public void Jogar()
     {
         SceneManager.LoadScene(NomeDoLevelDeJogo);
@@ -27,7 +29,17 @@ public class WorkingMainMenu : MonoBehaviour
         PainelOpçoes.SetActive(false);
         PainelMenuInicial.SetActive(true);
     }
+    public void AbrirSongs()
+    {
+        PainelOpçoes.SetActive(false);
+        PainelSounds.SetActive(true);
+    }
 
+    public void FecharSongs()
+    {
+        PainelSounds.SetActive(false);
+        PainelOpçoes.SetActive(true);
+    }
     public void SairJogo()
     {
         Debug.Log("Quit Game");

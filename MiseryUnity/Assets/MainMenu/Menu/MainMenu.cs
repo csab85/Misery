@@ -14,7 +14,7 @@ public class NewBehaviourScript : MonoBehaviour
 
     void loadthis()
     {
-        SceneManager.LoadScene("Scenery", LoadSceneMode.Additive);
+        SceneManager.LoadSceneAsync("Scenery", LoadSceneMode.Additive);
     }
 
     // Update is called once per frame
