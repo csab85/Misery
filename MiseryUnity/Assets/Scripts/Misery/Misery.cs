@@ -20,7 +20,7 @@ public class Misery : MonoBehaviour
         if(Input.GetAxis("Horizontal") != 0)
         {
             velocity.x = Input.GetAxis("Horizontal") * acceleration;
-            ///AudioManager.instance.PlaySfx("Walk");
+            AudioManager.instance.PlaySfx("Walk");
         }
 
         if (Input.GetAxis("Vertical") != 0)

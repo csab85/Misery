@@ -3,23 +3,22 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-
-public class NewBehaviourScript : MonoBehaviour
+public class sceneryAppearing : MonoBehaviour
 {
     // Start is called before the first frame update
     void Start()
     {
-        Invoke("Scenery", 5);
+        Invoke("loadthis", 0);
     }
 
     void loadthis()
     {
-        SceneManager.LoadSceneAsync("Scenery", LoadSceneMode.Additive);
+        SceneManager.LoadScene("Scenery", LoadSceneMode.Additive);
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 }
