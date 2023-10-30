@@ -50,14 +50,11 @@ public class UnitBehaviour : MonoBehaviour
     public string state = "walking";
 
     //Storages
-    Dictionary<int, string> directions = new Dictionary<int, string>
-    {
-        {0, "none"},
-        {1, "right"},
-        {-1, "left"},
-        {2, "up"},
-        {-2, "down"}
-    };
+    int none = 0;
+    int right = 1;
+    int left = -1;
+    int up = 2;
+    int down = -2;
 
     #endregion
     //========================
@@ -71,31 +68,31 @@ public class UnitBehaviour : MonoBehaviour
     /// Moves towards direction given
     /// </summary>
     /// <param name="direction">The direction to move (if its none it'll slowly stop moving)</param>
-    void Walk(string direction)
+    void Walk(int direction)
     {
 
-        if (direction == "right" | direction == "up")
+        if (direction == right | direction == up)
         {
             side = 1;
         }
 
-        if (direction == "left")
+        if (direction == left)
         {
             side = -1;
         }
 
         //get input
-        if (direction == "right" | direction == "left")
+        if (direction == right | direction == left)
         {
             velocity.x = Mathf.MoveTowards(velocity.x, (maxVelocity.x * side), acceleration * Time.deltaTime);
         }
 
-        if (direction == "up" | direction == "down")
+        if (direction == up | direction == down)
         {
             velocity.y = Mathf.MoveTowards(velocity.y, (maxVelocity.y * side), acceleration * Time.deltaTime);
         }
         
-        if (direction == "none")
+        if (direction == none)
         {
             velocity.x = Mathf.MoveTowards(velocity.x, 0, deceleration * Time.deltaTime);
             velocity.y = Mathf.MoveTowards(velocity.y, 0, deceleration * Time.deltaTime);
@@ -109,7 +106,7 @@ public class UnitBehaviour : MonoBehaviour
     /// Reads the path given, and makes the unit walk following its directions
     /// </summary>
     /// <param name="path">The path to be followed</param>
-    void ReadPath(List<string> path)
+    void ReadPath(List<int> path)
     {
         //onetime
         if (!oneTimeSetup)
@@ -123,6 +120,7 @@ public class UnitBehaviour : MonoBehaviour
             if (tag == "Ground Enemy" | tag == "Air Enemy")
             {
                 pathStep = path.Count - 1;
+                print(path[pathStep]);
                 readDirection = -1;
             }
 
@@ -139,14 +137,15 @@ public class UnitBehaviour : MonoBehaviour
         //walk func
         if (!decelerating)
         {
-            Walk(path[pathStep]);
+            Walk((path[pathStep] * readDirection));
+            print(tag + (path[pathStep] * readDirection));
         }
 
 
         //decelerate
         if (decelerating)
         {
-            if (egoMap.path[pathStep] == "right" | egoMap.path[pathStep] == "left")
+            if (egoMap.path[pathStep] == right | egoMap.path[pathStep] == left)
             {
                 float displacement = (Mathf.Pow((-maxVelocity.x), 2) / ((deceleration) * 2)) * Time.deltaTime;
 
@@ -164,11 +163,11 @@ public class UnitBehaviour : MonoBehaviour
 
                 else
                 {
-                    Walk(path[pathStep]);
+                    Walk((path[pathStep] * readDirection));
                 }
             }
 
-            else if (egoMap.path[pathStep] == "up")
+            else if (egoMap.path[pathStep] == up)
             {
                 float displacement = (Mathf.Pow((-maxVelocity.y), 2) / ((deceleration) * 2)) * Time.deltaTime;
 
@@ -180,7 +179,7 @@ public class UnitBehaviour : MonoBehaviour
                     {
                         decelerating = false;
                         movement = 0;
-                        pathStep += pathWay;
+                        pathStep += readDirection;
                     }
                 }
 
@@ -193,12 +192,12 @@ public class UnitBehaviour : MonoBehaviour
 
 
         //movement calculus
-        if (egoMap.path[pathStep] == "right" | egoMap.path[pathStep] == "left")
+        if (egoMap.path[pathStep] == right | egoMap.path[pathStep] == left)
         {
             movement = Mathf.Abs(transform.position.x - initialPosit.x);
         }
 
-        if (egoMap.path[pathStep] == "up")
+        if (egoMap.path[pathStep] == up | egoMap.path[pathStep] == down)
         {
             movement = Mathf.Abs(transform.position.y - initialPosit.y);
         }
@@ -208,15 +207,15 @@ public class UnitBehaviour : MonoBehaviour
         //check if movement is enough
         if (movement >= walkDistance)
         {
-            if (egoMap.path[pathStep + pathWay] != egoMap.path[pathStep])
+            if (egoMap.path[pathStep + readDirection] != egoMap.path[pathStep])
             {
                 decelerating = true;
             }
 
-            else if (egoMap.path[pathStep + pathWay] == egoMap.path[pathStep])
+            else if (egoMap.path[pathStep + readDirection] == egoMap.path[pathStep])
             {
                 movement = 0;
-                pathStep += pathWay;
+                pathStep += readDirection;
             }
         }
     }

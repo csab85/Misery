@@ -40,8 +40,13 @@ public class EgoMap : MonoBehaviour
     bool firstTilePainted = false; //refers only to the path's first tile
 
     //Function values
-    string[] directions = { "up", "left", "right"};
-    public List<string> path;
+    int none = 0;
+    int right = 1;
+    int left = -1;
+    int up = 2;
+
+    int[] directions = {1, -1, 2};
+    public List<int> path;
 
     #endregion
     //========================
@@ -108,24 +113,26 @@ public class EgoMap : MonoBehaviour
         if (actualPosition.y == (mapSize.y - 1))
         {
             pathPainted = true;
+            path.Add(none);
+            return;
         }
 
         //get random tile
         if (firstTilePainted)
         {
-            string direction = directions[Random.Range(0, 3)];
+            int direction = directions[Random.Range(0, 3)];
 
-            if (direction == "up")
+            if (direction == up)
             {
                 newPosition.y += 1;
             }
 
-            if (direction == "left")
+            if (direction == left)
             {
                 newPosition.x -= 1;
             }
 
-            if (direction == "right")
+            if (direction == right)
             {
                 newPosition.x += 1;
             }

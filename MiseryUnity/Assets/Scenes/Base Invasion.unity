@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.12731715, g: 0.13414735, b: 0.121078536, a: 1}
+  m_IndirectSpecularColor: {r: 0.12731749, g: 0.13414757, b: 0.1210787, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -454,11 +454,11 @@ MonoBehaviour:
   egoVoid: {fileID: 11400000, guid: e96ade454fa2fd9469566afe2c7e2223, type: 2}
   egoPath: {fileID: 11400000, guid: 0ae455a854b40c444a4331f9796f8b0c, type: 2}
   mapSize: {x: 9, y: 8}
-  voidPaintSpeed: 9
-  pathPaintSpeed: 9
+  voidPaintSpeed: 99
+  pathPaintSpeed: 99
   voidPainted: 0
   pathPainted: 1
-  path: []
+  path: 
 --- !u!1 &522160769
 GameObject:
   m_ObjectHideFlags: 0
