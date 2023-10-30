@@ -10,6 +10,7 @@ public class UnitBehaviour : MonoBehaviour
 
     public EgoMap egoMap;
     public GameObject shot;
+    GameObject enemy;
 
     #endregion
     //========================
@@ -19,11 +20,14 @@ public class UnitBehaviour : MonoBehaviour
     //========================
     #region
 
-    //State (walking, attacking)
-    public string state = "walking";
+    //Stats
+    public int health;
+    public int defense;
+    public int damage;
+    public int attackSpeed; //defines the projectile speed, since the faster it hits the target, the faster it is shot again
 
     //Movement
-    public Vector3 velocity;
+    Vector3 velocity;
     public Vector3 maxVelocity;
     public float acceleration;
     public float deceleration;
@@ -35,13 +39,25 @@ public class UnitBehaviour : MonoBehaviour
     int side = 0;
 
     //read path
-    public int pathStep = 0;
-    public float movement = 0;
+    bool oneTimeSetup = false;
+    int readDirection = 0; //defines if it'll read the list normally or inverted
+    int pathStep = 0;
+    float movement = 0;
     bool decelerating = false;
-    public Vector3 initialPosit;
+    Vector3 initialPosit;
 
-    //Range and attacking
-    GameObject enemy;
+    //State (walking, attacking)
+    public string state = "walking";
+
+    //Storages
+    Dictionary<int, string> directions = new Dictionary<int, string>
+    {
+        {0, "none"},
+        {1, "right"},
+        {-1, "left"},
+        {2, "up"},
+        {-2, "down"}
+    };
 
     #endregion
     //========================
@@ -74,7 +90,7 @@ public class UnitBehaviour : MonoBehaviour
             velocity.x = Mathf.MoveTowards(velocity.x, (maxVelocity.x * side), acceleration * Time.deltaTime);
         }
 
-        if (direction == "up")
+        if (direction == "up" | direction == "down")
         {
             velocity.y = Mathf.MoveTowards(velocity.y, (maxVelocity.y * side), acceleration * Time.deltaTime);
         }
@@ -95,6 +111,24 @@ public class UnitBehaviour : MonoBehaviour
     /// <param name="path">The path to be followed</param>
     void ReadPath(List<string> path)
     {
+        //onetime
+        if (!oneTimeSetup)
+        {
+            if (tag == "Ground Ally" | tag == "Air Ally")
+            {
+                pathStep = 0;
+                readDirection = 1;
+            }
+
+            if (tag == "Ground Enemy" | tag == "Air Enemy")
+            {
+                pathStep = path.Count - 1;
+                readDirection = -1;
+            }
+
+            oneTimeSetup = true;
+        }
+
         //setup
         if (movement == 0)
         {
@@ -124,7 +158,7 @@ public class UnitBehaviour : MonoBehaviour
                     {
                         decelerating = false;
                         movement = 0;
-                        pathStep += 1;
+                        pathStep += readDirection;
                     }
                 }
 
@@ -146,7 +180,7 @@ public class UnitBehaviour : MonoBehaviour
                     {
                         decelerating = false;
                         movement = 0;
-                        pathStep += 1;
+                        pathStep += pathWay;
                     }
                 }
 
@@ -174,15 +208,15 @@ public class UnitBehaviour : MonoBehaviour
         //check if movement is enough
         if (movement >= walkDistance)
         {
-            if (egoMap.path[pathStep + 1] != egoMap.path[pathStep])
+            if (egoMap.path[pathStep + pathWay] != egoMap.path[pathStep])
             {
                 decelerating = true;
             }
 
-            else if (egoMap.path[pathStep + 1] == egoMap.path[pathStep])
+            else if (egoMap.path[pathStep + pathWay] == egoMap.path[pathStep])
             {
                 movement = 0;
-                pathStep += 1;
+                pathStep += pathWay;
             }
         }
     }

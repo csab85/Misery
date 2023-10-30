@@ -6,8 +6,12 @@ TagManager:
   tags:
   - Ghost
   - House
-  - EnemyGround
-  - Dead
+  - Ground Ally
+  - Air Ally
+  - Ground Enemy
+  - Air Enemy
+  - Ground Shot
+  - Air Shot
   layers:
   - Default
   - TransparentFX
