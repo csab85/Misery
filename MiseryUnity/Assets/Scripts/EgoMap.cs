@@ -12,6 +12,8 @@ public class EgoMap : MonoBehaviour
     public Tilemap egoTilemap;
     public Tile egoVoid;
     public Tile egoPath;
+    public GameObject ally;
+    public GameObject enemy;
 
     #endregion
     //========================
@@ -39,15 +41,7 @@ public class EgoMap : MonoBehaviour
 
     bool firstTilePainted = false; //refers only to the path's first tile
 
-    //Function values
-    int none = 0;
-    int right = 1;
-    int left = -1;
-    int up = 2;
-
-    int[] directions = {1, -1, 2};
-    public List<int> path;
-    public List<Vector3Int> pathPositions;
+ 
 
     #endregion
     //========================
@@ -90,81 +84,6 @@ public class EgoMap : MonoBehaviour
         }
     }
 
-    IEnumerator PaintPath()
-    {
-        //choose first tile
-        if (!firstTilePainted)
-        {
-            actualPosition.y = 0;
-            actualPosition.x = (int)(mapSize.x / 2);
-
-            newPosition = actualPosition;
-
-            firstTilePainted = true;
-        }
-
-        //paint tile
-        if (egoTilemap.GetTile(actualPosition) != egoPath)
-        {
-            egoTilemap.SetTile(actualPosition, egoPath);
-            pathPositions.Add(actualPosition);
-            paintNextTile = false;
-        }
-
-        //if got to the last tile
-        if (actualPosition.y == (mapSize.y - 1))
-        {
-            pathPainted = true;
-            path.Add(none);
-            yield break;
-        }
-
-        //get random tile
-        if (firstTilePainted)
-        {
-            int direction = directions[Random.Range(0, 3)];
-
-            if (direction == up)
-            {
-                newPosition.y += 1;
-            }
-
-            if (direction == left)
-            {
-                newPosition.x -= 1;
-            }
-
-            if (direction == right)
-            {
-                newPosition.x += 1;
-            }
-
-            //check if position is okay
-            if (newPosition.x < mapSize.x && newPosition.x >= 0 && newPosition.y < mapSize.y && newPosition.y >= 0)
-            {
-                if (egoTilemap.GetTile(newPosition) != egoPath) //free slot
-                {
-                    actualPosition = newPosition;
-                    path.Add(direction);
-                    yield return new WaitForSecondsRealtime(1 / pathPaintSpeed);
-                    paintNextTile = true;
-                }
-
-                if (egoTilemap.GetTile(newPosition) == egoPath)
-                {
-                    newPosition = actualPosition;
-                    paintNextTile = true;
-                }
-            }
-
-            else
-            {
-                newPosition = actualPosition;
-                paintNextTile = true;
-            }
-        }
-    }
-
     #endregion
     //========================
 
@@ -187,9 +106,14 @@ public class EgoMap : MonoBehaviour
             StartCoroutine(PaintVoid());
         }
 
-        if (!pathPainted && paintNextTile)
+        if (Input.GetKeyDown(KeyCode.A))
         {
-            StartCoroutine(PaintPath());
+            Instantiate(ally, new Vector3(Random.Range(0.5f, 8.6f), 0.5f, 0), Quaternion.identity);
+        }
+
+        if (Input.GetKeyDown(KeyCode.D))
+        {
+            Instantiate(enemy, new Vector3(Random.Range(0.5f, 8.6f), 8.5f, 0), Quaternion.identity);
         }
     }
 

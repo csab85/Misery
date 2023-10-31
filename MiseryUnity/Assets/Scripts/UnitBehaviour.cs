@@ -28,35 +28,29 @@ public class UnitBehaviour : MonoBehaviour
     public int attackSpeed; //defines the projectile speed, since the faster it hits the target, the faster it is shot again
 
     //Movement
-    Vector3 velocity;
+    public Vector3 velocity;
     public Vector3 maxVelocity;
     public float acceleration;
     public float deceleration;
-
-    public float walkDistance;
 
     //Function progresssion
     //walk
     int side = 0;
 
-    //read path
+    //move
+    int movementDirection = 0;
     bool oneTimeSetup = false;
-    int readDirection = 0; //defines if it'll read the list normally or inverted
-    int pathStep = 0;
-    float movement = 0;
     bool decelerating = false;
-    Vector3 initialPosit;
-    Vector3 startingPosit;
 
     //State (walking, attacking)
     public string state = "walking";
 
     //Storages
     int none = 0;
-    int right = 1;
-    int left = -1;
-    int up = 2;
-    int down = -2;
+    int up = 1;
+    int down = -1;
+    int right = 2;
+    int left = -2;
 
     #endregion
     //========================
@@ -105,130 +99,42 @@ public class UnitBehaviour : MonoBehaviour
     }
 
     /// <summary>
-    /// Reads the path given, and makes the unit walk following its directions
+    /// Makes the object move towards it objective and dodge obstacles
     /// </summary>
-    /// <param name="path">The path to be followed</param>
-    void ReadPath(List<int> path)
+    /// <param></param>
+    void Move()
     {
         //onetime
         if (!oneTimeSetup)
         {
             if (tag == "Ground Ally" | tag == "Air Ally")
             {
-                pathStep = 0;
-                readDirection = 1;
-
-                startingPosit = egoMap.pathPositions[0]; 
+                movementDirection = up;
             }
 
             if (tag == "Ground Enemy" | tag == "Air Enemy")
             {
-                pathStep = path.Count - 2;
-                readDirection = -1;
-
-                startingPosit = egoMap.pathPositions[path.Count - 1];
+                movementDirection = down;
             }
-
-            //position correction
-            startingPosit.x += 0.5f;
-            startingPosit.y += 0.5f;
-
-            print(startingPosit);
-            transform.position = startingPosit;
 
             oneTimeSetup = true;
         }
 
-        //setup
-        if (movement == 0)
-        {
-            initialPosit = transform.position;
-        }
-
-
-        //walk func
-        if (!decelerating)
-        {
-            Walk((path[pathStep] * readDirection));
-        }
-
-
         //decelerate
         if (decelerating)
         {
-            if (path[pathStep] == right | path[pathStep] == left)
+            if (movementDirection == right | movementDirection == left)
             {
-                float displacement = (Mathf.Pow((-maxVelocity.x), 2) / ((deceleration) * 2)) * Time.deltaTime;
-
-                if (movement >= walkDistance - displacement)
-                {
-                    velocity.x = Mathf.MoveTowards(velocity.x, 0, deceleration * Time.deltaTime);
-
-                    if ((velocity.x * side) <= 0)
-                    {
-                        decelerating = false;
-                        movement = 0;
-                        pathStep += readDirection;
-                    }
-                }
-
-                else
-                {
-                    Walk((path[pathStep] * readDirection));
-                }
+                velocity.x = Mathf.MoveTowards(velocity.x, 0, deceleration);
             }
 
-            else if (path[pathStep] == up | path[pathStep] == down)
+            if (movementDirection == up | movementDirection == down)
             {
-                float displacement = (Mathf.Pow((-maxVelocity.y), 2) / ((deceleration) * 2)) * Time.deltaTime;
-
-                if (movement >= (walkDistance) - displacement)
-                {
-                    velocity.y = Mathf.MoveTowards(velocity.y, 0, deceleration * Time.deltaTime);
-
-                    if (velocity.y * side <= 0)
-                    {
-                        decelerating = false;
-                        movement = 0;
-                        pathStep += readDirection;
-                    }
-                }
-
-                else
-                {
-                    Walk(path[pathStep]);
-                }
+                velocity.y = Mathf.MoveTowards(velocity.y, 0, deceleration);
             }
         }
 
-
-        //movement calculus
-        if (path[pathStep] == right | egoMap.path[pathStep] == left)
-        {
-            movement = Mathf.Abs(transform.position.x - initialPosit.x);
-        }
-
-        if (path[pathStep] == up | path[pathStep] == down)
-        {
-            movement = Mathf.Abs(transform.position.y - initialPosit.y);
-        }
-
-        
-
-        //check if movement is enough
-        if (movement >= walkDistance)
-        {
-            if (egoMap.path[pathStep + readDirection] != egoMap.path[pathStep])
-            {
-                decelerating = true;
-            }
-
-            else if (egoMap.path[pathStep + readDirection] == egoMap.path[pathStep])
-            {
-                movement = 0;
-                pathStep += readDirection;
-            }
-        }
+        Walk(movementDirection);
     }
 
     /// <summary>
@@ -254,7 +160,15 @@ public class UnitBehaviour : MonoBehaviour
     //Start
     void Start()
     {
-        initialPosit = transform.position;
+        if (tag == "Ground Ally" | tag == "Air Ally")
+        {
+            movementDirection = up;
+        }
+
+        if (tag == "Ground Enemy" | tag == "Air Enemy")
+        {
+            movementDirection = down;
+        }
     }
 
     //Update
@@ -270,11 +184,8 @@ public class UnitBehaviour : MonoBehaviour
         {
             case "walking":
                 #region
-
-                if (egoMap.voidPainted && egoMap.pathPainted)
-                {
-                    ReadPath(egoMap.path);
-                }
+                
+                Walk(movementDirection);
 
                 break;
 
@@ -289,9 +200,17 @@ public class UnitBehaviour : MonoBehaviour
                     break;
                 }
 
-                Attack(enemy);
+                if (velocity.x == 0 && velocity.y == 0)
+                {
+                    Attack(enemy);
+                    state = "waiting";
+                    break;
+                }
 
-                state = "waiting";
+                else
+                {
+                    Walk(none);
+                }
 
                 break;
 
