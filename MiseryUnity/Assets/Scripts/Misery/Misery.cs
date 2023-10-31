@@ -6,7 +6,7 @@ public class Misery : MonoBehaviour
 {
     //==============================================================================================STATS===================================================================================================================
     public string state;
-    public float speed;
+    public static float speed;
     public Vector3 velocity;
     public Vector3 maxVelocity;
     public float acceleration;
@@ -40,7 +40,7 @@ public class Misery : MonoBehaviour
 
     void Start()
     {
-        
+        speed = 0;
     }
 
     // Update is called once per frame
