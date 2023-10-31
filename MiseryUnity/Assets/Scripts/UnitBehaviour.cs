@@ -10,6 +10,7 @@ public class UnitBehaviour : MonoBehaviour
 
     public EgoMap egoMap;
     public GameObject shot;
+    public Shot shotScript;
     GameObject enemy;
 
     #endregion
@@ -45,6 +46,7 @@ public class UnitBehaviour : MonoBehaviour
     float movement = 0;
     bool decelerating = false;
     Vector3 initialPosit;
+    Vector3 startingPosit;
 
     //State (walking, attacking)
     public string state = "walking";
@@ -76,7 +78,7 @@ public class UnitBehaviour : MonoBehaviour
             side = 1;
         }
 
-        if (direction == left)
+        if (direction == left | direction == down)
         {
             side = -1;
         }
@@ -115,14 +117,24 @@ public class UnitBehaviour : MonoBehaviour
             {
                 pathStep = 0;
                 readDirection = 1;
+
+                startingPosit = egoMap.pathPositions[0]; 
             }
 
             if (tag == "Ground Enemy" | tag == "Air Enemy")
             {
-                pathStep = path.Count - 1;
-                print(path[pathStep]);
+                pathStep = path.Count - 2;
                 readDirection = -1;
+
+                startingPosit = egoMap.pathPositions[path.Count - 1];
             }
+
+            //position correction
+            startingPosit.x += 0.5f;
+            startingPosit.y += 0.5f;
+
+            print(startingPosit);
+            transform.position = startingPosit;
 
             oneTimeSetup = true;
         }
@@ -138,14 +150,13 @@ public class UnitBehaviour : MonoBehaviour
         if (!decelerating)
         {
             Walk((path[pathStep] * readDirection));
-            print(tag + (path[pathStep] * readDirection));
         }
 
 
         //decelerate
         if (decelerating)
         {
-            if (egoMap.path[pathStep] == right | egoMap.path[pathStep] == left)
+            if (path[pathStep] == right | path[pathStep] == left)
             {
                 float displacement = (Mathf.Pow((-maxVelocity.x), 2) / ((deceleration) * 2)) * Time.deltaTime;
 
@@ -167,7 +178,7 @@ public class UnitBehaviour : MonoBehaviour
                 }
             }
 
-            else if (egoMap.path[pathStep] == up)
+            else if (path[pathStep] == up | path[pathStep] == down)
             {
                 float displacement = (Mathf.Pow((-maxVelocity.y), 2) / ((deceleration) * 2)) * Time.deltaTime;
 
@@ -175,7 +186,7 @@ public class UnitBehaviour : MonoBehaviour
                 {
                     velocity.y = Mathf.MoveTowards(velocity.y, 0, deceleration * Time.deltaTime);
 
-                    if (velocity.y <= 0)
+                    if (velocity.y * side <= 0)
                     {
                         decelerating = false;
                         movement = 0;
@@ -192,12 +203,12 @@ public class UnitBehaviour : MonoBehaviour
 
 
         //movement calculus
-        if (egoMap.path[pathStep] == right | egoMap.path[pathStep] == left)
+        if (path[pathStep] == right | egoMap.path[pathStep] == left)
         {
             movement = Mathf.Abs(transform.position.x - initialPosit.x);
         }
 
-        if (egoMap.path[pathStep] == up | egoMap.path[pathStep] == down)
+        if (path[pathStep] == up | path[pathStep] == down)
         {
             movement = Mathf.Abs(transform.position.y - initialPosit.y);
         }
@@ -226,8 +237,11 @@ public class UnitBehaviour : MonoBehaviour
     /// <param name="enemy">The target</param>
     void Attack(GameObject enemy)
     {
+        shotScript.state = "moving";
+
         Vector3 direction = enemy.transform.position - transform.position;
-        shot.GetComponent<Rigidbody2D>().AddForce(direction);
+
+        shot.GetComponent<Rigidbody2D>().AddForce(Vector3.Scale(direction, new Vector3(attackSpeed, attackSpeed, 0)));
     }
 
     #endregion
@@ -246,6 +260,12 @@ public class UnitBehaviour : MonoBehaviour
     //Update
     void Update()
     {
+        if (health <= 0)
+        {
+            tag = "Dead";
+            gameObject.SetActive(false);
+        }
+
         switch (state)
         {
             case "walking":
@@ -263,14 +283,15 @@ public class UnitBehaviour : MonoBehaviour
             case "attacking":
                 #region
 
-                Attack(enemy);
-
-                state = "waiting";
-
                 if (enemy.tag == "Dead")
                 {
                     state = "walking";
+                    break;
                 }
+
+                Attack(enemy);
+
+                state = "waiting";
 
                 break;
 
@@ -279,7 +300,7 @@ public class UnitBehaviour : MonoBehaviour
             case "waiting":
                 #region
 
-                if (shot.transform.position == new Vector3(0, 0, 1))
+                if (shotScript.state == "static")
                 {
                     state = "attacking";
                 }
@@ -293,10 +314,47 @@ public class UnitBehaviour : MonoBehaviour
     //Range trigger
     private void OnTriggerStay2D(Collider2D collision)
     {
-        if (collision.tag == "EnemyAir" | collision.tag == "EnemyGround")
+        if (tag == "Ground Ally" | tag == "Air Ally")
         {
-            enemy = collision.gameObject;
-            state = "attacking";
+            if (collision.tag == "Air Enemy" | collision.tag == "Ground Enemy")
+            {
+                enemy = collision.gameObject;
+                state = "attacking";
+            }
+        }
+
+        if (tag == "Ground Enemy" | tag == "Air Enemy")
+        {
+            if (collision.tag == "Air Ally" | collision.tag == "Ground Ally")
+            {
+                enemy = collision.gameObject;
+                state = "attacking";
+            }
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (tag == "Ground Ally" | tag == "Air Ally")
+        {
+            if (collision.tag == "Air Enemy Shot" | collision.tag == "Ground Enemy Shot")
+            {
+                if (Mathf.Abs(collision.transform.position.x - transform.position.x) < 1) //see if it collided with hitbox or range (maybe if its smaller than range?)
+                {
+                    health -= 1;
+                }
+            }
+        }
+
+        if (tag == "Ground Enemy" | tag == "Air Enemy")
+        {
+            if (collision.tag == "Air Ally Shot" | collision.tag == "Ground Ally Shot")
+            {
+                if (Mathf.Abs(collision.transform.position.x - transform.position.x) < 1) //see if it collided with hitbox or range (maybe if its smaller than range?)
+                {
+                    health -= 1;
+                }
+            }
         }
     }
 

@@ -47,6 +47,7 @@ public class EgoMap : MonoBehaviour
 
     int[] directions = {1, -1, 2};
     public List<int> path;
+    public List<Vector3Int> pathPositions;
 
     #endregion
     //========================
@@ -106,6 +107,7 @@ public class EgoMap : MonoBehaviour
         if (egoTilemap.GetTile(actualPosition) != egoPath)
         {
             egoTilemap.SetTile(actualPosition, egoPath);
+            pathPositions.Add(actualPosition);
             paintNextTile = false;
         }
 
@@ -114,7 +116,7 @@ public class EgoMap : MonoBehaviour
         {
             pathPainted = true;
             path.Add(none);
-            return;
+            yield break;
         }
 
         //get random tile

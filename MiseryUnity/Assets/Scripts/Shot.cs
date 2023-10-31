@@ -18,32 +18,8 @@ public class Shot : MonoBehaviour
     //========================
     #region
 
-    //Stats
-    public int health;
-    public int defense;
-    public int damage;
-    public int attackSpeed; //defines the projectile speed, since the faster it hits the target, the faster it is shot again
-
-    //Movement
-    Vector3 velocity;
-    public Vector3 maxVelocity;
-    public float acceleration;
-    public float deceleration;
-
-    public float walkDistance;
-
-    //Function progresssion
-    //walk
-    int side = 0;
-
-    //read path
-    int pathStep = 0;
-    float movement = 0;
-    bool decelerating = false;
-    Vector3 initialPosit;
-
-    //State (walking, attacking)
-    public string state = "walking";
+    //State
+    public string state = "static";
 
     #endregion
     //========================
@@ -72,15 +48,49 @@ public class Shot : MonoBehaviour
     //Update
     void Update()
     {
-        //delete ball if gets too far
+        switch (state)
+        {
+            case "static":
+                #region
+
+
+
+                transform.position = transform.parent.transform.position;
+                break;
+
+                #endregion
+
+            case "moving":
+                #region
+
+                if (Mathf.Abs(transform.position.x - transform.parent.transform.position.x) > 5 | Mathf.Abs(transform.position.y - transform.parent.transform.position.y) > 5)
+                {
+                    state = "static";
+                }
+
+                break;
+
+                #endregion
+        }
     }
 
     //Collision
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.tag == "EnemyGround")
+        if (tag == "Ground Ally Shot" | tag == "Air Ally Shot")
         {
-            transform.position = transform.parent.transform.position;
+            if (collision.tag == "Air Enemy" | collision.tag == "Ground Enemy")
+            {
+                state = "static";
+            }
+        }
+
+        if (tag == "Ground Enemy Shot" | tag == "Air Enemy Shot")
+        {
+            if (collision.tag == "Air Ally" | collision.tag == "Ground Ally")
+            {
+                state = "static";
+            }
         }
     }
 

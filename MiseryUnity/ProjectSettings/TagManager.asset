@@ -10,8 +10,11 @@ TagManager:
   - Air Ally
   - Ground Enemy
   - Air Enemy
-  - Ground Shot
-  - Air Shot
+  - Air Ally Shot
+  - Ground Ally Shot
+  - Air Enemy Shot
+  - Ground Enemy Shot
+  - Dead
   layers:
   - Default
   - TransparentFX
