@@ -2,13 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class NOME DA CLASSE AQUI : MonoBehaviour
+public class Spawner : MonoBehaviour
 {
     //IMPORTS
     //========================
     #region
 
-
+    public GameObject enemy;
 
     #endregion
     //========================
@@ -18,7 +18,8 @@ public class NOME DA CLASSE AQUI : MonoBehaviour
     //========================
     #region
 
-
+    public float cooldown;
+    bool onCoooldown = false;
 
     #endregion
     //========================
@@ -28,7 +29,13 @@ public class NOME DA CLASSE AQUI : MonoBehaviour
     //========================
     #region
 
-
+    IEnumerator SpawnEnemy()
+    {
+        Instantiate(enemy, transform.position, Quaternion.identity);
+        onCoooldown = true;
+        yield return new WaitForSeconds(cooldown);
+        onCoooldown = false;
+    }
 
     #endregion
     //========================
@@ -47,7 +54,10 @@ public class NOME DA CLASSE AQUI : MonoBehaviour
     //Update
     void Update()
     {
-
+        if (!onCoooldown)
+        {
+            StartCoroutine(SpawnEnemy());
+        }
     }
 
     #endregion

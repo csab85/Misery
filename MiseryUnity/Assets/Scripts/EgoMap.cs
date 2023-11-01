@@ -12,8 +12,13 @@ public class EgoMap : MonoBehaviour
     public Tilemap egoTilemap;
     public Tile egoVoid;
     public Tile egoPath;
+
     public GameObject ally;
     public GameObject enemy;
+
+    public GameObject rock;
+    public GameObject trap;
+    public GameObject spawner; 
 
     #endregion
     //========================
@@ -36,10 +41,12 @@ public class EgoMap : MonoBehaviour
 
     //Functions progress
     public bool voidPainted = false;
-    public bool pathPainted = true;
+    public bool obstacled = true;
     bool paintNextTile = true;
 
     bool firstTilePainted = false; //refers only to the path's first tile
+
+    int rockCounter = 0;
 
  
 
@@ -80,10 +87,32 @@ public class EgoMap : MonoBehaviour
         else
         {
             voidPainted = true;
-            pathPainted = false;
+            obstacled = false;
         }
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="obstacle">The type of obstacle to be added</param>
+    /// <param name="minimumPoint">The minimun point x and y in which the obstacles will appear (Max is the map border)</param>
+    /// <param name="times">How much times the obstacle will be spawned</param>
+    /// <returns></returns>
+    void  AddObstacle(GameObject obstacle, Vector2 minimumPoint, int times)
+    {
+        Vector2 posit;
+
+        for (int i = 0; i < times; i++)
+        {
+            posit.x = Random.Range(minimumPoint.x, 7);
+            posit.y = Random.Range(minimumPoint.y, 7);
+
+            Instantiate(obstacle, posit, Quaternion.identity);
+            rockCounter += 1;
+        }
+
+        obstacled = true;
+    }
     #endregion
     //========================
 
@@ -104,6 +133,11 @@ public class EgoMap : MonoBehaviour
         if (!voidPainted && paintNextTile)
         {
             StartCoroutine(PaintVoid());
+        }
+
+        if (voidPainted && rockCounter < 3)
+        {
+            AddObstacle(spawner, new Vector2(2, 6), 3);
         }
 
         if (Input.GetKeyDown(KeyCode.A))
