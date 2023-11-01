@@ -25,13 +25,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1520751745574699399}
-  serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -2.996109, y: -0.93385214, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &8244552743770209274
 SpriteRenderer:
@@ -98,7 +98,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   state: 
-  speed: 2
   velocity: {x: 0, y: 0, z: 0}
   maxVelocity: {x: 2, y: 2, z: 0}
   acceleration: 1
+  moving: 0
+  musicValue: 0
+  sfxValue: 0
+  _musicSlider: {fileID: 2350930198095349193, guid: 85106a7f3e8a58b4ca574d297cd79bf0, type: 3}
+  _sfxslider: {fileID: 8969546386678760055, guid: 349b68b731c603c40ae76e123c01b40e, type: 3}

@@ -13,9 +13,13 @@ public class WorkingMainMenu : MonoBehaviour
     private GameObject PainelOpçoes;
     [SerializeField]
     private GameObject PainelSounds;
+
+    public Misery playerSctript;
+    
     public void Jogar()
     {
         SceneManager.LoadScene(NomeDoLevelDeJogo);
+        playerSctript.moving = true;
     }
 
     public void AbrirOpçoes()
