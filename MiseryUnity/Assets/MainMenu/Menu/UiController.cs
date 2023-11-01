@@ -7,6 +7,11 @@ public class UiController : MonoBehaviour
 {
     public Slider _musicSlider, _sfxslider;
 
+    private void Awake()
+    {
+        _musicSlider.value = AudioManager.instance.musicSource.volume;
+        _sfxslider.value = AudioManager.instance.sfxSource.volume;
+    }
     public void ToggleMusic()
     {
         AudioManager.instance.toggleMusic();

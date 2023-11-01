@@ -8,17 +8,7 @@ public class sceneryAppearing : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Invoke("loadthis", 0);
-    }
-
-    void loadthis()
-    {
         SceneManager.LoadScene("Scenery", LoadSceneMode.Additive);
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
 }

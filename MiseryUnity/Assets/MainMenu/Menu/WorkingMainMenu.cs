@@ -18,8 +18,10 @@ public class WorkingMainMenu : MonoBehaviour
     
     public void Jogar()
     {
-        SceneManager.LoadScene(NomeDoLevelDeJogo);
+        SceneManager.LoadScene(NomeDoLevelDeJogo); 
         playerSctript.moving = true;
+        SceneManager.UnloadSceneAsync("MainMenu");
+        AudioManager.instance.PlayMusic("ThemeGame");
     }
 
     public void AbrirOpçoes()
