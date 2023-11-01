@@ -1558,7 +1558,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_UiScaleMode: 0
-  m_ReferencePixelsPerUnit: 100
+  m_ReferencePixelsPerUnit: 32
   m_ScaleFactor: 1
   m_ReferenceResolution: {x: 800, y: 600}
   m_ScreenMatchMode: 0
@@ -3006,6 +3006,10 @@ PrefabInstance:
     - target: {fileID: 8969546386678760054, guid: 349b68b731c603c40ae76e123c01b40e, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8969546386678760055, guid: 349b68b731c603c40ae76e123c01b40e, type: 3}
+      propertyPath: m_Value
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 8969546386678760055, guid: 349b68b731c603c40ae76e123c01b40e, type: 3}
       propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Target

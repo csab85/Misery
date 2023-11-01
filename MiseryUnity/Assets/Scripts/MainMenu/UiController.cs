@@ -9,7 +9,7 @@ public class UiController : MonoBehaviour
 
     private void Awake()
     {
-        _musicSlider.value = AudioManager.instance.musicSource.volume;
+        _musicSlider.value = AudioManager.instance.musicSource.volume; //essas duas coisas fizeram os sliders marcarem posição
         _sfxslider.value = AudioManager.instance.sfxSource.volume;
     }
     public void ToggleMusic()
