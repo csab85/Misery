@@ -4,41 +4,42 @@ using UnityEngine;
 
 public class Dialogue : MonoBehaviour
 {
-    public Sprite profile; //sprite
-    public string[] speechTxt; //texto
-    public string actorName; //nome dele
+    public Sprite profile;
+    public string[] speechTxt;
+    public string actorName;
+    public LayerMask playerLayer;
+    public float radius;
 
-    public LayerMask playerLayer;        //permite referenciar uma layer que a gente tenha criado
-    public float radius;                 //vai nos dar o tamanho do colisor
-
-    //precisamos referênciar o dialogue control, a classe que tá tendo o controle, precisamos chamar um metodo dela
     private DialogueControl dc;
-    bool onRadius;
+    private bool onRadius;
+    private bool isDialogueActive = false; // Variável para verificar se o diálogo está ativo
 
     private void Start()
     {
-        dc = FindObjectOfType<DialogueControl>(); //referência o script dialogue control
+        dc = FindObjectOfType<DialogueControl>();
     }
 
-    private void FixedUpdate()               //quando tiver trabalhando com física é melhor fixedUpdate
+    private void FixedUpdate()
     {
         InteractiveDialogue();
     }
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space) && onRadius)
+        if (Input.GetKeyDown(KeyCode.Space) && onRadius && !isDialogueActive) // Verifica se o diálogo não está ativo
         {
+            isDialogueActive = true; // Ativa o diálogo
             dc.Speech(profile, speechTxt, actorName);
         }
     }
+
     public void InteractiveDialogue()
     {
-        Collider2D hit = Physics2D.OverlapCircle(transform.position, radius, playerLayer);     //no overlapCircle, entre os parenteses preciso passar a posição, o tamanho e a layer que ele irá interagir
+        Collider2D hit = Physics2D.OverlapCircle(transform.position, radius, playerLayer);
 
         if (hit != null)
         {
-           onRadius = true;
+            onRadius = true;
         }
         else
         {
@@ -46,8 +47,14 @@ public class Dialogue : MonoBehaviour
         }
     }
 
-    private void OnDrawGizmosSelected()    //serve para mostrar o guizmo dos personagens
+    private void OnDrawGizmosSelected()
     {
         Gizmos.DrawWireSphere(transform.position, radius);
+    }
+
+    // Método chamado pelo DialogueControl quando o diálogo termina
+    public void EndDialogue()
+    {
+        isDialogueActive = false; // Desativa o diálogo
     }
 }
