@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -56,5 +57,10 @@ public class DialogueControl : MonoBehaviour
                 DialogueObject.SetActive(false);
             }
         }
+    }
+
+    internal void AdvanceSpeech()
+    {
+        throw new NotImplementedException();
     }
 }

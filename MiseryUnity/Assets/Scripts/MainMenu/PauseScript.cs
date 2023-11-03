@@ -38,5 +38,6 @@ public class PauseScript : MonoBehaviour
     public void ReturnToMenu()
     {
          SceneManager.LoadScene("MainMenu");
+        AudioManager.instance.PlayMusic("Theme"); //faz com que toque a próxima música quando aperta o play
     }
 }
