@@ -2,13 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CLASS NAME : MonoBehaviour
+public class RangeSyncronizer : MonoBehaviour
 {
     //IMPORTS
     //========================
     #region
 
-
+    public UnitBehaviour parentUnitScript;
 
     #endregion
     //========================
@@ -41,7 +41,7 @@ public class CLASS NAME : MonoBehaviour
     //Start
     void Start()
     {
-
+        GetComponent<CircleCollider2D>().radius = parentUnitScript.range;
     }
 
     //Update

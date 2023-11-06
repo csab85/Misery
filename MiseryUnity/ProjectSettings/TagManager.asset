@@ -15,6 +15,8 @@ TagManager:
   - Air Enemy Shot
   - Ground Enemy Shot
   - Dead
+  - Damaged
+  - Building
   layers:
   - Default
   - TransparentFX

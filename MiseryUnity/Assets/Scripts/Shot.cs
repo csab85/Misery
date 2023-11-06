@@ -8,7 +8,7 @@ public class Shot : MonoBehaviour
     //========================
     #region
 
-
+    UnitBehaviour targetScript;
 
     #endregion
     //========================
@@ -54,7 +54,7 @@ public class Shot : MonoBehaviour
                 #region
 
 
-
+                GetComponent<SpriteRenderer>().enabled = false;
                 transform.position = transform.parent.transform.position;
                 break;
 
@@ -68,6 +68,8 @@ public class Shot : MonoBehaviour
                     state = "static";
                 }
 
+                GetComponent<SpriteRenderer>().enabled = true;
+
                 break;
 
                 #endregion
@@ -79,9 +81,10 @@ public class Shot : MonoBehaviour
     {
         if (tag == "Ground Ally Shot" | tag == "Air Ally Shot")
         {
-            if (collision.tag == "Air Enemy" | collision.tag == "Ground Enemy")
+            if (collision.tag == "Air Enemy" | collision.tag == "Ground Enemy" | collision.tag == "Building")
             {
                 state = "static";
+                collision.tag = "Damaged";
             }
         }
 
@@ -90,6 +93,7 @@ public class Shot : MonoBehaviour
             if (collision.tag == "Air Ally" | collision.tag == "Ground Ally")
             {
                 state = "static";
+                collision.tag = "Damaged";
             }
         }
     }

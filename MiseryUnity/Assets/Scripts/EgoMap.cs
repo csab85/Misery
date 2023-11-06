@@ -1,24 +1,28 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Tilemaps;
 
 public class EgoMap : MonoBehaviour
 {
     //IMPORTS
     //========================
     #region
-
-    public Tilemap egoTilemap;
-    public Tile egoVoid;
-    public Tile egoPath;
-
-    public GameObject ally;
-    public GameObject enemy;
-
     public GameObject rock;
     public GameObject trap;
-    public GameObject spawner; 
+    public GameObject spawner;
+
+    public GameObject camera;
+
+    //classes
+    public GameObject allyShooter;
+    public GameObject allyMage;
+    public GameObject allyTank;
+
+    public GameObject enemyShooter;
+    public GameObject enemyMage;
+    public GameObject enemyTank;
+
+    GameObject selectedUnit;
 
     #endregion
     //========================
@@ -28,27 +32,16 @@ public class EgoMap : MonoBehaviour
     //========================
     #region
 
-    //Size
-    public Vector2 mapSize;
+    public int shootersAvaiable = 0;
+    public int magesAvaiable = 0;
+    public int tanksAvaiable = 0;
 
-    //Paint speed
-    public float voidPaintSpeed;
-    public float pathPaintSpeed;
-
-    //Position
-    Vector3Int actualPosition = new Vector3Int(0, 0, 0);
-    Vector3Int newPosition = new Vector3Int(0, 0, 0);
+    public List<GameObject> deck;
 
     //Functions progress
-    public bool voidPainted = false;
     public bool obstacled = true;
-    bool paintNextTile = true;
-
-    bool firstTilePainted = false; //refers only to the path's first tile
 
     int rockCounter = 0;
-
- 
 
     #endregion
     //========================
@@ -59,40 +52,7 @@ public class EgoMap : MonoBehaviour
     #region
 
     /// <summary>
-    /// Paints a floor the size specified by mapSize
-    /// </summary>
-    /// <returns></returns>
-    IEnumerator PaintVoid()
-    {
-        if (actualPosition.y <= (mapSize.y - 1))
-        {
-            egoTilemap.SetTile(actualPosition, egoVoid);
-            paintNextTile = false;
-
-            if (actualPosition.x >= (mapSize.x - 1))
-            {
-                actualPosition.x = 0;
-                actualPosition.y += 1;
-            }
-
-            else
-            {
-                actualPosition.x += 1;
-            }
-
-            yield return new WaitForSecondsRealtime(1 / voidPaintSpeed);
-            paintNextTile = true;
-        }
-
-        else
-        {
-            voidPainted = true;
-            obstacled = false;
-        }
-    }
-
-    /// <summary>
-    /// 
+    /// Adds obstacles to the map
     /// </summary>
     /// <param name="obstacle">The type of obstacle to be added</param>
     /// <param name="minimumPoint">The minimun point x and y in which the obstacles will appear (Max is the map border)</param>
@@ -113,6 +73,33 @@ public class EgoMap : MonoBehaviour
 
         obstacled = true;
     }
+
+    void ChooseTroops()
+    {
+        for (int i = 0; i < 16; i++)
+        {
+            GameObject chosenUnit = deck[Random.Range(0, 3)];
+
+            if (chosenUnit == allyShooter)
+            {
+                shootersAvaiable += 1;
+                continue;
+            }
+
+            if (chosenUnit == allyMage)
+            {
+                magesAvaiable += 1;
+                continue;
+            }
+
+            if (chosenUnit == allyTank)
+            {
+                tanksAvaiable += 1;
+                continue;
+            }
+        }
+    }
+
     #endregion
     //========================
 
@@ -124,30 +111,49 @@ public class EgoMap : MonoBehaviour
     //Start
     void Start()
     {
-        
+        deck = new List<GameObject> { allyShooter, allyMage, allyTank };
+        ChooseTroops();
     }
 
     //Update
     void Update()
     {
-        if (!voidPainted && paintNextTile)
+        if (Input.GetKeyDown(KeyCode.A) && shootersAvaiable > 0)
         {
-            StartCoroutine(PaintVoid());
+            selectedUnit = allyShooter;
         }
 
-        if (voidPainted && rockCounter < 3)
+        if (Input.GetKeyDown(KeyCode.S) && magesAvaiable > 0)
         {
-            AddObstacle(spawner, new Vector2(2, 6), 3);
+            selectedUnit = allyMage;
         }
 
-        if (Input.GetKeyDown(KeyCode.A))
+        if (Input.GetKeyDown(KeyCode.D) && tanksAvaiable > 0)
         {
-            Instantiate(ally, new Vector3(Random.Range(0.5f, 8.6f), 0.5f, 0), Quaternion.identity);
+            selectedUnit = allyTank;
         }
 
-        if (Input.GetKeyDown(KeyCode.D))
+        if (Input.GetMouseButtonDown(0))
         {
-            Instantiate(enemy, new Vector3(Random.Range(0.5f, 8.6f), 8.5f, 0), Quaternion.identity);
+            Vector3 mousePosit = camera.GetComponent<Camera>().ScreenToWorldPoint(Input.mousePosition);
+
+            Instantiate(selectedUnit, new Vector3(mousePosit.x, mousePosit.y, -2), Quaternion.identity);
+
+            //discount
+            if (selectedUnit == allyShooter)
+            {
+                shootersAvaiable -= 1;
+            }
+
+            if (selectedUnit == allyMage)
+            {
+                magesAvaiable -= 1;
+            }
+
+            if (selectedUnit == allyTank)
+            {
+                tanksAvaiable -= 1;
+            }
         }
     }
 

@@ -11,6 +11,7 @@ public class UnitBehaviour : MonoBehaviour
     public EgoMap egoMap;
     public GameObject shot;
     public Shot shotScript;
+    public UnitBehaviour self;
     GameObject enemy;
 
     #endregion
@@ -26,6 +27,7 @@ public class UnitBehaviour : MonoBehaviour
     public int defense;
     public int damage;
     public int attackSpeed; //defines the projectile speed, since the faster it hits the target, the faster it is shot again
+    public int range;
 
     //Movement
     public Vector3 velocity;
@@ -33,9 +35,20 @@ public class UnitBehaviour : MonoBehaviour
     public float acceleration;
     public float deceleration;
 
+    //Targets
+    public List<string> targets;
+    public bool targetGroundAlly;
+    public bool targetAirAlly;
+    public bool targetGroundEnemy;
+    public bool targetAirEnemy;
+    public bool targetBuilding;
+
     //Function progresssion
     //walk
     int side = 0;
+
+    //damage
+    bool damaging = false;
 
     //move
     int movementDirection = 0;
@@ -51,6 +64,8 @@ public class UnitBehaviour : MonoBehaviour
     int down = -1;
     int right = 2;
     int left = -2;
+
+    string selfTag;
 
     #endregion
     //========================
@@ -145,9 +160,24 @@ public class UnitBehaviour : MonoBehaviour
     {
         shotScript.state = "moving";
 
-        Vector3 direction = enemy.transform.position - transform.position;
+        Vector3 direction = (enemy.transform.position - transform.position).normalized;
 
-        shot.GetComponent<Rigidbody2D>().AddForce(Vector3.Scale(direction, new Vector3(attackSpeed, attackSpeed, 0)));
+        shot.GetComponent<Rigidbody2D>().velocity = direction * 5;
+    }
+
+    /// <summary>
+    /// Damages this unit ans turns it invulnerable for a while
+    /// </summary>
+    /// <returns></returns>
+    IEnumerator Damage()
+    {
+        damaging = true;
+        health -= 1;
+        GetComponent<SpriteRenderer>().color = new Color(200, 0, 0);
+        yield return new WaitForSecondsRealtime(0.3f);
+        GetComponent<SpriteRenderer>().color = new Color(255, 255, 255);
+        tag = selfTag;
+        damaging = false;
     }
 
     #endregion
@@ -160,6 +190,7 @@ public class UnitBehaviour : MonoBehaviour
     //Start
     void Start()
     {
+        //setup if it is enemy or ally
         if (tag == "Ground Ally" | tag == "Air Ally")
         {
             movementDirection = up;
@@ -169,6 +200,36 @@ public class UnitBehaviour : MonoBehaviour
         {
             movementDirection = down;
         }
+
+        //setup targets
+
+        if (targetGroundAlly)
+        {
+            targets.Add("Ground Ally");
+        }
+
+        if (targetAirAlly)
+        {
+            targets.Add("Air Ally");
+        }
+
+        if (targetGroundEnemy)
+        {
+            targets.Add("Ground Enemy");
+        }
+
+        if (targetAirEnemy)
+        {
+            targets.Add("Air Enemy");
+        }
+
+        if (targetBuilding)
+        {
+            targets.Add("Building");
+        }
+
+        //get self tag
+        selfTag = tag;
     }
 
     //Update
@@ -180,100 +241,71 @@ public class UnitBehaviour : MonoBehaviour
             gameObject.SetActive(false);
         }
 
-        switch (state)
+        if (tag != "Dead" && tag != "Damaged")
         {
-            case "walking":
-                #region
-                
-                Walk(movementDirection);
+            switch (state)
+            {
+                case "walking":
+                    #region
 
-                break;
+                    Walk(movementDirection);
 
-            #endregion
-
-            case "attacking":
-                #region
-
-                if (enemy.tag == "Dead")
-                {
-                    state = "walking";
                     break;
-                }
-
-                if (velocity.x == 0 && velocity.y == 0)
-                {
-                    Attack(enemy);
-                    state = "waiting";
-                    break;
-                }
-
-                else
-                {
-                    Walk(none);
-                }
-
-                break;
-
-            #endregion
-
-            case "waiting":
-                #region
-
-                if (shotScript.state == "static")
-                {
-                    state = "attacking";
-                }
-
-                break;
 
                 #endregion
+
+                case "attacking":
+                    #region
+
+                    if (enemy.tag == "Dead")
+                    {
+                        state = "walking";
+                        break;
+                    }
+
+                    if (velocity.x == 0 && velocity.y == 0)
+                    {
+                        Attack(enemy);
+                        state = "waiting";
+                        break;
+                    }
+
+                    else
+                    {
+                        Walk(none);
+                    }
+
+                    break;
+
+                #endregion
+
+                case "waiting":
+                    #region
+
+                    if (shotScript.state == "static")
+                    {
+                        state = "attacking";
+                    }
+
+                    break;
+
+                    #endregion
+            }
+        }
+
+        if (tag == "Damaged" && !damaging)
+        {
+            StartCoroutine(Damage());
         }
     }
 
     //Range trigger
     private void OnTriggerStay2D(Collider2D collision)
     {
-        if (tag == "Ground Ally" | tag == "Air Ally")
+        if (targets.Contains(collision.tag))
         {
-            if (collision.tag == "Air Enemy" | collision.tag == "Ground Enemy")
-            {
-                enemy = collision.gameObject;
-                state = "attacking";
-            }
-        }
-
-        if (tag == "Ground Enemy" | tag == "Air Enemy")
-        {
-            if (collision.tag == "Air Ally" | collision.tag == "Ground Ally")
-            {
-                enemy = collision.gameObject;
-                state = "attacking";
-            }
-        }
-    }
-
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (tag == "Ground Ally" | tag == "Air Ally")
-        {
-            if (collision.tag == "Air Enemy Shot" | collision.tag == "Ground Enemy Shot")
-            {
-                if (Mathf.Abs(collision.transform.position.x - transform.position.x) < 1) //see if it collided with hitbox or range (maybe if its smaller than range?)
-                {
-                    health -= 1;
-                }
-            }
-        }
-
-        if (tag == "Ground Enemy" | tag == "Air Enemy")
-        {
-            if (collision.tag == "Air Ally Shot" | collision.tag == "Ground Ally Shot")
-            {
-                if (Mathf.Abs(collision.transform.position.x - transform.position.x) < 1) //see if it collided with hitbox or range (maybe if its smaller than range?)
-                {
-                    health -= 1;
-                }
-            }
+            enemy = collision.gameObject;
+            state = "attacking";
         }
     }
 
