@@ -6,16 +6,11 @@ using UnityEngine.SceneManagement;
 public class PauseScript : MonoBehaviour
 {
     public Transform pauseMenu;
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
 
-    // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape))
+        // Verifica se a cena "MainMenu" não está carregada e se a tecla Escape foi pressionada
+        if (!SceneManager.GetSceneByName("MainMenu").isLoaded && Input.GetKeyDown(KeyCode.Escape))
         {
             if (pauseMenu.gameObject.activeSelf)
             {
@@ -29,6 +24,7 @@ public class PauseScript : MonoBehaviour
             }
         }
     }
+
     public void ResumeGame()
     {
         pauseMenu.gameObject.SetActive(false);
@@ -37,7 +33,7 @@ public class PauseScript : MonoBehaviour
 
     public void ReturnToMenu()
     {
-         SceneManager.LoadScene("MainMenu");
-        AudioManager.instance.PlayMusic("Theme"); //faz com que toque a próxima música quando aperta o play
+        SceneManager.LoadScene("MainMenu");
+        AudioManager.instance.PlayMusic("Theme");
     }
 }
