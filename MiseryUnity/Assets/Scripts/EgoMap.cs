@@ -58,14 +58,14 @@ public class EgoMap : MonoBehaviour
     /// <param name="minimumPoint">The minimun point x and y in which the obstacles will appear (Max is the map border)</param>
     /// <param name="times">How much times the obstacle will be spawned</param>
     /// <returns></returns>
-    void  AddObstacle(GameObject obstacle, Vector2 minimumPoint, int times)
+    void  AddObstacle(GameObject obstacle, int times)
     {
         Vector2 posit;
 
         for (int i = 0; i < times; i++)
         {
-            posit.x = Random.Range(minimumPoint.x, 7);
-            posit.y = Random.Range(minimumPoint.y, 7);
+            posit.x = Random.Range(transform.position.x - (transform.localScale.x / 2), transform.position.x + (transform.localScale.x / 2));
+            posit.y = Random.Range(2.7f, (transform.position.y + (transform.localScale.y / 2)) - 1);
 
             Instantiate(obstacle, posit, Quaternion.identity);
             rockCounter += 1;
@@ -113,22 +113,27 @@ public class EgoMap : MonoBehaviour
     {
         deck = new List<GameObject> { allyShooter, allyMage, allyTank };
         ChooseTroops();
+        AddObstacle(spawner, 3);
     }
 
     //Update
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.A) && shootersAvaiable > 0)
+
+        //Control
+        #region
+
+        if (Input.GetKeyDown(KeyCode.A))
         {
             selectedUnit = allyShooter;
         }
 
-        if (Input.GetKeyDown(KeyCode.S) && magesAvaiable > 0)
+        if (Input.GetKeyDown(KeyCode.S))
         {
             selectedUnit = allyMage;
         }
 
-        if (Input.GetKeyDown(KeyCode.D) && tanksAvaiable > 0)
+        if (Input.GetKeyDown(KeyCode.D))
         {
             selectedUnit = allyTank;
         }
@@ -136,24 +141,36 @@ public class EgoMap : MonoBehaviour
         if (Input.GetMouseButtonDown(0))
         {
             Vector3 mousePosit = camera.GetComponent<Camera>().ScreenToWorldPoint(Input.mousePosition);
-
-            Instantiate(selectedUnit, new Vector3(mousePosit.x, mousePosit.y, -2), Quaternion.identity);
+            
 
             //discount
-            if (selectedUnit == allyShooter)
+            if (selectedUnit == allyShooter && shootersAvaiable > 0)
             {
+                Instantiate(selectedUnit, new Vector3(mousePosit.x + 0.3f, mousePosit.y, -2), Quaternion.identity);
+                Instantiate(selectedUnit, new Vector3(mousePosit.x - 0.3f, mousePosit.y, -2), Quaternion.identity);
+                Instantiate(selectedUnit, new Vector3(mousePosit.x, mousePosit.y + 0.3f, -2), Quaternion.identity);
+                Instantiate(selectedUnit, new Vector3(mousePosit.x, mousePosit.y - 0.3f, -2), Quaternion.identity);
+
                 shootersAvaiable -= 1;
             }
 
-            if (selectedUnit == allyMage)
+            if (selectedUnit == allyMage && magesAvaiable > 0)
             {
+                Instantiate(selectedUnit, new Vector3(mousePosit.x, mousePosit.y, -2), Quaternion.identity);
+
                 magesAvaiable -= 1;
             }
 
-            if (selectedUnit == allyTank)
+            if (selectedUnit == allyTank && tanksAvaiable > 0)
             {
+                Instantiate(selectedUnit, new Vector3(mousePosit.x, mousePosit.y, -2), Quaternion.identity);
+
                 tanksAvaiable -= 1;
             }
+
+            #endregion
+
+
         }
     }
 

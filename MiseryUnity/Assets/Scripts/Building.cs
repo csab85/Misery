@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Gates : MonoBehaviour
+public class Building : MonoBehaviour
 {
     //IMPORTS
     //========================
@@ -74,6 +74,11 @@ public class Gates : MonoBehaviour
         if (tag == "Damaged" && !damaging)
         {
             StartCoroutine(Damage());
+        }
+
+        if (health < 0)
+        {
+            Destroy(gameObject);
         }
     }
 
