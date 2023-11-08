@@ -26,21 +26,20 @@ public class UnitBehaviour : MonoBehaviour
     public int health;
     public int defense;
     public int damage;
+    public int aoe;
     public int attackSpeed; //defines the projectile speed, since the faster it hits the target, the faster it is shot again
     public int range;
 
     //Movement
-    public Vector3 velocity;
+    Vector3 velocity;
     public Vector3 maxVelocity;
     public float acceleration;
     public float deceleration;
 
     //Targets
     public List<string> targets;
-    public bool targetGroundAlly;
-    public bool targetAirAlly;
-    public bool targetGroundEnemy;
-    public bool targetAirEnemy;
+    public bool targetAlly;
+    public bool targetEnemy;
     public bool targetBuilding;
 
     //Function progresssion
@@ -191,36 +190,26 @@ public class UnitBehaviour : MonoBehaviour
     void Start()
     {
         //setup if it is enemy or ally
-        if (tag == "Ground Ally" | tag == "Air Ally")
+        if (tag == "Ally")
         {
             movementDirection = up;
         }
 
-        if (tag == "Ground Enemy" | tag == "Air Enemy")
+        if (tag == "Enemy")
         {
             movementDirection = down;
         }
 
         //setup targets
 
-        if (targetGroundAlly)
+        if (targetAlly)
         {
-            targets.Add("Ground Ally");
+            targets.Add("Ally");
         }
 
-        if (targetAirAlly)
+        if (targetEnemy)
         {
-            targets.Add("Air Ally");
-        }
-
-        if (targetGroundEnemy)
-        {
-            targets.Add("Ground Enemy");
-        }
-
-        if (targetAirEnemy)
-        {
-            targets.Add("Air Enemy");
+            targets.Add("Enemy");
         }
 
         if (targetBuilding)

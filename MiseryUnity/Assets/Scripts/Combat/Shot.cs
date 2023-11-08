@@ -9,6 +9,7 @@ public class Shot : MonoBehaviour
     #region
 
     UnitBehaviour targetScript;
+    UnitBehaviour unitScript; //the unit this shot is attached to
 
     #endregion
     //========================
@@ -20,6 +21,13 @@ public class Shot : MonoBehaviour
 
     //State
     public string state = "static";
+
+    //Targets affcted
+    public List<string> affectedTargets = new List<string> {"Building"};
+
+    //Gambiarra
+    bool exploding = false;
+    float selfRadius;
 
     #endregion
     //========================
@@ -42,7 +50,19 @@ public class Shot : MonoBehaviour
     //Start
     void Start()
     {
+        //sync to its unit targets
+        if (unitScript.targetAlly)
+        {
+            affectedTargets.Add("Ally");
+        }
 
+        if (unitScript.targetEnemy)
+        {
+            affectedTargets.Add("Enemy");
+        }
+
+        //get radius
+        selfRadius = GetComponent<CircleCollider2D>().radius;
     }
 
     //Update
@@ -53,7 +73,7 @@ public class Shot : MonoBehaviour
             case "static":
                 #region
 
-
+                GetComponent<CircleCollider2D>().radius = selfRadius;
                 GetComponent<SpriteRenderer>().enabled = false;
                 transform.position = transform.parent.transform.position;
                 break;
@@ -72,6 +92,18 @@ public class Shot : MonoBehaviour
 
                 break;
 
+            #endregion
+
+            case "exploding":
+                #region
+
+                if (exploding)
+                {
+                    //exploding animation and make exploding bool chage to false when animation finished
+                }
+
+                break;
+
                 #endregion
         }
     }
@@ -79,20 +111,29 @@ public class Shot : MonoBehaviour
     //Collision
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (tag == "Ground Ally Shot" | tag == "Air Ally Shot")
+        if (affectedTargets.Contains(collision.tag))
         {
-            if (collision.tag == "Air Enemy" | collision.tag == "Ground Enemy" | collision.tag == "Building")
+            if (unitScript.aoe > 0)
+            {
+                GetComponent<CircleCollider2D>().radius = unitScript.aoe;
+                return;
+            }
+
+            else
             {
                 state = "static";
                 collision.tag = "Damaged";
             }
         }
+    }
 
-        if (tag == "Ground Enemy Shot" | tag == "Air Enemy Shot")
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        if (affectedTargets.Contains(collision.tag))
         {
-            if (collision.tag == "Air Ally" | collision.tag == "Ground Ally")
+            if (!exploding)
             {
-                state = "static";
+                state = "exploding";
                 collision.tag = "Damaged";
             }
         }
