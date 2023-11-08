@@ -98,7 +98,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 129adc0f28fcd2a49aeb33028d450652, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  miseryScript: {fileID: 0}
+  miseryScript: {fileID: 1391977340033278048, guid: b634a0d8e00dddc4293441d376d3ebd0, type: 3}
   camDelay: 0.25
   camTravelSpeed: 3
   zoomSpeed: 1
