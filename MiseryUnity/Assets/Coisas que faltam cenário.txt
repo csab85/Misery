@@ -1,0 +1,24 @@
+Coisas que faltam cenário: (Vou adicionando as coisas conforme vou lembrando)
+
+1-Arrumar algumas perspectivas
+2-Sprites
+3-Como será a transição da camera
+4-Movimento dos npcs
+5-Sprites extras(tipo lixo, ratis, fontes, árvores, etc)
+6-Loading
+7-Menu
+8-Diálogos
+9-Tiles
+
+2)
+Lugares por fora
+Lugares internos
+casa de Npcs, prédios
+Lixo,Rato,Fontes,árvores e outras coisas que não to lembrando agora
+
+9)
+Calçada com rua rachada
+Calçada com rua lisa
+Rua rachada
+Rua metade rachada metade lisa
+Rua lisa

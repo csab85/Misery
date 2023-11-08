@@ -129,6 +129,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cam: {fileID: 0}
   state: 
+<<<<<<< HEAD
   acceleration: 3
   decelaration: 3
   maxVelocity: {x: 2, y: 2, z: 0}
@@ -429,3 +430,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f9337115acf56ff41bfdc98aa089f3ad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+=======
+  velocity: {x: 0, y: 0, z: 0}
+  maxVelocity: {x: 2, y: 2, z: 0}
+  acceleration: 1
+  moving: 0
+  musicValue: 0
+  sfxValue: 0
+  _musicSlider: {fileID: 2350930198095349193, guid: 85106a7f3e8a58b4ca574d297cd79bf0, type: 3}
+  _sfxslider: {fileID: 8969546386678760055, guid: 349b68b731c603c40ae76e123c01b40e, type: 3}
+>>>>>>> origin/Scenery

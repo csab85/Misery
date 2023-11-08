@@ -1,0 +1,15 @@
+Preto: Prédios, barracos, coisas para compor cenário e impedir a passagem do jogador.
+
+Verde: Rua
+
+Branco: Casa
+
+Vermelho: Bar
+
+Amarelo: Ponte
+
+Azul Escuro: Museu
+
+Roxo: Pier
+
+Azul Claro: Rio
