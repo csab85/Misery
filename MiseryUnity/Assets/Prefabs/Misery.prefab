@@ -174,9 +174,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cam: {fileID: 9110296520517975847, guid: fdd6ac1590ec81a479a1bab18eefbad7, type: 3}
-  state: 
-  acceleration: 0
-  deceleration: 0
-  maxVelocity: {x: 0, y: 0, z: 0}
+  state: walking
+  acceleration: 5
+  deceleration: 5
+  maxVelocity: {x: 5, y: 5, z: 0}
   velocity: {x: 0, y: 0, z: 0}
   moving: 0

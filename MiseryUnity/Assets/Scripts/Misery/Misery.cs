@@ -89,7 +89,17 @@ public class Misery : MonoBehaviour
     // Update
     void Update()
     {
-        Walk();
+        switch (state)
+        {
+            case  "walking":
+                #region
+
+                Walk();
+
+                break;
+
+                #endregion
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
