@@ -5,7 +5,9 @@ using UnityEngine;
 public class Dialogue : MonoBehaviour
 {
     public Sprite profile;
+    [TextArea]
     public string[] speechTxt;
+    public DialogueStruct[] speechPlayer;
     public string actorName;
     public LayerMask playerLayer;
     public float radius;
@@ -29,7 +31,7 @@ public class Dialogue : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space) && onRadius && !isDialogueActive) // Verifica se o diálogo não está ativo
         {
             isDialogueActive = true; // Ativa o diálogo
-            dc.Speech(profile, speechTxt, actorName);
+            dc.Speech(profile, actorName, speechPlayer);
         }
     }
 
