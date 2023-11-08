@@ -4,9 +4,19 @@ using UnityEngine;
 
 public class Soul : MonoBehaviour
 {
+    //IMPORTS
+    //========================
+    #region
+
+    
+
+    #endregion
+    //========================
+
     //STATS
     //========================
-    
+    #region
+
     //Movement
     public float speed;
     Vector3 velocity;
@@ -35,10 +45,14 @@ public class Soul : MonoBehaviour
     bool leftStreet = true;
     int directionValue = 1;
 
+    #endregion
     //========================
+
 
     //FUNCTIONS
     //========================
+    #region
+
     /// <summary>
     /// Changes the face of the soul
     /// </summary>
@@ -46,6 +60,8 @@ public class Soul : MonoBehaviour
     void ChangeFace(string newMood)
     {
         transform.GetChild(lastMoodValue).gameObject.SetActive(false);//deactivate current face
+
+        moodValue = Random.Range(0, 4);
 
         mood = moods[moodValue];//get new face
         lastMoodValue = moodValue;//update last mood
@@ -62,7 +78,7 @@ public class Soul : MonoBehaviour
     {
         float alpha = transform.GetComponent<SpriteRenderer>().color.a;
 
-        if (fadingRate < 0)
+        if (fadingRate > 0)
         {
             if (alpha <= 0)
             {
@@ -70,7 +86,7 @@ public class Soul : MonoBehaviour
             }
         }
 
-        if (fadingRate > 0)
+        if (fadingRate < 0)
         {
             if (alpha >= maxAlpha)
             {
@@ -78,7 +94,7 @@ public class Soul : MonoBehaviour
             }
         }
 
-        alpha += fadingRate * 0.001f;
+        alpha -= fadingRate * 0.001f;
 
         transform.GetComponent<SpriteRenderer>().color = new Color(color.r, color.g, color.b, alpha);
 
@@ -124,9 +140,16 @@ public class Soul : MonoBehaviour
         color = new Color(Random.value, Random.value, Random.value, 0);
         gameObject.GetComponent<SpriteRenderer>().color = color;
     }
+
+    #endregion
     //========================
 
 
+    //RUNNING
+    //========================
+    #region
+
+    //Start
     void Start()
     {
         ChangeFace(mood);
@@ -140,7 +163,7 @@ public class Soul : MonoBehaviour
         startingX = transform.position.x;
     }
 
-
+    //Úpdate
     void Update()
     {
         switch (state)
@@ -171,7 +194,7 @@ public class Soul : MonoBehaviour
                 
                 if (finishedWalking)
                 {
-                    state = "invisilating";
+                    state = "fading";
                 }
 
                 break;
@@ -196,4 +219,6 @@ public class Soul : MonoBehaviour
                 #endregion
         }
     }
+
+    #endregion
 }
