@@ -51,10 +51,4 @@ public class WorkingMainMenu : MonoBehaviour
         Debug.Log("Quit Game");
         Application.Quit();
     }
-
-    public void VelocidadePersonagem()
-    {
-        Misery.speed = 10;
-
-    }
 }

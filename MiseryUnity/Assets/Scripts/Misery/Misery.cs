@@ -4,53 +4,112 @@ using UnityEngine;
 
 public class Misery : MonoBehaviour
 {
-    //==============================================================================================STATS===================================================================================================================
+    //IMPORTS
+    //========================
+    #region
+
+    public MainCamera cam;
+
+    #endregion
+    //========================
+
+
+    //STATS AND VALUES
+    //========================
+    #region
+
     public string state;
-    public static float speed;
-    public Vector3 velocity;
-    public Vector3 maxVelocity;
     public float acceleration;
-    public bool moving = false;
+    public float deceleration;
+    public Vector3 maxVelocity;
+    public Vector3 velocity;
 
-    //===============================================================================FUNCTIONS==============================================================================================================================
+    //Function progression
+    public bool moving = false; //allows player to move or not while on menu
 
-    //Movement--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-    IEnumerator Walk()
+    #endregion
+    //========================
+
+
+    //FUNCTIONS
+    //========================
+    #region
+
+    /// <summary>
+    /// Move misery accordyingly to keyboard input
+    /// </summary>
+    /// <returns></returns>
+    void Walk()
     {
-        if (moving)
+        Vector2 side = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
+
+        //get input
+        if (Input.GetButton("Horizontal"))
         {
-            if (Input.GetAxis("Horizontal") != 0)
-            {
-                velocity.x = Input.GetAxis("Horizontal") * acceleration;
-                AudioManager.instance.PlaySfx("Walk");
-            }
-
-            if (Input.GetAxis("Vertical") != 0)
-            {
-                velocity.y = Input.GetAxis("Vertical") * acceleration;
-            }
-
-            //move
-            if (velocity != new Vector3(0, 0, 0))
-            {
-                transform.position += velocity * Time.deltaTime;
-            }
-
-            yield return new WaitForSecondsRealtime(0);
+            velocity.x = Mathf.MoveTowards(velocity.x, (maxVelocity.x * side.x), acceleration * Time.deltaTime);
         }
-        
+
+        if (!Input.GetButton("Horizontal"))
+        {
+            velocity.x = Mathf.MoveTowards(velocity.x, 0, deceleration * Time.deltaTime);
+        }
+
+        if (Input.GetButton("Vertical"))
+        {
+            velocity.y = Mathf.MoveTowards(velocity.y, (maxVelocity.y * side.y), acceleration * Time.deltaTime);
+        }
+
+        if (!Input.GetButton("Vertical"))
+        {
+            velocity.y = Mathf.MoveTowards(velocity.y, 0, deceleration * Time.deltaTime);
+        }
+
+
+        //move
+        if (velocity != new Vector3(0, 0, 0))
+        {
+            transform.position += velocity * Time.deltaTime;
+        }
     }
 
+    #endregion
+    //========================
 
+
+    //RUNNING
+    //========================
+    #region
+
+    //Start
     void Start()
     {
-        speed = 0;
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-            StartCoroutine(Walk());
         
     }
+
+    // Update
+    void Update()
+    {
+        Walk();
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (cam.changing == false)
+        {
+            if (cam.place == collision.tag)
+            {
+                cam.place = "Outside";
+            }
+
+            else
+            {
+                cam.place = collision.tag;
+            }
+        }
+
+        cam.changing = true;
+    }
+
+    #endregion
+    //========================
 }
