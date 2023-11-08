@@ -9,7 +9,7 @@ public class Shot : MonoBehaviour
     #region
 
     UnitBehaviour targetScript;
-    UnitBehaviour unitScript; //the unit this shot is attached to
+    [SerializeField] UnitBehaviour unitScript; //the unit this shot is attached to
 
     #endregion
     //========================
@@ -126,7 +126,7 @@ public class Shot : MonoBehaviour
             }
         }
     }
-
+ 
     private void OnTriggerStay2D(Collider2D collision)
     {
         if (affectedTargets.Contains(collision.tag))

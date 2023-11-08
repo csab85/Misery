@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 8137898138354744706}
   m_Layer: 0
   m_Name: AllyMage
-  m_TagString: Ground Ally
+  m_TagString: Ally
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -170,7 +170,7 @@ MonoBehaviour:
   deceleration: 2
   targets: []
   targetAlly: 0
-  targetEnemy: 0
+  targetEnemy: 1
   targetBuilding: 1
   state: walking
 --- !u!1 &8137898139225282762
@@ -250,7 +250,7 @@ GameObject:
   - component: {fileID: 8137898139738009691}
   m_Layer: 0
   m_Name: Shot
-  m_TagString: Air Ally Shot
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -337,7 +337,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 0.4999999
+  m_Radius: 0.5
 --- !u!50 &8588280230419543117
 Rigidbody2D:
   serializedVersion: 4
@@ -371,6 +371,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7569df3ccdf88bd43ad1f9ed27da6fd3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  unitScript: {fileID: 8137898138354744706}
   state: static
   affectedTargets:
   - Building

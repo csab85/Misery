@@ -77,7 +77,7 @@ GameObject:
   - component: {fileID: 1545857435338315047}
   m_Layer: 0
   m_Name: Shot
-  m_TagString: Air Enemy Shot
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -198,6 +198,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7569df3ccdf88bd43ad1f9ed27da6fd3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  unitScript: {fileID: 1545857435517775061}
   state: static
   affectedTargets:
   - Building
@@ -216,7 +217,7 @@ GameObject:
   - component: {fileID: 1545857435517775061}
   m_Layer: 0
   m_Name: EnemyMage
-  m_TagString: Ground Enemy
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -365,7 +366,7 @@ MonoBehaviour:
   acceleration: 2
   deceleration: 2
   targets: []
-  targetAlly: 0
+  targetAlly: 1
   targetEnemy: 0
   targetBuilding: 0
   state: walking
