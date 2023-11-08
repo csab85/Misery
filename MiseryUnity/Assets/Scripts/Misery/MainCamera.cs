@@ -9,7 +9,7 @@ public class MainCamera : MonoBehaviour
     #region
 
     //Game Objects
-    GameObject player;
+    GameObject misery;
 
     //Components
     Camera cam;
@@ -26,22 +26,14 @@ public class MainCamera : MonoBehaviour
     #region
 
     //camera settings
+    public Vector3 camPosition;
+    public float camSize;
     public float camDelay;
     public float camTravelSpeed;
-    public float zoomSpeed;
+    public float camZoomSpeed;
 
     //cam defining vars (defines the camera behaviour)
-    bool following = true;
-    float camSize;
-    Vector2 camFixedPosition;
-
-    //flow vars (defines behaviours values)
-    public string lastRooftop;
-    public string actualRooftop;
-    public bool changed = true;
-    public string place = "Outside";
-
-    public bool changing = false; //call change ambient function on updadte
+    public bool following = true;
 
     #endregion
     //========================
@@ -52,53 +44,14 @@ public class MainCamera : MonoBehaviour
     #region
 
     /// <summary>
-    /// Makes the rooftop go invisible or visible
-    /// </summary>
-    /// <param name="rooftopName">the rooftop that is going to fade/unfade (gotta be the game object's name in the editor)</param>
-    /// <param name="fadingRate">how much alpha the rooftop earns/loses per cycle</param>
-    bool Fade(string rooftopName, float fadingRate)
-    {
-        if (rooftopName != "Outside")
-        {
-            GameObject rooftop = GameObject.Find(rooftopName);
-
-            float alpha = rooftop.GetComponent<SpriteRenderer>().color.a;
-
-            if (fadingRate > 0)
-            {
-                if (alpha <= 0)
-                {
-                    return true;
-                }
-            }
-
-            if (fadingRate < 0)
-            {
-                if (alpha >= 1)
-                {
-                    return true;
-                }
-            }
-
-            alpha -= fadingRate * 0.001f;
-
-            Color rooftopColor = rooftop.transform.GetComponent<SpriteRenderer>().color;
-
-            rooftop.transform.GetComponent<SpriteRenderer>().color = new Color(rooftopColor.r, rooftopColor.g, rooftopColor.b, alpha);
-        }
-
-        return false;
-    }
-
-    /// <summary>
     /// Follows the player with a delayed repositioning
     /// </summary>
     void CameraFollow()
 {
-        float cameraX = player.transform.position.x - miseryScript.velocity.x * camDelay;
-        float cameraY = player.transform.position.y - miseryScript.velocity.y * camDelay;
+        float cameraX = misery.transform.position.x - miseryScript.velocity.x * camDelay;
+        float cameraY = misery.transform.position.y - miseryScript.velocity.y * camDelay;
 
-        if (transform.position.x > (cameraX - camDelay) && transform.position.x < (cameraX + camDelay) && transform.position.y > (cameraY - camDelay) && transform.position.y < (cameraY + camDelay))
+        if (miseryScript.velocity.x != 0 && miseryScript.velocity.y != 0)
         {
             transform.position = new Vector3(cameraX, cameraY, -10);
         }
@@ -126,112 +79,51 @@ public class MainCamera : MonoBehaviour
                 transform.position -= new Vector3(0, camTravelSpeed, 0) * Time.deltaTime;
             }
         }
-            
-}
 
-    /// <summary>
-    /// Switches camera to following/fixed, rooftops to visible/invisible and zoom to zoomed in/zoomed out depending on the place Misery is
-    /// </summary>
-    void ChangeAmbient()
-    {
-        if (changed)
+        //arrange zoom
+        if (cam.orthographicSize < 5)
         {
-            lastRooftop = actualRooftop;
-
-            //outside
-            if (place == "Outside")
-            {
-                following = true;
-                camSize = 5;
-                actualRooftop = "Outside";
-            }
-
-            //experimental place
-            if (place == "House")
-            {
-                following = false;
-                camFixedPosition = new Vector2(-7, 0.7f);
-                camSize = 2.5f;
-                actualRooftop = "House Rooftop";
-            }
-
-            changed = false;
+            cam.orthographicSize += 1 * camZoomSpeed * Time.deltaTime;
         }
 
-        if (changed == false)
+        if (cam.orthographicSize > 5)
         {
-            //cam size
-            #region
-            bool correctSize = false;
+            cam.orthographicSize -= 1 * camZoomSpeed * Time.deltaTime;
+        }
+    }
 
-            if (cam.orthographicSize < camSize)
-            {
-                cam.orthographicSize += zoomSpeed * Time.deltaTime;
-            }
+    void CameraStay()
+    {
+        //adjust postion
+        if (transform.position.x < camPosition.x)
+        {
+            transform.position += new Vector3(camTravelSpeed, 0, 0) * Time.deltaTime;
+        }
 
-            if (cam.orthographicSize > camSize)
-            {
-                cam.orthographicSize -= zoomSpeed * Time.deltaTime;
-            }
+        if (transform.position.x > camPosition.x)
+        {
+            transform.position -= new Vector3(camTravelSpeed, 0, 0) * Time.deltaTime;
+        }
 
-            //check size
-            if (cam.orthographicSize > (camSize - 0.1f) && cam.orthographicSize < (camSize + 0.1f))
-            {
-                correctSize = true;
-            }
-            #endregion
+        if (transform.position.y < camPosition.y)
+        {
+            transform.position += new Vector3(0, camTravelSpeed, 0) * Time.deltaTime;
+        }
 
-            //cam position
-            #region
-            bool correctPositX = false;
-            bool correctPositY = false;
+        if (transform.position.y > camPosition.y)
+        {
+            transform.position -= new Vector3(0, camTravelSpeed, 0) * Time.deltaTime;
+        }
 
-            if(transform.position.x < camFixedPosition.x)
-            {
-                transform.position += new Vector3(camTravelSpeed, 0, 0) * Time.deltaTime;
-            }
+        //adjust zoom
+        if (cam.orthographicSize < camSize)
+        {
+            cam.orthographicSize += 1 * camZoomSpeed * Time.deltaTime;
+        }
 
-            if (transform.position.x > camFixedPosition.x)
-            {
-                transform.position -= new Vector3(camTravelSpeed, 0, 0) * Time.deltaTime;
-            }
-
-            if (transform.position.y < camFixedPosition.y)
-            {
-                transform.position += new Vector3(0, camTravelSpeed, 0) * Time.deltaTime;
-            }
-
-            if (transform.position.y > camFixedPosition.y)
-            {
-                transform.position -= new Vector3(0, camTravelSpeed, 0) * Time.deltaTime;
-            }
-
-            //check posit
-            if (transform.position.x > (camFixedPosition.x - 0.1f) && transform.position.x < (camFixedPosition.x + 0.1f))
-            {
-                correctPositX = true;
-            }
-
-            if (transform.position.y > (camFixedPosition.y - 0.1f) && transform.position.y < (camFixedPosition.y + 0.1f))
-            {
-                correctPositY = true;
-            }
-            #endregion
-
-            //rooftop visibility
-            #region
-
-            bool correctFadedRooftop = Fade(actualRooftop, 3);
-            bool correctUnfadedRooftop = Fade(lastRooftop, -3);
-
-            #endregion
-
-            //check all
-            if ((correctSize && correctPositX && correctPositY && correctFadedRooftop) | (correctSize && correctUnfadedRooftop && following))
-            {
-                changed = true;
-                changing = false;
-            }
+        if (cam.orthographicSize > camSize)
+        {
+            cam.orthographicSize -= 1 * camZoomSpeed * Time.deltaTime;
         }
     }
 
@@ -246,7 +138,7 @@ public class MainCamera : MonoBehaviour
     //Start
     void Start()
     {
-        player = GameObject.Find("Misery");
+        misery = GameObject.Find("Misery");
         cam = gameObject.GetComponent<Camera>();
     }
 
@@ -258,9 +150,9 @@ public class MainCamera : MonoBehaviour
             CameraFollow();
         }
 
-        if (changing)
+        if (!following)
         {
-            ChangeAmbient();
+            CameraStay();
         }
     }
 

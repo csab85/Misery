@@ -94,30 +94,15 @@ public class Misery : MonoBehaviour
             case  "walking":
                 #region
 
-                Walk();
+                if (moving)
+                {
+                    Walk();
+                }
 
                 break;
 
                 #endregion
         }
-    }
-
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (cam.changing == false)
-        {
-            if (cam.place == collision.tag)
-            {
-                cam.place = "Outside";
-            }
-
-            else
-            {
-                cam.place = collision.tag;
-            }
-        }
-
-        cam.changing = true;
     }
 
     #endregion
