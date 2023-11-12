@@ -1,0 +1,6 @@
+Layers:
+Rio: 0
+Ruas/Pontes: 1
+Prédios visuais layer: 2
+Locais interagiveis/Pier: layer 3
+Personagens/Misária: layer 4

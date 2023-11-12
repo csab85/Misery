@@ -61,7 +61,7 @@ public class DialogueControl : MonoBehaviour
 
     public void NextSentece()     //passar para as próximas frases
     {
-        Debug.Log("chamou funçãi");
+        Debug.Log("chamou função");
         if(speechText.text == sentences[index])
         {
             // ainda tem texto
@@ -72,6 +72,7 @@ public class DialogueControl : MonoBehaviour
                 index++; //pulo para próxima fase
                 speechText.text = ""; //limpo o texto
                 StartCoroutine(TypeSentence()); //chama a próxima frase
+
             }
             else //lido quando acaba os textos
             {
@@ -92,6 +93,16 @@ public class DialogueControl : MonoBehaviour
         {
             Debug.Log("desativou");
             DialogueObject.SetActive(false);
+        }
+    }
+
+    public void fixedButton()
+    {
+        if(bootA.enabled == true)
+        {
+            indexD++;
+            speechText.text = "";
+        
         }
     }
 
