@@ -9,7 +9,7 @@ public class Shot : MonoBehaviour
     #region
 
     UnitBehaviour targetScript;
-    [SerializeField] UnitBehaviour unitScript; //the unit this shot is attached to
+    [SerializeField] UnitBehaviour unitScript; //the unit this shot is attached 
 
     #endregion
     //========================
@@ -61,7 +61,7 @@ public class Shot : MonoBehaviour
             affectedTargets.Add("Enemy");
         }
 
-        //get radius
+        //sync radius
         selfRadius = GetComponent<CircleCollider2D>().radius;
     }
 
@@ -122,6 +122,7 @@ public class Shot : MonoBehaviour
             else
             {
                 state = "static";
+                collision.GetComponent<UnitBehaviour>().damageTaken = unitScript.damage;
                 collision.tag = "Damaged";
             }
         }

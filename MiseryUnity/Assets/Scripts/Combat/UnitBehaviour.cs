@@ -27,8 +27,13 @@ public class UnitBehaviour : MonoBehaviour
     public int defense;
     public int damage;
     public int aoe;
-    public int attackSpeed; //defines the projectile speed, since the faster it hits the target, the faster it is shot again
+    public float attackSpeed; //defines the projectile speed, since the faster it hits the target, the faster it is shot again
     public int range;
+
+    public int damageTaken = 0;
+
+    //Debuffs
+    bool eliteShooterDebuff = false;
 
     //Movement
     Vector3 velocity;
@@ -170,17 +175,27 @@ public class UnitBehaviour : MonoBehaviour
     /// <returns></returns>
     IEnumerator Damage()
     {
-        damaging = true;
-        health -= 1;
+        damaging = true; 
+
+        if (eliteShooterDebuff)
+        {
+            damageTaken += 1;
+        }
+
+        health -= damageTaken;
+        damageTaken = 0;
+
         GetComponent<SpriteRenderer>().color = new Color(200, 0, 0);
         yield return new WaitForSecondsRealtime(0.3f);
         GetComponent<SpriteRenderer>().color = new Color(255, 255, 255);
+
         tag = selfTag;
         damaging = false;
     }
 
     #endregion
     //========================
+
 
     //RUNNING
     //========================
