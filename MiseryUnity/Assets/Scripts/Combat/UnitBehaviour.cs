@@ -23,14 +23,14 @@ public class UnitBehaviour : MonoBehaviour
     #region
 
     //Stats
-    public int health;
-    public int defense;
-    public int damage;
-    public int aoe;
+    public float health;
+    public float defense;
+    public float damage;
+    public float aoe;
     public float attackSpeed; //defines the projectile speed, since the faster it hits the target, the faster it is shot again
-    public int range;
+    public float range;
 
-    public int damageTaken = 0;
+    public float damageTaken = 0;
 
     //Debuffs
     bool eliteShooterDebuff = false;
