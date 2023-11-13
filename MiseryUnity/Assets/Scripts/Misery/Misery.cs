@@ -8,7 +8,9 @@ public class Misery : MonoBehaviour
     //========================
     #region
 
+    //components
     public MainCamera cam;
+    Animator animator;
 
     #endregion
     //========================
@@ -47,23 +49,68 @@ public class Misery : MonoBehaviour
         if (Input.GetButton("Horizontal"))
         {
             velocity.x = Mathf.MoveTowards(velocity.x, (maxVelocity.x * side.x), acceleration * Time.deltaTime);
+
+            //animation
+            animator.SetBool("Walking", true);
+            animator.SetBool("Idle", false);
+
+            if (Input.GetAxis("Horizontal") > 0)
+            {
+                animator.SetFloat("DirectX", 1);
+            }
+
+            if (Input.GetAxis("Horizontal") < 0)
+            {
+                animator.SetFloat("DirectX", -1);
+            }
         }
 
         if (!Input.GetButton("Horizontal"))
         {
             velocity.x = Mathf.MoveTowards(velocity.x, 0, deceleration * Time.deltaTime);
+
+            //animation
+            if (Input.GetButton("Vertical"))
+            {
+                animator.SetFloat("DirectX", 0);
+            }
         }
 
         if (Input.GetButton("Vertical"))
         {
             velocity.y = Mathf.MoveTowards(velocity.y, (maxVelocity.y * side.y), acceleration * Time.deltaTime);
+
+            //animation
+            animator.SetBool("Walking", true);
+            animator.SetBool("Idle", false);
+
+            if (Input.GetAxis("Vertical") > 0)
+            {
+                animator.SetFloat("DirectY", 1);
+            }
+
+            if (Input.GetAxis("Vertical") < 0)
+            {
+                animator.SetFloat("DirectY", -1);
+            }
         }
 
         if (!Input.GetButton("Vertical"))
         {
             velocity.y = Mathf.MoveTowards(velocity.y, 0, deceleration * Time.deltaTime);
+            
+            //animation
+            if (Input.GetButton("Horizontal"))
+            {
+                animator.SetFloat("DirectY", 0);
+            }
         }
 
+        if (!Input.GetButton("Vertical") && !Input.GetButton("Horizontal"))
+        {
+            animator.SetBool("Idle", true);
+            animator.SetBool("Walking", false);
+        }
 
         //move
         if (velocity != new Vector3(0, 0, 0))
@@ -83,7 +130,7 @@ public class Misery : MonoBehaviour
     //Start
     void Start()
     {
-        
+        animator = GetComponent<Animator>();
     }
 
     // Update
