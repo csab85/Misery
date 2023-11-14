@@ -22,6 +22,8 @@ public class WorkingMainMenu : MonoBehaviour
         playerSctript.moving = true;
         SceneManager.UnloadSceneAsync("MainMenu"); //descarrega a cena
         AudioManager.instance.PlayMusic("ThemeGame"); //faz com que toque a próxima música quando aperta o play
+
+        playerSctript.moving = true;
     }
 
     public void AbrirOpçoes()

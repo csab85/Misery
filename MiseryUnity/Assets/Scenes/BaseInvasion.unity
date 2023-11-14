@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.3731193, g: 0.38073996, b: 0.35872698, a: 1}
+  m_IndirectSpecularColor: {r: 0.37311953, g: 0.38074014, b: 0.3587274, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -308,8 +308,8 @@ MonoBehaviour:
   trap: {fileID: 2128305191}
   spawner: {fileID: 1789398614}
   camera: {fileID: 1658228040}
-  allyShooter: {fileID: 42085877573675216, guid: 42f4ceef352ee6d47bc20b72d9709863, type: 3}
-  allyMage: {fileID: 8137898138354744711, guid: b8906295ed319304da2ab2e395939db0, type: 3}
+  allyShooter: {fileID: 6367889166788088360, guid: 20f0431f4b15a1d43ad2001b2e72bf94, type: 3}
+  allyMage: {fileID: 6367889166788088360, guid: 20f0431f4b15a1d43ad2001b2e72bf94, type: 3}
   allyTank: {fileID: 8230417562941105057, guid: c663e23854dbff346be9da5787806f12, type: 3}
   enemyShooter: {fileID: 6003387460918956602, guid: 2ce46715f2558824c8e3bc0dc07226e4, type: 3}
   enemyMage: {fileID: 1545857435517775066, guid: bffd60b9bf44b004589a2a28320132e5, type: 3}
@@ -536,7 +536,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a016f4661987e8b4788f3a7a04d9b1c3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemy: {fileID: 6003387460918956602, guid: 2ce46715f2558824c8e3bc0dc07226e4, type: 3}
+  enemy: {fileID: 1117691949372833128, guid: 3d018fdff36f0854abd57043478d7424, type: 3}
   cooldown: 3
 --- !u!114 &1789398618
 MonoBehaviour:
