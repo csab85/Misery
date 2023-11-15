@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 28f91f2f080f53f46a97907b27afb40e
+guid: 3570400fae7a61c45b5d4b83822e00e3
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -117,7 +117,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: sla_0
+      name: RichStreet_0
       rect:
         serializedVersion: 2
         x: 0
@@ -131,14 +131,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b6ab1710e1600c949883d7a6a6b1b4ad
-      internalID: -44291634
+      spriteID: 70f434f0cbef6474888e921ba89513e1
+      internalID: -262959971
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: sla_1
+      name: RichStreet_1
       rect:
         serializedVersion: 2
         x: 32
@@ -152,14 +152,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: aca13c6aba671eb43a6a4e671b962111
-      internalID: 793049295
+      spriteID: cf9103dffabbc574ea2557ffd142c20c
+      internalID: -540689784
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: sla_2
+      name: RichStreet_2
       rect:
         serializedVersion: 2
         x: 0
@@ -173,14 +173,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 9655ac5e0ddecc04eb3eaac3b15079ac
-      internalID: -725753880
+      spriteID: 883b1be3b70149f4e91fb0e19d5a6c23
+      internalID: -1351687668
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: sla_3
+      name: RichStreet_3
       rect:
         serializedVersion: 2
         x: 32
@@ -194,8 +194,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 32bc97a40b2d08449a239de64ca6b5fe
-      internalID: -1056859650
+      spriteID: 24929f3dbdec62b45a13d39ab6944cdc
+      internalID: 1792042467
       vertices: []
       indices: 
       edges: []
@@ -211,10 +211,10 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      sla_1: 793049295
-      sla_0: -44291634
-      sla_2: -725753880
-      sla_3: -1056859650
+      RichStreet_2: -1351687668
+      RichStreet_1: -540689784
+      RichStreet_0: -262959971
+      RichStreet_3: 1792042467
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0
