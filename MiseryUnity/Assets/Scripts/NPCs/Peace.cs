@@ -56,6 +56,12 @@ public class Peace: MonoBehaviour
                 nextProgressionValue = 1;
 
                 break;
+
+            case 1:
+                speech = new string[] { "rapaiz" };
+                nextProgressionValue = 2;
+
+                break;
         }
 
         dialogue.speechTxt = speech;
