@@ -26,7 +26,7 @@ public class DialogueGhost : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space) && onRadius && !isDialogueActive)
+        if (Input.GetKeyDown(KeyCode.Space) && onRadius && dcGhost.dialogueFinished)
         {
             isDialogueActive = true;
             dcGhost.Speech(profile, speechTxt, actorName); // Alteração: Chamar dcGhost.Speech em vez de dc.Speech

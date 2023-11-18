@@ -5,7 +5,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class DialogueControlGhost : MonoBehaviour
+public class DialogueControlNPC : MonoBehaviour
 {
     [Header("Components")]
     public GameObject DialogueObject;

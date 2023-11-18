@@ -9,7 +9,7 @@ public class Peace: MonoBehaviour
     #region
 
     public Misery miseryScript;
-    public Dialogue dialogue;
+    public DialogueNPC dialogue;
 
     #endregion
     //========================
@@ -20,6 +20,7 @@ public class Peace: MonoBehaviour
     #region
 
     string[] speech;
+    float nextProgressionValue;
 
     #endregion
     //========================
@@ -51,13 +52,14 @@ public class Peace: MonoBehaviour
         switch (miseryScript.progression)
         {
             case 0:
+                speech = new string[] { "Sarve", "Ta bao?" };
+                nextProgressionValue = 1;
 
-                speech = new string[] {"Oi meu bom", "Tá  safo?"};
-                print("ja foi");
                 break;
         }
 
         dialogue.speechTxt = speech;
+        dialogue.nextProgressionValue = nextProgressionValue;
     }
 
     #endregion
