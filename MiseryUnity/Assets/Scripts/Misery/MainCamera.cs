@@ -32,6 +32,9 @@ public class MainCamera : MonoBehaviour
     public float camTravelSpeed;
     public float camZoomSpeed;
 
+    float cameraX = 0;
+    float cameraY = 0;
+
     //cam defining vars (defines the camera behaviour)
     public bool following = true;
 
@@ -48,82 +51,33 @@ public class MainCamera : MonoBehaviour
     /// </summary>
     void CameraFollow()
 {
-        float cameraX = misery.transform.position.x - miseryScript.velocity.x * camDelay;
-        float cameraY = misery.transform.position.y - miseryScript.velocity.y * camDelay;
+        cameraX = Mathf.MoveTowards(cameraX, (misery.transform.position.x - miseryScript.velocity.x * camDelay), (camTravelSpeed * Time.deltaTime));
+        cameraY = Mathf.MoveTowards(cameraY, (misery.transform.position.y - miseryScript.velocity.y * camDelay), (camTravelSpeed * Time.deltaTime));
 
-        if (miseryScript.velocity.x != 0 && miseryScript.velocity.y != 0)
-        {
-            transform.position = new Vector3(cameraX, cameraY, -10);
-        }
-
-        //arrange position
-        else
-        {
-            if (transform.position.x < cameraX)
-            {
-                transform.position += new Vector3(camTravelSpeed, 0, 0) * Time.deltaTime;
-            }
-
-            if (transform.position.x > cameraX)
-            {
-                transform.position -= new Vector3(camTravelSpeed, 0, 0) * Time.deltaTime;
-            }
-
-            if (transform.position.y < cameraY)
-            {
-                transform.position += new Vector3(0, camTravelSpeed, 0) * Time.deltaTime;
-            }
-
-            if (transform.position.y > cameraY)
-            {
-                transform.position -= new Vector3(0, camTravelSpeed, 0) * Time.deltaTime;
-            }
-        }
+        transform.position = new Vector3(cameraX, cameraY, -10);
 
         //arrange zoom
-        if (cam.orthographicSize < 5)
+        if (cam.orthographicSize != 5)
         {
-            cam.orthographicSize += 1 * camZoomSpeed * Time.deltaTime;
-        }
-
-        if (cam.orthographicSize > 5)
-        {
-            cam.orthographicSize -= 1 * camZoomSpeed * Time.deltaTime;
+            cam.orthographicSize = Mathf.MoveTowards(cam.orthographicSize, 5, camZoomSpeed * Time.deltaTime);
         }
     }
 
+    /// <summary>
+    /// Makes the camera stay at the specified position and zoom
+    /// </summary>
     void CameraStay()
     {
         //adjust postion
-        if (transform.position.x < camPosition.x)
-        {
-            transform.position += new Vector3(camTravelSpeed, 0, 0) * Time.deltaTime;
-        }
+        cameraX = Mathf.MoveTowards(cameraX, camPosition.x, camTravelSpeed);
+        cameraY = Mathf.MoveTowards(cameraY, camPosition.y, camTravelSpeed);
 
-        if (transform.position.x > camPosition.x)
-        {
-            transform.position -= new Vector3(camTravelSpeed, 0, 0) * Time.deltaTime;
-        }
-
-        if (transform.position.y < camPosition.y)
-        {
-            transform.position += new Vector3(0, camTravelSpeed, 0) * Time.deltaTime;
-        }
-
-        if (transform.position.y > camPosition.y)
-        {
-            transform.position -= new Vector3(0, camTravelSpeed, 0) * Time.deltaTime;
-        }
+        transform.position = new Vector3(cameraX, cameraY, -10);
 
         //adjust zoom
-        if (cam.orthographicSize < camSize)
+        if (cam.orthographicSize != camSize)
         {
-            cam.orthographicSize += 1 * camZoomSpeed * Time.deltaTime;
-        }
-
-        if (cam.orthographicSize > camSize)
-        {
-            cam.orthographicSize -= 1 * camZoomSpeed * Time.deltaTime;
+            cam.orthographicSize = Mathf.MoveTowards(cam.orthographicSize, camSize, camZoomSpeed * Time.deltaTime);
         }
     }
 

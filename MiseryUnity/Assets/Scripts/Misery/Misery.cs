@@ -20,6 +20,7 @@ public class Misery : MonoBehaviour
     //========================
     #region
 
+    //Status
     public string state;
     public float acceleration;
     public float deceleration;
@@ -28,6 +29,9 @@ public class Misery : MonoBehaviour
 
     //Function progression
     public bool moving = false; //allows player to move or not while on menu
+
+    //History progression
+    public float progression = 0;
 
     #endregion
     //========================
@@ -149,6 +153,11 @@ public class Misery : MonoBehaviour
                 break;
 
                 #endregion
+        }
+
+        switch (progression)
+        {
+
         }
     }
 
