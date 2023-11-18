@@ -109,7 +109,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 224
+        y: 480
         width: 32
         height: 32
       alignment: 0
@@ -129,8 +129,8 @@ TextureImporter:
       name: misery_walk_1
       rect:
         serializedVersion: 2
-        x: 32
-        y: 224
+        x: 0
+        y: 448
         width: 32
         height: 32
       alignment: 0
@@ -150,8 +150,8 @@ TextureImporter:
       name: misery_walk_2
       rect:
         serializedVersion: 2
-        x: 64
-        y: 224
+        x: 32
+        y: 448
         width: 32
         height: 32
       alignment: 0
@@ -171,8 +171,8 @@ TextureImporter:
       name: misery_walk_3
       rect:
         serializedVersion: 2
-        x: 96
-        y: 224
+        x: 64
+        y: 448
         width: 32
         height: 32
       alignment: 0
@@ -192,8 +192,8 @@ TextureImporter:
       name: misery_walk_4
       rect:
         serializedVersion: 2
-        x: 128
-        y: 224
+        x: 96
+        y: 448
         width: 32
         height: 32
       alignment: 0
@@ -214,7 +214,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 192
+        y: 416
         width: 32
         height: 32
       alignment: 0
@@ -234,8 +234,8 @@ TextureImporter:
       name: misery_walk_6
       rect:
         serializedVersion: 2
-        x: 32
-        y: 192
+        x: 0
+        y: 384
         width: 32
         height: 32
       alignment: 0
@@ -255,8 +255,8 @@ TextureImporter:
       name: misery_walk_7
       rect:
         serializedVersion: 2
-        x: 64
-        y: 192
+        x: 32
+        y: 384
         width: 32
         height: 32
       alignment: 0
@@ -276,8 +276,8 @@ TextureImporter:
       name: misery_walk_8
       rect:
         serializedVersion: 2
-        x: 96
-        y: 192
+        x: 64
+        y: 384
         width: 32
         height: 32
       alignment: 0
@@ -297,8 +297,8 @@ TextureImporter:
       name: misery_walk_9
       rect:
         serializedVersion: 2
-        x: 128
-        y: 192
+        x: 96
+        y: 384
         width: 32
         height: 32
       alignment: 0
@@ -319,7 +319,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 160
+        y: 352
         width: 32
         height: 32
       alignment: 0
@@ -339,8 +339,8 @@ TextureImporter:
       name: misery_walk_11
       rect:
         serializedVersion: 2
-        x: 32
-        y: 160
+        x: 0
+        y: 320
         width: 32
         height: 32
       alignment: 0
@@ -360,8 +360,8 @@ TextureImporter:
       name: misery_walk_12
       rect:
         serializedVersion: 2
-        x: 64
-        y: 160
+        x: 32
+        y: 320
         width: 32
         height: 32
       alignment: 0
@@ -381,8 +381,8 @@ TextureImporter:
       name: misery_walk_13
       rect:
         serializedVersion: 2
-        x: 96
-        y: 160
+        x: 64
+        y: 320
         width: 32
         height: 32
       alignment: 0
@@ -402,8 +402,8 @@ TextureImporter:
       name: misery_walk_14
       rect:
         serializedVersion: 2
-        x: 128
-        y: 160
+        x: 96
+        y: 320
         width: 32
         height: 32
       alignment: 0
@@ -424,7 +424,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 128
+        y: 288
         width: 32
         height: 32
       alignment: 0
@@ -444,8 +444,8 @@ TextureImporter:
       name: misery_walk_16
       rect:
         serializedVersion: 2
-        x: 32
-        y: 128
+        x: 0
+        y: 256
         width: 32
         height: 32
       alignment: 0
@@ -465,8 +465,8 @@ TextureImporter:
       name: misery_walk_17
       rect:
         serializedVersion: 2
-        x: 64
-        y: 128
+        x: 32
+        y: 256
         width: 32
         height: 32
       alignment: 0
@@ -486,8 +486,8 @@ TextureImporter:
       name: misery_walk_18
       rect:
         serializedVersion: 2
-        x: 96
-        y: 128
+        x: 64
+        y: 256
         width: 32
         height: 32
       alignment: 0
@@ -507,8 +507,8 @@ TextureImporter:
       name: misery_walk_19
       rect:
         serializedVersion: 2
-        x: 128
-        y: 128
+        x: 96
+        y: 256
         width: 32
         height: 32
       alignment: 0
@@ -529,7 +529,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 96
+        y: 224
         width: 32
         height: 32
       alignment: 0
@@ -549,8 +549,8 @@ TextureImporter:
       name: misery_walk_21
       rect:
         serializedVersion: 2
-        x: 32
-        y: 96
+        x: 0
+        y: 192
         width: 32
         height: 32
       alignment: 0
@@ -570,8 +570,8 @@ TextureImporter:
       name: misery_walk_22
       rect:
         serializedVersion: 2
-        x: 64
-        y: 96
+        x: 32
+        y: 192
         width: 32
         height: 32
       alignment: 0
@@ -591,8 +591,8 @@ TextureImporter:
       name: misery_walk_23
       rect:
         serializedVersion: 2
-        x: 96
-        y: 96
+        x: 64
+        y: 192
         width: 32
         height: 32
       alignment: 0
@@ -612,8 +612,8 @@ TextureImporter:
       name: misery_walk_24
       rect:
         serializedVersion: 2
-        x: 128
-        y: 96
+        x: 96
+        y: 192
         width: 32
         height: 32
       alignment: 0
@@ -634,7 +634,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 64
+        y: 160
         width: 32
         height: 32
       alignment: 0
@@ -654,8 +654,8 @@ TextureImporter:
       name: misery_walk_26
       rect:
         serializedVersion: 2
-        x: 32
-        y: 64
+        x: 0
+        y: 128
         width: 32
         height: 32
       alignment: 0
@@ -675,8 +675,8 @@ TextureImporter:
       name: misery_walk_27
       rect:
         serializedVersion: 2
-        x: 64
-        y: 64
+        x: 32
+        y: 128
         width: 32
         height: 32
       alignment: 0
@@ -696,8 +696,8 @@ TextureImporter:
       name: misery_walk_28
       rect:
         serializedVersion: 2
-        x: 96
-        y: 64
+        x: 64
+        y: 128
         width: 32
         height: 32
       alignment: 0
@@ -717,8 +717,8 @@ TextureImporter:
       name: misery_walk_29
       rect:
         serializedVersion: 2
-        x: 128
-        y: 64
+        x: 96
+        y: 128
         width: 32
         height: 32
       alignment: 0
@@ -739,7 +739,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 32
+        y: 96
         width: 32
         height: 32
       alignment: 0
@@ -759,8 +759,8 @@ TextureImporter:
       name: misery_walk_31
       rect:
         serializedVersion: 2
-        x: 32
-        y: 32
+        x: 0
+        y: 64
         width: 32
         height: 32
       alignment: 0
@@ -780,8 +780,8 @@ TextureImporter:
       name: misery_walk_32
       rect:
         serializedVersion: 2
-        x: 64
-        y: 32
+        x: 32
+        y: 64
         width: 32
         height: 32
       alignment: 0
@@ -801,8 +801,8 @@ TextureImporter:
       name: misery_walk_33
       rect:
         serializedVersion: 2
-        x: 96
-        y: 32
+        x: 64
+        y: 64
         width: 32
         height: 32
       alignment: 0
@@ -822,8 +822,8 @@ TextureImporter:
       name: misery_walk_34
       rect:
         serializedVersion: 2
-        x: 128
-        y: 32
+        x: 96
+        y: 64
         width: 32
         height: 32
       alignment: 0
@@ -844,7 +844,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 0
+        y: 32
         width: 32
         height: 32
       alignment: 0
@@ -864,7 +864,7 @@ TextureImporter:
       name: misery_walk_36
       rect:
         serializedVersion: 2
-        x: 32
+        x: 0
         y: 0
         width: 32
         height: 32
@@ -885,7 +885,7 @@ TextureImporter:
       name: misery_walk_37
       rect:
         serializedVersion: 2
-        x: 64
+        x: 32
         y: 0
         width: 32
         height: 32
@@ -906,7 +906,7 @@ TextureImporter:
       name: misery_walk_38
       rect:
         serializedVersion: 2
-        x: 96
+        x: 64
         y: 0
         width: 32
         height: 32
@@ -927,7 +927,7 @@ TextureImporter:
       name: misery_walk_39
       rect:
         serializedVersion: 2
-        x: 128
+        x: 96
         y: 0
         width: 32
         height: 32
