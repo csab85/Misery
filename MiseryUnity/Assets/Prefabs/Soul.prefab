@@ -207,6 +207,7 @@ GameObject:
   - component: {fileID: 6403014385240101283}
   - component: {fileID: 6403014385240101294}
   - component: {fileID: 1104839011961411328}
+  - component: {fileID: 5176253254469609167}
   m_Layer: 0
   m_Name: Soul
   m_TagString: Untagged
@@ -337,6 +338,26 @@ MonoBehaviour:
   - roblox
   mood: 
   maxAlpha: 0.7
+--- !u!114 &5176253254469609167
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6403014385240101281}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7144d2624a462944281a40639c2d49b8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  profile: {fileID: 21300000, guid: ffe3c68010cce0a409fcf3a63d4b7476, type: 3}
+  speechTxt:
+  - Interagir?
+  actorName: Alma
+  playerLayer:
+    serializedVersion: 2
+    m_Bits: 256
+  radius: 2
 --- !u!1 &6403014385334010046
 GameObject:
   m_ObjectHideFlags: 0

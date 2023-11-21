@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Building : MonoBehaviour
 {
@@ -78,7 +79,14 @@ public class Building : MonoBehaviour
 
         if (health < 0)
         {
-            Destroy(gameObject);
+            if (name != "Gates")
+            {
+                Destroy(gameObject);
+            }
+            else
+            {
+                SceneManager.LoadScene("Scenery");
+            }
         }
     }
 

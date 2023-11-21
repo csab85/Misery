@@ -429,12 +429,12 @@ MonoBehaviour:
   trap: {fileID: 2128305191}
   spawner: {fileID: 1789398614}
   camera: {fileID: 1658228040}
-  allyShooter: {fileID: 6367889166788088360, guid: 20f0431f4b15a1d43ad2001b2e72bf94, type: 3}
+  allyShooter: {fileID: 3402124315034881886, guid: 090bfe3e48e91184cb0b02c0abcf36b0, type: 3}
   allyMage: {fileID: 6367889166788088360, guid: 20f0431f4b15a1d43ad2001b2e72bf94, type: 3}
-  allyTank: {fileID: 8230417562941105057, guid: c663e23854dbff346be9da5787806f12, type: 3}
-  enemyShooter: {fileID: 6003387460918956602, guid: 2ce46715f2558824c8e3bc0dc07226e4, type: 3}
-  enemyMage: {fileID: 1545857435517775066, guid: bffd60b9bf44b004589a2a28320132e5, type: 3}
-  enemyTank: {fileID: 8559172469472989534, guid: 6cc3cb940879d8b45be769bc861020f4, type: 3}
+  allyTank: {fileID: 5777290744116738578, guid: ed286d39cd8073b4aaf86f77e4b13502, type: 3}
+  enemyShooter: {fileID: 5777290744116738578, guid: ac47b2a29c6960846b18068e73eecbbf, type: 3}
+  enemyMage: {fileID: 5777290744116738578, guid: 04d1787a42bcd3243bbfa542df541893, type: 3}
+  enemyTank: {fileID: 5777290744116738578, guid: 9de1442f5555b9f46ac9fd165bed2571, type: 3}
   shootersAvaiable: 0
   magesAvaiable: 0
   tanksAvaiable: 0
@@ -887,7 +887,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!212 &1789398615
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -967,7 +967,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a016f4661987e8b4788f3a7a04d9b1c3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemy: {fileID: 1117691949372833128, guid: 3d018fdff36f0854abd57043478d7424, type: 3}
+  enemy: {fileID: 5777290744116738578, guid: ac47b2a29c6960846b18068e73eecbbf, type: 3}
   cooldown: 3
 --- !u!114 &1789398618
 MonoBehaviour:

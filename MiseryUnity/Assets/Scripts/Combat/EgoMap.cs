@@ -167,11 +167,8 @@ public class EgoMap : MonoBehaviour
 
                 tanksAvaiable -= 1;
             }
-
-            #endregion
-
-
         }
+        #endregion
     }
 
     #endregion

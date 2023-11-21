@@ -23,10 +23,10 @@ public class Shot : MonoBehaviour
     public string state = "static";
 
     //Targets affcted
-    public List<string> affectedTargets = new List<string> {"Building"};
+    public List<string> affectedTargets;
 
     //Gambiarra
-    bool exploding = false;
+    public bool exploding = false;
     float selfRadius;
 
     #endregion
@@ -59,6 +59,11 @@ public class Shot : MonoBehaviour
         if (unitScript.targetEnemy)
         {
             affectedTargets.Add("Enemy");
+        }
+
+        if (unitScript.targetBuilding)
+        {
+            affectedTargets.Add("Building");
         }
 
         //sync radius
@@ -100,6 +105,7 @@ public class Shot : MonoBehaviour
                 if (exploding)
                 {
                     //exploding animation and make exploding bool chage to false when animation finished
+                    GetComponent<Animator>().SetBool("Exploding", true);
                 }
 
                 break;

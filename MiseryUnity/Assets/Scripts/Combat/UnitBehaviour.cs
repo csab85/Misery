@@ -252,6 +252,9 @@ public class UnitBehaviour : MonoBehaviour
                 case "walking":
                     #region
 
+                    GetComponent<Animator>().SetBool("shooting", false);
+                    GetComponent<Animator>().SetBool("walking", true);
+
                     Walk(movementDirection);
 
                     break;
@@ -260,6 +263,9 @@ public class UnitBehaviour : MonoBehaviour
 
                 case "attacking":
                     #region
+
+                    GetComponent<Animator>().SetBool("shooting", true);
+                    GetComponent<Animator>().SetBool("walking", false);
 
                     if (enemy.tag == "Dead")
                     {
@@ -285,6 +291,9 @@ public class UnitBehaviour : MonoBehaviour
 
                 case "waiting":
                     #region
+
+                    GetComponent<Animator>().SetBool("shooting", false);
+                    GetComponent<Animator>().SetBool("walking", false);
 
                     if (shotScript.state == "static")
                     {
