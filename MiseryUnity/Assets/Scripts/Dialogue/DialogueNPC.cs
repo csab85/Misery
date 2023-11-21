@@ -18,6 +18,16 @@ public class DialogueNPC : MonoBehaviour
     bool talking = false;
     public float nextProgressionValue;
 
+    public void Talk()
+    {
+        print("aaAAA");
+        if (!talking && dcNPC.dialogueFinished)
+        {
+            talking = true;
+            dcNPC.Speech(profile, speechTxt, actorName); // Alteração: Chamar dcNPC.Speech em vez de dc.Speech
+        }
+    }
+
     private void Start()
     {
         dcNPC = FindObjectOfType<DialogueControlNPC>(); // Alteração: Usar DialogueControlGhost em vez de DialogueControl
