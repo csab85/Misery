@@ -1589,6 +1589,7 @@ MonoBehaviour:
   trap: {fileID: 2128305191}
   spawner: {fileID: 1789398614}
   camera: {fileID: 1658228040}
+  timeSliderScript: {fileID: 2076256042}
   allyShooter: {fileID: 3402124315034881886, guid: 090bfe3e48e91184cb0b02c0abcf36b0, type: 3}
   allyMage: {fileID: 6367889166788088360, guid: 20f0431f4b15a1d43ad2001b2e72bf94, type: 3}
   allyTank: {fileID: 5777290744116738578, guid: ed286d39cd8073b4aaf86f77e4b13502, type: 3}
@@ -3620,6 +3621,8 @@ MonoBehaviour:
   timeCounter: {fileID: 1729547335}
   timeValue: 0
   growthSpeed: 0.4
+  decayMultiplier: 20
+  aimTimeValue: 10
 --- !u!1 &2080695507
 GameObject:
   m_ObjectHideFlags: 0

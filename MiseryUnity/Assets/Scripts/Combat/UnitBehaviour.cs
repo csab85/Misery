@@ -24,7 +24,7 @@ public class UnitBehaviour : MonoBehaviour
 
     //Stats
     public float health;
-    public float defense;
+    public float cost;
     public float damage;
     public float aoe;
     public float attackSpeed; //defines the projectile speed, since the faster it hits the target, the faster it is shot again

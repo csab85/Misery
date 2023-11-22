@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class EgoMap : MonoBehaviour
 {
@@ -12,6 +13,8 @@ public class EgoMap : MonoBehaviour
     public GameObject spawner;
 
     public GameObject camera;
+
+    [SerializeField] TimeSlider timeSliderScript;
 
     //classes
     public GameObject allyShooter;
@@ -141,30 +144,34 @@ public class EgoMap : MonoBehaviour
         if (Input.GetMouseButtonDown(0))
         {
             Vector3 mousePosit = camera.GetComponent<Camera>().ScreenToWorldPoint(Input.mousePosition);
-            
+
+            float unitCost = selectedUnit.GetComponent<UnitBehaviour>().cost;
 
             //discount
-            if (selectedUnit == allyShooter && shootersAvaiable > 0)
+            if (selectedUnit == allyShooter && shootersAvaiable > 0 && timeSliderScript.timeValue >= unitCost)
             {
                 Instantiate(selectedUnit, new Vector3(mousePosit.x + 0.3f, mousePosit.y, -2), Quaternion.identity);
                 Instantiate(selectedUnit, new Vector3(mousePosit.x - 0.3f, mousePosit.y, -2), Quaternion.identity);
                 Instantiate(selectedUnit, new Vector3(mousePosit.x, mousePosit.y + 0.3f, -2), Quaternion.identity);
                 Instantiate(selectedUnit, new Vector3(mousePosit.x, mousePosit.y - 0.3f, -2), Quaternion.identity);
 
+                timeSliderScript.aimTimeValue = timeSliderScript.timeValue - unitCost;
                 shootersAvaiable -= 1;
             }
 
-            if (selectedUnit == allyMage && magesAvaiable > 0)
+            if (selectedUnit == allyMage && magesAvaiable > 0 && timeSliderScript.timeValue >= unitCost)
             {
                 Instantiate(selectedUnit, new Vector3(mousePosit.x, mousePosit.y, -2), Quaternion.identity);
 
+                timeSliderScript.aimTimeValue = timeSliderScript.timeValue - unitCost;
                 magesAvaiable -= 1;
             }
 
-            if (selectedUnit == allyTank && tanksAvaiable > 0)
+            if (selectedUnit == allyTank && tanksAvaiable > 0 && timeSliderScript.timeValue >= unitCost)
             {
                 Instantiate(selectedUnit, new Vector3(mousePosit.x, mousePosit.y, -2), Quaternion.identity);
 
+                timeSliderScript.aimTimeValue = timeSliderScript.timeValue - unitCost;
                 tanksAvaiable -= 1;
             }
         }

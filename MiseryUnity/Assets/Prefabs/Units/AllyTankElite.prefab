@@ -155,7 +155,7 @@ MonoBehaviour:
   shotScript: {fileID: 5829041311061843304}
   self: {fileID: 5829041310832092314}
   health: 55
-  defense: 0
+  cost: 4
   damage: 0.5
   aoe: 0
   attackSpeed: 0.2

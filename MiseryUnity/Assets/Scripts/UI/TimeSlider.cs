@@ -25,8 +25,10 @@ public class TimeSlider: MonoBehaviour
     public float timeValue;
 
     [SerializeField] float growthSpeed;
+    [SerializeField] float decayMultiplier;
+    float normalGrowthSpeed;
 
-    float aimTimeValue;
+    public float aimTimeValue;
 
     int intTimeValue;
 
@@ -50,11 +52,30 @@ public class TimeSlider: MonoBehaviour
     void Start()
     {
         aimTimeValue = slider.maxValue;
+        normalGrowthSpeed = growthSpeed;
     }
 
     //Update
     void Update()
     {
+        //make it faster when reducing
+        if(aimTimeValue < timeValue && growthSpeed == normalGrowthSpeed)
+        {
+            growthSpeed *= decayMultiplier;
+        }
+
+        else
+        {
+            growthSpeed = normalGrowthSpeed;
+        }
+
+        //make it go back to growing after reduced
+        if (timeValue == aimTimeValue)
+        {
+            aimTimeValue = 10;
+        }
+
+        //move slider
         timeValue = Mathf.MoveTowards(timeValue, aimTimeValue, growthSpeed * Time.deltaTime);
         slider.value = timeValue;
 
