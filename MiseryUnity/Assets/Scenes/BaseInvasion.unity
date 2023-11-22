@@ -897,8 +897,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 761627d49c26bc3499e7813b64c99f73, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  egoMapScript: {fileID: 917766033}
   cardButton: {fileID: 543760631}
-  unit: {fileID: 5777290744116738589, guid: ed286d39cd8073b4aaf86f77e4b13502, type: 3}
+  unit: {fileID: 5777290744116738578, guid: ed286d39cd8073b4aaf86f77e4b13502, type: 3}
+  unitScript: {fileID: 5777290744116738589, guid: ed286d39cd8073b4aaf86f77e4b13502, type: 3}
   type: {fileID: 1045693281}
   cost: {fileID: 1351420912}
   damage: {fileID: 839530860}
@@ -1215,7 +1217,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Atiradores
+  m_text: '
 
 '
   m_isRightToLeft: 0
@@ -1537,11 +1539,13 @@ MonoBehaviour:
   enemyShooter: {fileID: 5777290744116738578, guid: ac47b2a29c6960846b18068e73eecbbf, type: 3}
   enemyMage: {fileID: 5777290744116738578, guid: 04d1787a42bcd3243bbfa542df541893, type: 3}
   enemyTank: {fileID: 5777290744116738578, guid: 9de1442f5555b9f46ac9fd165bed2571, type: 3}
+  selectedUnit: {fileID: 0}
   shootersAvaiable: 0
   magesAvaiable: 0
   tanksAvaiable: 0
   deck: []
   obstacled: 1
+  showingCard: 0
 --- !u!1 &927980340
 GameObject:
   m_ObjectHideFlags: 0
@@ -1681,8 +1685,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 761627d49c26bc3499e7813b64c99f73, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  egoMapScript: {fileID: 917766033}
   cardButton: {fileID: 927980342}
-  unit: {fileID: 3402124315034881873, guid: 090bfe3e48e91184cb0b02c0abcf36b0, type: 3}
+  unit: {fileID: 3402124315034881886, guid: 090bfe3e48e91184cb0b02c0abcf36b0, type: 3}
+  unitScript: {fileID: 3402124315034881873, guid: 090bfe3e48e91184cb0b02c0abcf36b0, type: 3}
   type: {fileID: 806457220}
   cost: {fileID: 196484273}
   damage: {fileID: 359054249}
@@ -1751,7 +1757,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Tanque
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: dec6b3ed77c47d8469d8c6bfe651b7f0, type: 2}
   m_sharedMaterial: {fileID: -8928099505917920317, guid: dec6b3ed77c47d8469d8c6bfe651b7f0, type: 2}
@@ -2030,7 +2036,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Mago
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: dec6b3ed77c47d8469d8c6bfe651b7f0, type: 2}
   m_sharedMaterial: {fileID: -8928099505917920317, guid: dec6b3ed77c47d8469d8c6bfe651b7f0, type: 2}
@@ -2596,8 +2602,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 761627d49c26bc3499e7813b64c99f73, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  egoMapScript: {fileID: 917766033}
   cardButton: {fileID: 1547796322}
-  unit: {fileID: 6367889166788088359, guid: 20f0431f4b15a1d43ad2001b2e72bf94, type: 3}
+  unit: {fileID: 6367889166788088360, guid: 20f0431f4b15a1d43ad2001b2e72bf94, type: 3}
+  unitScript: {fileID: 6367889166788088359, guid: 20f0431f4b15a1d43ad2001b2e72bf94, type: 3}
   type: {fileID: 1183728303}
   cost: {fileID: 1515115328}
   damage: {fileID: 1721712114}

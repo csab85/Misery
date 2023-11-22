@@ -110,7 +110,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!60 &5777290744116738584
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -155,8 +155,9 @@ MonoBehaviour:
   shot: {fileID: 5777290744413324270}
   shotScript: {fileID: 5777290744413324271}
   self: {fileID: 5777290744116738589}
+  type: 
   health: 4
-  defense: 0
+  cost: 0
   damage: 1
   aoe: 0
   attackSpeed: 0.5

@@ -5,14 +5,16 @@ using UnityEngine.UI;
 using TMPro;
 using UnityEngine.EventSystems;
 
-public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
+public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler
 {
     //IMPORTS
     //========================
     #region
 
+    [SerializeField] EgoMap egoMapScript;
     [SerializeField] Button cardButton;
-    [SerializeField] UnitBehaviour unit;
+    [SerializeField] GameObject unit;
+    [SerializeField] UnitBehaviour unitScript;
     [SerializeField] TextMeshProUGUI type;
     [SerializeField] TextMeshProUGUI cost;
     [SerializeField] TextMeshProUGUI damage;
@@ -62,8 +64,6 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     void ShowCard()
     {
         //calculate values
-        float correctPosit = (showHeight * Screen.height) / transform.parent.GetComponent<CanvasScaler>().referenceResolution.y;
-
         posit.y = Mathf.MoveTowards(posit.y, (normalPosit.y + showHeight), travelSpeed * Time.deltaTime);
 
         scale.x = Mathf.MoveTowards(scale.x, 3.5f, growthSpeed * Time.deltaTime);
@@ -119,6 +119,8 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     //Start
     void Start()
     {
+
+        //handle card positioning
         rectTransform = GetComponent<RectTransform>();
 
         normalPosit = rectTransform.anchoredPosition;
@@ -129,23 +131,17 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
         posit = normalPosit;
         scale = normalScale;
         rotation = normalRotation;
+
+        //set card values
+        type.text = unitScript.type;
+        cost.text = unitScript.cost.ToString();
+        damage.text = unitScript.damage.ToString();
+        health.text = unitScript.health.ToString();
     }
 
     //Update
     void Update()
     {
-        //correct x based on resolution
-
-        //if (lastScreenX != Screen.width)
-        //{
-        //    float actualX = (normalPosit.x * Screen.width) / transform.parent.GetComponent<CanvasScaler>().referenceResolution.x;
-
-        //    normalPosit.x = actualX;
-        //    lastScreenX = Screen.width;
-        //    print("update");
-        //}
-        
-    
         if (show)
         {
             ShowCard();
@@ -161,12 +157,22 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     {
         hide = false;
         show = true;
+        egoMapScript.showingCard = true;
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
         show = false;
         hide = true;
+        egoMapScript.showingCard = false;
+    }
+
+    public void OnPointerClick(PointerEventData eventData)
+    {
+        if (show)
+        {
+            egoMapScript.selectedUnit = unit;
+        }
     }
 
     #endregion

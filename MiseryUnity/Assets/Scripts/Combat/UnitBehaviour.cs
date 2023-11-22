@@ -23,6 +23,7 @@ public class UnitBehaviour : MonoBehaviour
     #region
 
     //Stats
+    public string type;
     public float health;
     public float cost;
     public float damage;

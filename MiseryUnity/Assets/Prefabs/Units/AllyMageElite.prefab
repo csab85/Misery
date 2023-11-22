@@ -312,7 +312,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!60 &4601282067627919345
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -357,8 +357,9 @@ MonoBehaviour:
   shot: {fileID: 4601282067614154247}
   shotScript: {fileID: 4601282067614154246}
   self: {fileID: 4601282067627919348}
+  type: Mago de Elite
   health: 5
-  defense: 0
+  cost: 0
   damage: 3
   aoe: 0
   attackSpeed: 1

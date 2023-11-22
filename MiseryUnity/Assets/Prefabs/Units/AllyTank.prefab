@@ -130,7 +130,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!60 &1748049016646607213
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -179,6 +179,7 @@ MonoBehaviour:
   shot: {fileID: 5777290744413324270}
   shotScript: {fileID: 5777290744413324271}
   self: {fileID: 5777290744116738589}
+  type: Tanque
   health: 40
   cost: 3
   damage: 1

@@ -109,7 +109,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!60 &5829041310832092319
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -154,6 +154,7 @@ MonoBehaviour:
   shot: {fileID: 5829041311061843305}
   shotScript: {fileID: 5829041311061843304}
   self: {fileID: 5829041310832092314}
+  type: Tanque de Elite
   health: 55
   cost: 4
   damage: 0.5

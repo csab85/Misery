@@ -25,7 +25,7 @@ public class EgoMap : MonoBehaviour
     public GameObject enemyMage;
     public GameObject enemyTank;
 
-    GameObject selectedUnit;
+    public GameObject selectedUnit;
 
     #endregion
     //========================
@@ -43,8 +43,9 @@ public class EgoMap : MonoBehaviour
 
     //Functions progress
     public bool obstacled = true;
+    float rockCounter;
 
-    int rockCounter = 0;
+    public bool showingCard = false;
 
     #endregion
     //========================
@@ -128,12 +129,12 @@ public class EgoMap : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.A))
         {
-            selectedUnit = allyShooter;
+            selectedUnit = allyMage;
         }
 
         if (Input.GetKeyDown(KeyCode.S))
         {
-            selectedUnit = allyMage;
+            selectedUnit = allyShooter;
         }
 
         if (Input.GetKeyDown(KeyCode.D))
@@ -141,7 +142,7 @@ public class EgoMap : MonoBehaviour
             selectedUnit = allyTank;
         }
 
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0) && !showingCard)
         {
             Vector3 mousePosit = camera.GetComponent<Camera>().ScreenToWorldPoint(Input.mousePosition);
 

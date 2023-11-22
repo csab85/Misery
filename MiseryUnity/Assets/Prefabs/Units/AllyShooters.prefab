@@ -130,7 +130,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!60 &3174368887190391013
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -179,6 +179,7 @@ MonoBehaviour:
   shot: {fileID: 3402124315054700194}
   shotScript: {fileID: 3402124315054700195}
   self: {fileID: 3402124315034881873}
+  type: Atiradores
   health: 2
   cost: 2
   damage: 2
