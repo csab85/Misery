@@ -12,10 +12,10 @@ public class Card: MonoBehaviour
 
     [SerializeField] Button cardButton;
     [SerializeField] UnitBehaviour unit;
-    [SerializeField] TextMeshPro type;
-    [SerializeField] TextMeshPro cost;
-    [SerializeField] TextMeshPro damage;
-    [SerializeField] TextMeshPro health;
+    [SerializeField] TextMeshProUGUI type;
+    [SerializeField] TextMeshProUGUI cost;
+    [SerializeField] TextMeshProUGUI damage;
+    [SerializeField] TextMeshProUGUI health;
 
     #endregion
     //========================
@@ -54,7 +54,12 @@ public class Card: MonoBehaviour
     //Update
     void Update()
     {
+        
+    }
 
+    private void OnMouseOver()
+    {
+        print(name);
     }
 
     #endregion
