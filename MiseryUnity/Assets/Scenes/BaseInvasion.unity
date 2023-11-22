@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.37311953, g: 0.38074014, b: 0.3587274, a: 1}
+  m_IndirectSpecularColor: {r: 0.3731193, g: 0.38073996, b: 0.35872698, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -903,6 +903,12 @@ MonoBehaviour:
   cost: {fileID: 1351420912}
   damage: {fileID: 839530860}
   health: {fileID: 466446570}
+  travelSpeed: 260
+  growthSpeed: 5
+  rotationSpeed: 20
+  showHeight: 125
+  normalPosit: {x: 0, y: 0, z: 0}
+  posit: {x: 0, y: 0, z: 0}
 --- !u!1 &588286016
 GameObject:
   m_ObjectHideFlags: 0
@@ -1681,6 +1687,12 @@ MonoBehaviour:
   cost: {fileID: 196484273}
   damage: {fileID: 359054249}
   health: {fileID: 764151685}
+  travelSpeed: 260
+  growthSpeed: 5
+  rotationSpeed: 20
+  showHeight: 125
+  normalPosit: {x: 0, y: 0, z: 0}
+  posit: {x: 0, y: 0, z: 0}
 --- !u!1 &1045693279
 GameObject:
   m_ObjectHideFlags: 0
@@ -2590,6 +2602,12 @@ MonoBehaviour:
   cost: {fileID: 1515115328}
   damage: {fileID: 1721712114}
   health: {fileID: 1568080279}
+  travelSpeed: 260
+  growthSpeed: 5
+  rotationSpeed: 20
+  showHeight: 125
+  normalPosit: {x: 0, y: 0, z: 0}
+  posit: {x: 0, y: 0, z: 0}
 --- !u!1 &1568080277
 GameObject:
   m_ObjectHideFlags: 0
@@ -3853,7 +3871,7 @@ MonoBehaviour:
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
   m_ReferenceResolution: {x: 800, y: 600}
-  m_ScreenMatchMode: 0
+  m_ScreenMatchMode: 2
   m_MatchWidthOrHeight: 0
   m_PhysicalUnit: 3
   m_FallbackScreenDPI: 96
