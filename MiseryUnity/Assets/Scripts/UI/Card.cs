@@ -19,6 +19,7 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IP
     [SerializeField] TextMeshProUGUI cost;
     [SerializeField] TextMeshProUGUI damage;
     [SerializeField] TextMeshProUGUI health;
+    [SerializeField] Image highlight;
 
     #endregion
     //========================
@@ -150,6 +151,17 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IP
         if (hide)
         {
             HideCard();
+        }
+
+        //highlight selected card
+        if (egoMapScript.selectedUnit == unit)
+        {
+            highlight.enabled = true;
+        }
+
+        else
+        {
+            highlight.enabled = false;
         }
     }
 
