@@ -28,7 +28,7 @@ public class Misery : MonoBehaviour
     public Vector3 velocity;
 
     //Function progression
-    public bool moving = false; //allows player to move or not while on menu
+    public bool occupied = false; //defines if Misery can move and if city colliders will be up
 
     //History progression
     public float progression = 0;
@@ -145,7 +145,7 @@ public class Misery : MonoBehaviour
             case  "walking":
                 #region
 
-                if (moving)
+                if (!occupied)
                 {
                     Walk();
                 }

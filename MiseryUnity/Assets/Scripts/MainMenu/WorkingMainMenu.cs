@@ -19,11 +19,11 @@ public class WorkingMainMenu : MonoBehaviour
     public void Jogar()
     {
         SceneManager.LoadScene(NomeDoLevelDeJogo); 
-        playerSctript.moving = true;
+        playerSctript.occupied = true;
         SceneManager.UnloadSceneAsync("MainMenu"); //descarrega a cena
         AudioManager.instance.PlayMusic("ThemeGame"); //faz com que toque a próxima música quando aperta o play
 
-        playerSctript.moving = true;
+        playerSctript.occupied = false;
     }
 
     public void AbrirOpçoes()
@@ -52,5 +52,10 @@ public class WorkingMainMenu : MonoBehaviour
     {
         Debug.Log("Quit Game");
         Application.Quit();
+    }
+
+    private void Start()
+    {
+        playerSctript = GameObject.Find("Misery").GetComponent<Misery>();
     }
 }

@@ -5,10 +5,19 @@ using UnityEngine.SceneManagement;
 
 public class Play : MonoBehaviour
 {
-    public string nomeDaCena; // Nome da cena que você deseja carregar (no caso, "BaseInvader")
+    [SerializeField] GameObject baseInvasion;
+    [SerializeField] DialogueControlGhost dcGhost;
+    [SerializeField] GameObject mainCamera;
+    [SerializeField] GameObject fadeRect;
+    [SerializeField] float fadeSpeed;
+    float alpha = 0;
 
     public void CarregarCenaBaseInvader()
     {
-        SceneManager.LoadScene(nomeDaCena); // Carrega a cena com o nome especificado
+        dcGhost.NextSentence();
+
+        mainCamera.GetComponent<MainCamera>().Fade(0.5f);
+
+        Instantiate(baseInvasion, mainCamera.transform);
     }
 }

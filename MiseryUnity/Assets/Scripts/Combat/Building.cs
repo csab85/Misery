@@ -85,7 +85,7 @@ public class Building : MonoBehaviour
             }
             else
             {
-                SceneManager.LoadScene("Scenery");
+                SceneManager.UnloadSceneAsync("BaseInvasion");
             }
         }
     }

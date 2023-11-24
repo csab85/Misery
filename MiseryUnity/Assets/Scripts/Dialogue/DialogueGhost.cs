@@ -9,6 +9,7 @@ public class DialogueGhost : MonoBehaviour
     public string actorName;
     public LayerMask playerLayer;
     public float radius;
+    [SerializeField] Misery miseryScript;
 
     private DialogueControlGhost dcGhost; // Alteração: Usar DialogueControlGhost em vez de DialogueControl
     private bool onRadius;
@@ -29,6 +30,7 @@ public class DialogueGhost : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space) && onRadius && dcGhost.dialogueFinished)
         {
             isDialogueActive = true;
+            miseryScript.occupied = true;
             dcGhost.Speech(profile, speechTxt, actorName); // Alteração: Chamar dcGhost.Speech em vez de dc.Speech
         }
     }
@@ -54,6 +56,7 @@ public class DialogueGhost : MonoBehaviour
 
     public void EndDialogue()
     {
+        miseryScript.occupied = false;
         isDialogueActive = false;
     }
 }

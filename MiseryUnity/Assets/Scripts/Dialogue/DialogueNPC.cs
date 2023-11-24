@@ -20,10 +20,10 @@ public class DialogueNPC : MonoBehaviour
 
     public void Talk()
     {
-        print("aaAAA");
         if (!talking && dcNPC.dialogueFinished)
         {
             talking = true;
+            miseryScript.occupied = true;
             dcNPC.Speech(profile, speechTxt, actorName); // Alteração: Chamar dcNPC.Speech em vez de dc.Speech
         }
     }
@@ -43,6 +43,7 @@ public class DialogueNPC : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space) && onRadius && !talking && dcNPC.dialogueFinished)
         {
             talking = true;
+            miseryScript.occupied = true;
             dcNPC.Speech(profile, speechTxt, actorName); // Alteração: Chamar dcNPC.Speech em vez de dc.Speech
         }
 
@@ -55,6 +56,7 @@ public class DialogueNPC : MonoBehaviour
         {
             EndDialogue();
             talking = false;
+            miseryScript.occupied = false;
             miseryScript.progression = nextProgressionValue;
         }
     }

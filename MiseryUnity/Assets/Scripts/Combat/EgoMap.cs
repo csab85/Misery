@@ -8,11 +8,9 @@ public class EgoMap : MonoBehaviour
     //IMPORTS
     //========================
     #region
-    public GameObject rock;
-    public GameObject trap;
     public GameObject spawner;
 
-    public GameObject camera;
+    public GameObject cam;
 
     [SerializeField] TimeSlider timeSliderScript;
 
@@ -116,6 +114,7 @@ public class EgoMap : MonoBehaviour
     void Start()
     {
         deck = new List<GameObject> { allyShooter, allyMage, allyTank };
+        cam = GameObject.Find("MainCamera");
         ChooseTroops();
         AddObstacle(spawner, 3);
     }
@@ -144,7 +143,7 @@ public class EgoMap : MonoBehaviour
 
         if (Input.GetMouseButtonDown(0) && !showingCard)
         {
-            Vector3 mousePosit = camera.GetComponent<Camera>().ScreenToWorldPoint(Input.mousePosition);
+            Vector3 mousePosit = cam.GetComponent<Camera>().ScreenToWorldPoint(Input.mousePosition);
 
             float unitCost = selectedUnit.GetComponent<UnitBehaviour>().cost;
 
