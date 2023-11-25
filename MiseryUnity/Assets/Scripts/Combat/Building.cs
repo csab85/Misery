@@ -20,15 +20,15 @@ public class Building : MonoBehaviour
     #region
 
     //Stats
-    public int health;
-    int maxHealth;
+    public float health;
+    float maxHealth;
     public int defense;
 
     //Function progression
 
     //damage
     bool damaging = false;
-
+    public float damageTaken = 0;
     string selfTag;
 
     #endregion
@@ -46,10 +46,14 @@ public class Building : MonoBehaviour
     IEnumerator Damage()
     {
         damaging = true;
-        health -= 1;
+
+        health -= damageTaken;
+        damageTaken = 0;
+
         GetComponent<SpriteRenderer>().color = new Color(200, 0, 0);
-        yield return new WaitForSecondsRealtime(0.2f);
-        GetComponent<SpriteRenderer>().color = new Color(250, (health * (250 / maxHealth)), (health * (250 / maxHealth)));
+        yield return new WaitForSecondsRealtime(0.3f);
+        GetComponent<SpriteRenderer>().color = new Color(255, 255, 255);
+
         tag = selfTag;
         damaging = false;
     }

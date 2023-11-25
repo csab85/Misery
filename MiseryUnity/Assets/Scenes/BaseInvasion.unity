@@ -3486,6 +3486,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 5
   defense: 0
+  damageTaken: 0
 --- !u!60 &1789398619
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -3954,6 +3955,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 25
   defense: 0
+  damageTaken: 0
 --- !u!60 &2080695511
 PolygonCollider2D:
   m_ObjectHideFlags: 0

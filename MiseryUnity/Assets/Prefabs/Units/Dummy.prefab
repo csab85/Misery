@@ -186,7 +186,6 @@ MonoBehaviour:
   state: static
   affectedTargets:
   - Building
-  exploding: 0
 --- !u!58 &4077232064789765861
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -358,7 +357,7 @@ MonoBehaviour:
   shotScript: {fileID: 8559172469266573475}
   self: {fileID: 8559172469472989521}
   type: 
-  health: 0
+  health: 100
   cost: 0
   damage: 0
   aoe: 0

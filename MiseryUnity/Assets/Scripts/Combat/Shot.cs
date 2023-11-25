@@ -26,7 +26,6 @@ public class Shot : MonoBehaviour
     public List<string> affectedTargets;
 
     //Gambiarra
-    public bool exploding = false;
     float selfRadius;
 
     #endregion
@@ -37,7 +36,12 @@ public class Shot : MonoBehaviour
     //========================
     #region
 
-
+    void Unexplode()
+    {
+        GetComponent<Animator>().SetBool("exploding", false);
+        GetComponent<CircleCollider2D>().radius = selfRadius;
+        state = "static";
+    }
 
     #endregion
     //========================
@@ -78,7 +82,6 @@ public class Shot : MonoBehaviour
             case "static":
                 #region
 
-                GetComponent<CircleCollider2D>().radius = selfRadius;
                 GetComponent<SpriteRenderer>().enabled = false;
                 transform.position = transform.parent.transform.position;
                 break;
@@ -88,7 +91,9 @@ public class Shot : MonoBehaviour
             case "moving":
                 #region
 
-                if (Mathf.Abs(transform.position.x - transform.parent.transform.position.x) > 5 | Mathf.Abs(transform.position.y - transform.parent.transform.position.y) > 5)
+                float distance = Vector3.Distance(transform.position, transform.parent.transform.position);
+
+                if (distance > 5)
                 {
                     state = "static";
                 }
@@ -102,11 +107,7 @@ public class Shot : MonoBehaviour
             case "exploding":
                 #region
 
-                if (exploding)
-                {
-                    //exploding animation and make exploding bool chage to false when animation finished
-                    GetComponent<Animator>().SetBool("Exploding", true);
-                }
+                GetComponent<Animator>().SetBool("exploding", true);
 
                 break;
 
@@ -119,32 +120,48 @@ public class Shot : MonoBehaviour
     {
         if (affectedTargets.Contains(collision.tag))
         {
+            if (unitScript.aoe <= 0)
+            {
+                state = "static";
+            }
+
+            if (collision.tag == "Building")
+            {
+                collision.GetComponent<Building>().damageTaken = unitScript.damage;
+                collision.tag = "Damaged";
+            }
+
+            else if (collision.tag != "Damaged")
+            {
+                collision.GetComponent<UnitBehaviour>().damageTaken = unitScript.damage;
+                collision.tag = "Damaged";
+            }
+
             if (unitScript.aoe > 0)
             {
                 GetComponent<CircleCollider2D>().radius = unitScript.aoe;
-                return;
-            }
-
-            else
-            {
-                state = "static";
-                collision.GetComponent<UnitBehaviour>().damageTaken = unitScript.damage;
-                collision.tag = "Damaged";
+                state = "exploding";
             }
         }
     }
  
-    private void OnTriggerStay2D(Collider2D collision)
-    {
-        if (affectedTargets.Contains(collision.tag))
-        {
-            if (!exploding)
-            {
-                state = "exploding";
-                collision.tag = "Damaged";
-            }
-        }
-    }
+    //private void OnTriggerStay2D(Collider2D collision)
+    //{
+    //    if (affectedTargets.Contains(collision.tag))
+    //    {
+    //        if (tag == "Building")
+    //        {
+    //            collision.GetComponent<Building>().damageTaken = unitScript.damage;
+    //            collision.tag = "Damaged";
+    //        }
+
+    //        else if (tag != "Damaged")
+    //        {
+    //            collision.GetComponent<UnitBehaviour>().damageTaken = unitScript.damage;
+    //            collision.tag = "Damaged";
+    //        }
+    //    }
+    //}
 
     #endregion
     //========================
