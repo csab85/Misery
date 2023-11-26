@@ -8,7 +8,11 @@ public class Spawner : MonoBehaviour
     //========================
     #region
 
+    public GameObject[] enemiesArray;
     public GameObject enemy;
+
+    [SerializeField] EgoMap egomapScript;
+    [SerializeField] GameObject nexus;
 
     #endregion
     //========================
@@ -31,7 +35,9 @@ public class Spawner : MonoBehaviour
 
     IEnumerator SpawnEnemy()
     {
-        Instantiate(enemy, transform.position, Quaternion.identity);
+        //nexus.GetComponent<Animator>().SetBool("spawning", true);
+        //nexus.GetComponent<Animator>().SetBool("spawning", false);
+        egomapScript.activeUnits.Add(Instantiate(enemy, transform.position, Quaternion.identity));
         onCoooldown = true;
         yield return new WaitForSeconds(cooldown);
         onCoooldown = false;
@@ -48,7 +54,7 @@ public class Spawner : MonoBehaviour
     //Start
     void Start()
     {
-
+        enemy = enemiesArray[Random.Range(0, enemiesArray.Length)];
     }
 
     //Update

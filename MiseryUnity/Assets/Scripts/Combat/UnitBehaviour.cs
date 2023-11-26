@@ -28,7 +28,7 @@ public class UnitBehaviour : MonoBehaviour
     public float cost;
     public float damage;
     public float aoe;
-    public float attackSpeed; //defines the projectile speed, since the faster it hits the target, the faster it is shot again
+    public float attackSpeed; //defines the projectile speed, since the faster it hits the target, the faster it is shot 
     public float range;
 
     public float damageTaken = 0;
@@ -59,6 +59,10 @@ public class UnitBehaviour : MonoBehaviour
     int movementDirection = 0;
     bool oneTimeSetup = false;
     bool decelerating = false;
+
+    //attack
+    public Vector3 direction;
+    bool directioned = false;
 
     //State (walking, attacking)
     public string state = "walking";
@@ -163,11 +167,17 @@ public class UnitBehaviour : MonoBehaviour
     /// <param name="enemy">The target</param>
     void Attack(GameObject enemy)
     {
-        shotScript.state = "moving";
+        if (shotScript.state == "static")
+        {
+            shotScript.state = "moving";
+        }
 
-        Vector3 direction = (enemy.transform.position - transform.position).normalized;
 
-        shot.GetComponent<Rigidbody2D>().velocity = direction * 5;
+        if (!directioned)
+        {
+            direction = (enemy.transform.position - transform.position).normalized;
+            directioned = true;
+        }
     }
 
     /// <summary>
@@ -270,6 +280,7 @@ public class UnitBehaviour : MonoBehaviour
 
                     if (enemy.tag == "Dead")
                     {
+                        directioned = false;
                         state = "walking";
                         break;
                     }
@@ -298,6 +309,7 @@ public class UnitBehaviour : MonoBehaviour
 
                     if (shotScript.state == "static")
                     {
+                        directioned = false;
                         state = "attacking";
                     }
 
@@ -316,7 +328,7 @@ public class UnitBehaviour : MonoBehaviour
     //Range trigger
     private void OnTriggerStay2D(Collider2D collision)
     {
-        if (targets.Contains(collision.tag))
+        if (targets.Contains(collision.tag) && state != "waiting")
         {
             enemy = collision.gameObject;
             state = "attacking";

@@ -38,7 +38,9 @@ public class Shot : MonoBehaviour
 
     void Unexplode()
     {
+        print("unexplode");
         GetComponent<Animator>().SetBool("exploding", false);
+        transform.localScale = new Vector3(1, 1, 1);
         GetComponent<CircleCollider2D>().radius = selfRadius;
         state = "static";
     }
@@ -98,6 +100,7 @@ public class Shot : MonoBehaviour
                     state = "static";
                 }
 
+                GetComponent<Rigidbody2D>().velocity = unitScript.direction * unitScript.attackSpeed;
                 GetComponent<SpriteRenderer>().enabled = true;
 
                 break;
@@ -107,7 +110,11 @@ public class Shot : MonoBehaviour
             case "exploding":
                 #region
 
+                transform.localScale = new Vector3(2, 2, 1);
+                GetComponent<CircleCollider2D>().radius = unitScript.aoe / 2;
+                GetComponent<Rigidbody2D>().velocity = Vector2.zero;
                 GetComponent<Animator>().SetBool("exploding", true);
+                print("explode");
 
                 break;
 
@@ -120,6 +127,11 @@ public class Shot : MonoBehaviour
     {
         if (affectedTargets.Contains(collision.tag))
         {
+            if (unitScript.aoe > 0)
+            {
+                state = "exploding";
+            }
+
             if (unitScript.aoe <= 0)
             {
                 state = "static";
@@ -127,7 +139,7 @@ public class Shot : MonoBehaviour
 
             if (collision.tag == "Building")
             {
-                collision.GetComponent<Building>().damageTaken = unitScript.damage;
+                collision.GetComponent<Nexus>().damageTaken = unitScript.damage;
                 collision.tag = "Damaged";
             }
 
@@ -136,32 +148,8 @@ public class Shot : MonoBehaviour
                 collision.GetComponent<UnitBehaviour>().damageTaken = unitScript.damage;
                 collision.tag = "Damaged";
             }
-
-            if (unitScript.aoe > 0)
-            {
-                GetComponent<CircleCollider2D>().radius = unitScript.aoe;
-                state = "exploding";
-            }
         }
     }
- 
-    //private void OnTriggerStay2D(Collider2D collision)
-    //{
-    //    if (affectedTargets.Contains(collision.tag))
-    //    {
-    //        if (tag == "Building")
-    //        {
-    //            collision.GetComponent<Building>().damageTaken = unitScript.damage;
-    //            collision.tag = "Damaged";
-    //        }
-
-    //        else if (tag != "Damaged")
-    //        {
-    //            collision.GetComponent<UnitBehaviour>().damageTaken = unitScript.damage;
-    //            collision.tag = "Damaged";
-    //        }
-    //    }
-    //}
 
     #endregion
     //========================

@@ -311,7 +311,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 4
+  m_Constraints: 7
 --- !u!60 &8559172469472989524
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -366,9 +366,10 @@ MonoBehaviour:
   damageTaken: 0
   maxVelocity: {x: 0, y: 0, z: 0}
   acceleration: 0
-  deceleration: 0
+  deceleration: 20
   targets: []
   targetAlly: 0
   targetEnemy: 0
   targetBuilding: 0
+  direction: {x: 0, y: 0, z: 0}
   state: walking

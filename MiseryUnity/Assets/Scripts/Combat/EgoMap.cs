@@ -8,9 +8,11 @@ public class EgoMap : MonoBehaviour
     //IMPORTS
     //========================
     #region
-    public GameObject spawner;
+    [SerializeField] Misery miseryScript;
 
     public GameObject cam;
+
+    public GameObject spawner;
 
     [SerializeField] TimeSlider timeSliderScript;
 
@@ -45,6 +47,14 @@ public class EgoMap : MonoBehaviour
 
     public bool showingCard = false;
 
+    //list with units to delete
+    public List<GameObject> activeUnits;
+
+    //spawners list
+    [SerializeField] GameObject[] spawnersLvl1;
+    [SerializeField] GameObject[] spawnersLvl2;
+    [SerializeField] GameObject[] spawnersLvl3;
+
     #endregion
     //========================
 
@@ -62,15 +72,33 @@ public class EgoMap : MonoBehaviour
     /// <returns></returns>
     void  AddObstacle(GameObject obstacle, int times)
     {
-        Vector2 posit;
-
-        for (int i = 0; i < times; i++)
+        if (miseryScript.battleLvl == 1)
         {
-            posit.x = Random.Range(transform.position.x - (transform.localScale.x / 2), transform.position.x + (transform.localScale.x / 2));
-            posit.y = Random.Range(2.7f, (transform.position.y + (transform.localScale.y / 2)) - 1);
+            foreach (GameObject spawner in spawnersLvl1)
+            {
+                spawner.SetActive(true);
+            }
+        }
 
-            Instantiate(obstacle, posit, Quaternion.identity);
-            rockCounter += 1;
+        if (miseryScript.battleLvl == 2)
+        {
+            foreach (GameObject spawner in spawnersLvl2)
+            {
+                spawner.SetActive(true);
+            }
+        }
+
+        if (miseryScript.battleLvl == 3)
+        {
+            foreach (GameObject spawner in spawnersLvl3)
+            {
+                spawner.SetActive(true);
+            }
+        }
+
+        if (miseryScript.battleLvl == 4)
+        {
+            //ativar chefão?
         }
 
         obstacled = true;
@@ -114,6 +142,7 @@ public class EgoMap : MonoBehaviour
     void Start()
     {
         deck = new List<GameObject> { allyShooter, allyMage, allyTank };
+        miseryScript = GameObject.Find("Misery").GetComponent<Misery>();
         cam = GameObject.Find("MainCamera");
         ChooseTroops();
         AddObstacle(spawner, 3);
@@ -150,10 +179,10 @@ public class EgoMap : MonoBehaviour
             //discount
             if (selectedUnit == allyShooter && shootersAvaiable > 0 && timeSliderScript.timeValue >= unitCost)
             {
-                Instantiate(selectedUnit, new Vector3(mousePosit.x + 0.3f, mousePosit.y, -2), Quaternion.identity);
-                Instantiate(selectedUnit, new Vector3(mousePosit.x - 0.3f, mousePosit.y, -2), Quaternion.identity);
-                Instantiate(selectedUnit, new Vector3(mousePosit.x, mousePosit.y + 0.3f, -2), Quaternion.identity);
-                Instantiate(selectedUnit, new Vector3(mousePosit.x, mousePosit.y - 0.3f, -2), Quaternion.identity);
+                activeUnits.Add(Instantiate(selectedUnit, new Vector3(mousePosit.x + 0.3f, mousePosit.y, -2), Quaternion.identity));
+                activeUnits.Add(Instantiate(selectedUnit, new Vector3(mousePosit.x - 0.3f, mousePosit.y, -2), Quaternion.identity));
+                activeUnits.Add(Instantiate(selectedUnit, new Vector3(mousePosit.x, mousePosit.y + 0.3f, -2), Quaternion.identity));
+                activeUnits.Add(Instantiate(selectedUnit, new Vector3(mousePosit.x, mousePosit.y - 0.3f, -2), Quaternion.identity));
 
                 timeSliderScript.aimTimeValue = timeSliderScript.timeValue - unitCost;
                 shootersAvaiable -= 1;
@@ -161,7 +190,7 @@ public class EgoMap : MonoBehaviour
 
             if (selectedUnit == allyMage && magesAvaiable > 0 && timeSliderScript.timeValue >= unitCost)
             {
-                Instantiate(selectedUnit, new Vector3(mousePosit.x, mousePosit.y, -2), Quaternion.identity);
+                activeUnits.Add(Instantiate(selectedUnit, new Vector3(mousePosit.x, mousePosit.y, -2), Quaternion.identity));
 
                 timeSliderScript.aimTimeValue = timeSliderScript.timeValue - unitCost;
                 magesAvaiable -= 1;
@@ -169,7 +198,7 @@ public class EgoMap : MonoBehaviour
 
             if (selectedUnit == allyTank && tanksAvaiable > 0 && timeSliderScript.timeValue >= unitCost)
             {
-                Instantiate(selectedUnit, new Vector3(mousePosit.x, mousePosit.y, -2), Quaternion.identity);
+                activeUnits.Add(Instantiate(selectedUnit, new Vector3(mousePosit.x, mousePosit.y, -2), Quaternion.identity));
 
                 timeSliderScript.aimTimeValue = timeSliderScript.timeValue - unitCost;
                 tanksAvaiable -= 1;

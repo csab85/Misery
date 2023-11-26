@@ -32,6 +32,11 @@ public class Misery : MonoBehaviour
 
     //History progression
     public float progression = 0;
+    public int defeatedGhosts;
+
+    //Battle
+    public int battleLvl;
+    public Color enemyColor;
 
     #endregion
     //========================

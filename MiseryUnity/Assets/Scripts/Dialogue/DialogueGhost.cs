@@ -15,6 +15,9 @@ public class DialogueGhost : MonoBehaviour
     private bool onRadius;
     private bool isDialogueActive = false;
 
+    //combat
+    [SerializeField] int battleLvl;
+
     private void Start()
     {
         dcGhost = FindObjectOfType<DialogueControlGhost>(); // Alteração: Usar DialogueControlGhost em vez de DialogueControl
@@ -31,6 +34,8 @@ public class DialogueGhost : MonoBehaviour
         {
             isDialogueActive = true;
             miseryScript.occupied = true;
+            miseryScript.battleLvl = battleLvl;
+            miseryScript.enemyColor = GetComponent<SpriteRenderer>().color;
             dcGhost.Speech(profile, speechTxt, actorName); // Alteração: Chamar dcGhost.Speech em vez de dc.Speech
         }
     }

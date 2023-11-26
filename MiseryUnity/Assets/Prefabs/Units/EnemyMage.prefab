@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5777290744116738591}
   - component: {fileID: 5777290744116738590}
+  - component: {fileID: 548739193307340341}
   - component: {fileID: 5777290744116738588}
   - component: {fileID: 5777290744116738584}
   - component: {fileID: 5777290744116738589}
@@ -28,7 +29,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5777290744116738578}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -12}
+  m_LocalPosition: {x: -4.2527237, y: -0.5370319, z: -12}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -78,7 +79,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 6
-  m_Sprite: {fileID: 7482667652216324306, guid: 75f5f34dc1b5347e0b8351032682f224, type: 3}
+  m_Sprite: {fileID: -1955294341, guid: 9bd7f9751db7fb84d8f5217bc7447c17, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -86,9 +87,29 @@ SpriteRenderer:
   m_Size: {x: 1, y: 1}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!95 &548739193307340341
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5777290744116738578}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 05676a44fffa24643a7401b16b5d49fc, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
 --- !u!50 &5777290744116738588
 Rigidbody2D:
   serializedVersion: 4
@@ -109,7 +130,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 4
+  m_Constraints: 7
 --- !u!60 &5777290744116738584
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -120,13 +141,13 @@ PolygonCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.28866667}
+    pivot: {x: 0.5, y: 0.5}
     oldSize: {x: 1, y: 1}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
@@ -135,9 +156,13 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: 0, y: 0.5773587}
-      - {x: -0.5, y: -0.28866667}
-      - {x: 0.5, y: -0.28866667}
+    - - {x: -0.09375, y: 0.4375}
+      - {x: -0.28125, y: 0.1875}
+      - {x: -0.28125, y: -0.4375}
+      - {x: 0.25, y: -0.4375}
+      - {x: 0.25, y: 0.125}
+      - {x: 0.09375, y: 0.34375}
+      - {x: 0, y: 0.46875}
 --- !u!114 &5777290744116738589
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -154,21 +179,22 @@ MonoBehaviour:
   shot: {fileID: 5777290744413324270}
   shotScript: {fileID: 5777290744413324271}
   self: {fileID: 5777290744116738589}
-  type: 
+  type: Mago
   health: 4
-  cost: 0
+  cost: 1
   damage: 1
-  aoe: 2
-  attackSpeed: 0.5
-  range: 1
+  aoe: 0.5
+  attackSpeed: 4
+  range: 2
   damageTaken: 0
-  maxVelocity: {x: 0, y: 0, z: 0}
-  acceleration: 0
-  deceleration: 0
+  maxVelocity: {x: 1, y: 1, z: 0}
+  acceleration: 1
+  deceleration: 20
   targets: []
   targetAlly: 1
   targetEnemy: 0
   targetBuilding: 0
+  direction: {x: 0, y: 0, z: 0}
   state: walking
 --- !u!1 &5777290744413324270
 GameObject:
@@ -180,9 +206,10 @@ GameObject:
   m_Component:
   - component: {fileID: 5777290744413324267}
   - component: {fileID: 5777290744413324266}
+  - component: {fileID: 8956311614840613023}
   - component: {fileID: 5777290744413324265}
-  - component: {fileID: 5777290744413324271}
   - component: {fileID: 2193386765046724009}
+  - component: {fileID: 5777290744413324271}
   m_Layer: 0
   m_Name: Shot
   m_TagString: Untagged
@@ -199,7 +226,7 @@ Transform:
   m_GameObject: {fileID: 5777290744413324270}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 1}
-  m_LocalScale: {x: 0.4, y: 0.4, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 5777290744116738591}
@@ -245,18 +272,38 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 5
-  m_Sprite: {fileID: -2413806693520163455, guid: ebe73ca9363db456bacf42c025bb4847, type: 3}
-  m_Color: {r: 0.019357419, g: 0.15808082, b: 0.8207547, a: 1}
+  m_SortingOrder: 6
+  m_Sprite: {fileID: 404955381, guid: 9d1427fcda258884d950f48540aed06e, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
   m_Size: {x: 1, y: 1}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!95 &8956311614840613023
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5777290744413324270}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 01429ae48aa6afe47973f0706d45a9c0, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
 --- !u!50 &5777290744413324265
 Rigidbody2D:
   serializedVersion: 4
@@ -278,22 +325,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!114 &5777290744413324271
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5777290744413324270}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7569df3ccdf88bd43ad1f9ed27da6fd3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  unitScript: {fileID: 5777290744116738589}
-  state: static
-  affectedTargets: []
-  exploding: 0
 --- !u!58 &2193386765046724009
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -309,7 +340,22 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 0.5
+  m_Radius: 0.15
+--- !u!114 &5777290744413324271
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5777290744413324270}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7569df3ccdf88bd43ad1f9ed27da6fd3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  unitScript: {fileID: 5777290744116738589}
+  state: static
+  affectedTargets: []
 --- !u!1 &5777290744639554404
 GameObject:
   m_ObjectHideFlags: 0

@@ -12,6 +12,7 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IP
     #region
 
     [SerializeField] EgoMap egoMapScript;
+    [SerializeField] SpawnArea spawnAreaScript;
     [SerializeField] Button cardButton;
     [SerializeField] GameObject unit;
     [SerializeField] UnitBehaviour unitScript;
@@ -19,6 +20,7 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IP
     [SerializeField] TextMeshProUGUI cost;
     [SerializeField] TextMeshProUGUI damage;
     [SerializeField] TextMeshProUGUI health;
+    [SerializeField] TextMeshProUGUI avaiableTroops;
     [SerializeField] Image highlight;
 
     #endregion
@@ -45,8 +47,8 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IP
     Vector3 scale;
     Vector3 rotation;
 
-    bool show = false;
-    bool hide = false;
+    public bool show = false;
+    public bool hide = true;
 
     //gambiarra to correct position based on resolution
     float lastScreenX;
@@ -78,10 +80,11 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IP
         rectTransform.rotation = Quaternion.Euler(rotation);
         rectTransform.SetAsLastSibling();
 
-        if (posit == normalPosit && scale == normalScale && rotation == normalRotation)
-        {
-            show = false;
-        }
+        //if (posit == normalPosit && scale == normalScale && rotation == normalRotation)
+        //{
+        //    show = false;
+        //    spawnAreaScript.allCardsDown -= 1;
+        //}
     }
 
     /// <summary>
@@ -103,10 +106,11 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IP
         rectTransform.rotation = Quaternion.Euler(rotation);
         rectTransform.SetSiblingIndex(normalSibilingIndex);
 
-        if (posit == normalPosit && scale == normalScale && rotation == normalRotation)
-        {
-            hide = false;
-        }
+        //if (posit == normalPosit && scale == normalScale && rotation == normalRotation)
+        //{
+        //    hide = false;
+        //    spawnAreaScript.allCardsDown += 1;
+        //}
     }
 
     #endregion
@@ -143,6 +147,23 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IP
     //Update
     void Update()
     {
+        //check avaiable troops LEMBRA DE VERIFICAR SE OS NOMES TAO IGUAIS AOS DAS CARTAS
+        if (unitScript.type == "Mago" | unitScript.type == "Mago de Elite")
+        {
+            avaiableTroops.text = egoMapScript.magesAvaiable.ToString();
+        }
+
+        if (unitScript.type == "Atiradores" | unitScript.type == "Atiradores de Elite")
+        {
+            avaiableTroops.text = egoMapScript.shootersAvaiable.ToString();
+        }
+
+        if (unitScript.type == "Tanque" | unitScript.type == "Tanque de Elite")
+        {
+            avaiableTroops.text = egoMapScript.tanksAvaiable.ToString();
+        }
+
+
         if (show)
         {
             ShowCard();
