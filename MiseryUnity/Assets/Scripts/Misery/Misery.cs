@@ -28,7 +28,8 @@ public class Misery : MonoBehaviour
     public Vector3 velocity;
 
     //Function progression
-    public bool occupied = false; //defines if Misery can move and if city colliders will be up
+    public bool talking = false; //defines if Misery can move and if city colliders will be up
+    public bool invading = false;
 
     //History progression
     public float progression = 0;
@@ -150,7 +151,7 @@ public class Misery : MonoBehaviour
             case  "walking":
                 #region
 
-                if (!occupied)
+                if (!talking && !invading)
                 {
                     Walk();
                 }
@@ -158,11 +159,6 @@ public class Misery : MonoBehaviour
                 break;
 
                 #endregion
-        }
-
-        switch (progression)
-        {
-
         }
     }
 

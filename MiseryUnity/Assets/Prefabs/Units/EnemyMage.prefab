@@ -11,8 +11,8 @@ GameObject:
   - component: {fileID: 5777290744116738591}
   - component: {fileID: 5777290744116738590}
   - component: {fileID: 548739193307340341}
+  - component: {fileID: 472466870670861806}
   - component: {fileID: 5777290744116738588}
-  - component: {fileID: 5777290744116738584}
   - component: {fileID: 5777290744116738589}
   m_Layer: 0
   m_Name: EnemyMage
@@ -79,7 +79,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 6
-  m_Sprite: {fileID: -1955294341, guid: 9bd7f9751db7fb84d8f5217bc7447c17, type: 3}
+  m_Sprite: {fileID: 1464344246, guid: 52524f2c7b2fe8040a632172a7b55134, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -87,7 +87,7 @@ SpriteRenderer:
   m_Size: {x: 1, y: 1}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 0
+  m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!95 &548739193307340341
@@ -100,7 +100,7 @@ Animator:
   m_GameObject: {fileID: 5777290744116738578}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 05676a44fffa24643a7401b16b5d49fc, type: 2}
+  m_Controller: {fileID: 9100000, guid: af819bd7d47fad34db4171f3e999d832, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -110,28 +110,7 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
---- !u!50 &5777290744116738588
-Rigidbody2D:
-  serializedVersion: 4
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5777290744116738578}
-  m_BodyType: 0
-  m_Simulated: 1
-  m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDrag: 0
-  m_AngularDrag: 0.05
-  m_GravityScale: 0
-  m_Material: {fileID: 0}
-  m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 0
-  m_Constraints: 7
---- !u!60 &5777290744116738584
+--- !u!60 &472466870670861806
 PolygonCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -156,13 +135,34 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: -0.09375, y: 0.4375}
-      - {x: -0.28125, y: 0.1875}
-      - {x: -0.28125, y: -0.4375}
-      - {x: 0.25, y: -0.4375}
-      - {x: 0.25, y: 0.125}
-      - {x: 0.09375, y: 0.34375}
-      - {x: 0, y: 0.46875}
+    - - {x: -0.03125, y: 0.5}
+      - {x: -0.3125, y: 0.09375}
+      - {x: -0.3125, y: -0.46875}
+      - {x: -0.25, y: -0.5}
+      - {x: 0.34375, y: -0.5}
+      - {x: 0.34375, y: 0.03125}
+      - {x: 0.1875, y: 0.5}
+--- !u!50 &5777290744116738588
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5777290744116738578}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 7
 --- !u!114 &5777290744116738589
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -188,7 +188,7 @@ MonoBehaviour:
   attackSpeed: 4
   range: 3
   damageTaken: 0
-  maxVelocity: {x: 1, y: 1, z: 0}
+  maxVelocity: {x: 0, y: 0.5, z: 0}
   acceleration: 1
   deceleration: 20
   targets: []
@@ -274,7 +274,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 6
-  m_Sprite: {fileID: 404955381, guid: 9d1427fcda258884d950f48540aed06e, type: 3}
+  m_Sprite: {fileID: 21300000, guid: ecd31d7dd3812d8488b1e2ea9f6fe9fd, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -282,7 +282,7 @@ SpriteRenderer:
   m_Size: {x: 1, y: 1}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 0
+  m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!95 &8956311614840613023
@@ -295,7 +295,7 @@ Animator:
   m_GameObject: {fileID: 5777290744413324270}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 01429ae48aa6afe47973f0706d45a9c0, type: 2}
+  m_Controller: {fileID: 9100000, guid: 8d1c34fcdac4eed49b3385c1aa2e380b, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -341,7 +341,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 0.15
+  m_Radius: 0.23
 --- !u!114 &5777290744413324271
 MonoBehaviour:
   m_ObjectHideFlags: 0

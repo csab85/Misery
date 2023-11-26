@@ -11,8 +11,8 @@ GameObject:
   - component: {fileID: 5777290744116738591}
   - component: {fileID: 5777290744116738590}
   - component: {fileID: -3250806734076279055}
+  - component: {fileID: 396117759746450679}
   - component: {fileID: 5777290744116738588}
-  - component: {fileID: 5777290744116738584}
   - component: {fileID: 5777290744116738589}
   m_Layer: 0
   m_Name: EnemyTank
@@ -79,7 +79,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 6
-  m_Sprite: {fileID: -1955294341, guid: 6c3bb502584a7ff4f8e38a7c93560d20, type: 3}
+  m_Sprite: {fileID: -1823177120, guid: 070f8aed18c50334486719be50c8c62e, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -100,7 +100,7 @@ Animator:
   m_GameObject: {fileID: 5777290744116738578}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 145972b31e542fc4a90bc49c04edc31a, type: 2}
+  m_Controller: {fileID: 9100000, guid: 6c1077b531c3d2b46b518d76d7f470f6, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -110,28 +110,7 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
---- !u!50 &5777290744116738588
-Rigidbody2D:
-  serializedVersion: 4
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5777290744116738578}
-  m_BodyType: 0
-  m_Simulated: 1
-  m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDrag: 0
-  m_AngularDrag: 0.05
-  m_GravityScale: 0
-  m_Material: {fileID: 0}
-  m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 0
-  m_Constraints: 7
---- !u!60 &5777290744116738584
+--- !u!60 &396117759746450679
 PolygonCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -156,13 +135,53 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: -0.09375, y: 0.4375}
-      - {x: -0.28125, y: 0.1875}
-      - {x: -0.28125, y: -0.4375}
-      - {x: 0.25, y: -0.4375}
-      - {x: 0.25, y: 0.125}
-      - {x: 0.09375, y: 0.34375}
-      - {x: 0, y: 0.46875}
+    - - {x: -0.25, y: -0.03125}
+      - {x: -0.375, y: -0.03125}
+      - {x: -0.421875, y: -0.046875}
+      - {x: -0.421875, y: -0.25}
+      - {x: -0.328125, y: -0.28125}
+      - {x: -0.265625, y: -0.28125}
+      - {x: -0.203125, y: -0.234375}
+      - {x: -0.203125, y: -0.078125}
+    - - {x: 0.234375, y: -0.03125}
+      - {x: 0.203125, y: -0.0625}
+      - {x: 0.203125, y: -0.203125}
+      - {x: 0.21875, y: -0.265625}
+      - {x: 0.25, y: -0.28125}
+      - {x: 0.328125, y: -0.28125}
+      - {x: 0.40625, y: -0.25}
+      - {x: 0.421875, y: -0.21875}
+      - {x: 0.421875, y: -0.046875}
+      - {x: 0.390625, y: -0.03125}
+    - - {x: -0.09375, y: 0.40625}
+      - {x: -0.15625, y: 0.375}
+      - {x: -0.21875, y: 0.203125}
+      - {x: -0.21875, y: -0.21875}
+      - {x: -0.203125, y: -0.25}
+      - {x: 0.21875, y: -0.25}
+      - {x: 0.21875, y: 0.203125}
+      - {x: 0.109375, y: 0.40625}
+--- !u!50 &5777290744116738588
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5777290744116738578}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 7
 --- !u!114 &5777290744116738589
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -274,7 +293,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 5
-  m_Sprite: {fileID: 404955381, guid: 32bd3a962cdcf7544a7d47c83d0efba0, type: 3}
+  m_Sprite: {fileID: -1613501782, guid: 545226043d4db0c438e9c76c5cb74352, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -295,7 +314,7 @@ Animator:
   m_GameObject: {fileID: 5777290744413324270}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 02045a1d760a143418541def450d7100, type: 2}
+  m_Controller: {fileID: 9100000, guid: fe913a2e34644b7439876ed38fb6eaf7, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -341,7 +360,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 0.35
+  m_Radius: 0.3
 --- !u!114 &5777290744413324271
 MonoBehaviour:
   m_ObjectHideFlags: 0

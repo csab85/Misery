@@ -36,7 +36,21 @@ public class Spawner : MonoBehaviour
     IEnumerator SpawnEnemy()
     {
         nexus.GetComponent<Animator>().SetBool("spawning", true);
-        egomapScript.activeUnits.Add(Instantiate(enemy, transform.position, Quaternion.identity));
+
+        if (enemy.GetComponent<UnitBehaviour>().type == "Enemy Shooter")
+        {
+            egomapScript.activeUnits.Add(Instantiate(enemy, transform.position + new Vector3(0.3f, 0, 0), Quaternion.identity));
+            egomapScript.activeUnits.Add(Instantiate(enemy, transform.position + new Vector3(-0.3f, 0, 0), Quaternion.identity));
+            egomapScript.activeUnits.Add(Instantiate(enemy, transform.position + new Vector3(0, 0.3f, 0), Quaternion.identity));
+            egomapScript.activeUnits.Add(Instantiate(enemy, transform.position + new Vector3(0, -0.3f, 0), Quaternion.identity));
+        }
+
+        else
+        {
+            egomapScript.activeUnits.Add(Instantiate(enemy, transform.position, Quaternion.identity));
+        }
+        
+
         onCoooldown = true;
         yield return new WaitForSecondsRealtime(1);
         nexus.GetComponent<Animator>().SetBool("spawning", false);

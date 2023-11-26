@@ -8,7 +8,7 @@ public class Soul : MonoBehaviour
     //========================
     #region
 
-    
+    Misery miseryScript;
 
     #endregion
     //========================
@@ -152,6 +152,8 @@ public class Soul : MonoBehaviour
     //Start
     void Start()
     {
+        miseryScript = GameObject.Find("Misery").GetComponent<Misery>();
+
         ChangeFace(mood);
         ChooseColor();
 
@@ -217,6 +219,11 @@ public class Soul : MonoBehaviour
                 break;
 
                 #endregion
+        }
+
+        if (miseryScript.invading)
+        {
+            speed = 2;
         }
     }
 

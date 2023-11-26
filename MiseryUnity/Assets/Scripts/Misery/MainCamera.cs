@@ -125,7 +125,7 @@ public class MainCamera : MonoBehaviour
     // Update
     void Update()
     {
-        if (following)
+        if (following && !miseryScript.talking && !miseryScript.invading)
         {
             CameraFollow();
         }

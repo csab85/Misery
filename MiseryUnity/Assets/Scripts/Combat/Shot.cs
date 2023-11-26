@@ -72,6 +72,8 @@ public class Shot : MonoBehaviour
             affectedTargets.Add("Building");
         }
 
+        affectedTargets.Add("Damaged");
+
         //sync radius
         selfRadius = GetComponent<CircleCollider2D>().radius;
     }
@@ -114,8 +116,8 @@ public class Shot : MonoBehaviour
             case "exploding":
                 #region
 
-                transform.localScale = new Vector3(2, 2, 1);
-                GetComponent<CircleCollider2D>().radius = unitScript.aoe / 2;
+                transform.localScale = new Vector3(1, 1, 1);
+                GetComponent<CircleCollider2D>().radius = unitScript.aoe;
                 GetComponent<Rigidbody2D>().velocity = Vector2.zero;
                 GetComponent<Animator>().SetBool("exploding", true);
                 print("explode");

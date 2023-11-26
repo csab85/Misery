@@ -21,6 +21,7 @@ public class DialogueGhost : MonoBehaviour
     private void Start()
     {
         dcGhost = FindObjectOfType<DialogueControlGhost>(); // Alteração: Usar DialogueControlGhost em vez de DialogueControl
+        miseryScript = GameObject.Find("Misery").GetComponent<Misery>();
     }
 
     private void FixedUpdate()
@@ -32,8 +33,9 @@ public class DialogueGhost : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Space) && onRadius && dcGhost.dialogueFinished)
         {
+            GetComponent<Soul>().speed = 0;
             isDialogueActive = true;
-            miseryScript.occupied = true;
+            miseryScript.talking = true;
             miseryScript.battleLvl = battleLvl;
             miseryScript.enemyColor = GetComponent<SpriteRenderer>().color;
             dcGhost.Speech(profile, speechTxt, actorName); // Alteração: Chamar dcGhost.Speech em vez de dc.Speech
@@ -61,7 +63,7 @@ public class DialogueGhost : MonoBehaviour
 
     public void EndDialogue()
     {
-        miseryScript.occupied = false;
+        miseryScript.talking = false;
         isDialogueActive = false;
     }
 }

@@ -8,6 +8,7 @@ public class UnitBehaviour : MonoBehaviour
     //========================
     #region
 
+    Misery miseryScript;
     public EgoMap egoMap;
     public GameObject shot;
     public Shot shotScript;
@@ -215,6 +216,8 @@ public class UnitBehaviour : MonoBehaviour
     //Start
     void Start()
     {
+        miseryScript = GameObject.Find("Misery").GetComponent<Misery>();
+
         //setup if it is enemy or ally
         if (tag == "Ally")
         {
@@ -224,6 +227,8 @@ public class UnitBehaviour : MonoBehaviour
         if (tag == "Enemy")
         {
             movementDirection = down;
+
+            GetComponent<SpriteRenderer>().color = miseryScript.enemyColor;
         }
 
         //setup targets

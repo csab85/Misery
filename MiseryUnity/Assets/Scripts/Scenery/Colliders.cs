@@ -15,7 +15,7 @@ public class Colliders : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (miseryScript.occupied)
+        if (miseryScript.invading)
         {
             GetComponent<BoxCollider2D>().enabled = false;
         }

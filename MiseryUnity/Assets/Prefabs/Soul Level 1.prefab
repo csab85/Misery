@@ -209,7 +209,7 @@ GameObject:
   - component: {fileID: 1104839011961411328}
   - component: {fileID: 5176253254469609167}
   m_Layer: 0
-  m_Name: Soul
+  m_Name: Soul Level 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -323,7 +323,7 @@ MonoBehaviour:
   speed: 2
   maxVelocity: {x: 5, y: 0, z: 0}
   acceleration: 1
-  walkRange: 10
+  walkRange: 50
   movement: 0
   states:
   - visilating
@@ -350,14 +350,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7144d2624a462944281a40639c2d49b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  profile: {fileID: 21300000, guid: ffe3c68010cce0a409fcf3a63d4b7476, type: 3}
+  profile: {fileID: 0}
   speechTxt:
-  - Interagir?
+  - Invadir alma?
   actorName: Alma
   playerLayer:
     serializedVersion: 2
     m_Bits: 256
   radius: 2
+  miseryScript: {fileID: 0}
+  battleLvl: 1
 --- !u!1 &6403014385334010046
 GameObject:
   m_ObjectHideFlags: 0

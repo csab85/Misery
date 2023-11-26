@@ -68,7 +68,8 @@ public class Peace: MonoBehaviour
         {
             case 0:
 
-                speech = new string[] { "Olá pequenino!", "ta bao?" };
+                speech = new string[] { "Ah não, o cara novo...", "Quer dizer, seja bem vindo!", "Sempre sobra pra mim ensinar esses novatos inúteis, então vamos lá.", "..........."  };
+
                 dialogue.speechTxt = speech;
                 nextProgressionValue = 0.1f;
 
@@ -76,24 +77,85 @@ public class Peace: MonoBehaviour
 
             case 0.1f:
 
-                speech = new string[] { "oi" };
+                speech = new string[] { "................" };
+
                 dialogue.speechTxt = speech;
                 nextProgressionValue = 0.2f;
 
-                SwitchActor("Misery", portraits[0], 1);
-
-                
-                
+                SwitchActor("Miséria", portraits[0], 1);
 
                 break;
 
             case 0.2f:
 
-                speech = new string[] { "Vamos andando" };
+                speech = new string[] { "ABRE A CARTA QUE VOCÊ RECEBEU!!!" };
+
                 dialogue.speechTxt = speech;
-                nextProgressionValue = 1;
+                nextProgressionValue = 0.3f;
+
+                SwitchActor("Paz", portraits[2], 1.7f);
+
+                break;
+
+            case 0.3f:
+
+                speech = new string[] { "Isso.", "Aí dentro tem um deck de cartas.", "Você vai usar elas pra trabalhar pro Tempo.", "Se você sair daqui, vai ver que tem 3 ruas.", "E nessas ruas tem almas.", "Seu trabalho é invadir essas almas.", "Inclusive, estamos sem Tempo pra conversa.", "Vai invadir 5 almas, depois você volta.", "Só lembrando que as almas dessa rua aqui são mais fortes.", "Então elas valem por 3.", "As da rua do meio valem 2 almas.", "E as da rua de baixo valem por 1 mesmo.", "Se quiser se acostumar primeiro, sugiro ir na rua la em baixo.", "Tá esperando o que?" };
+
+                dialogue.speechTxt = speech;
+                nextProgressionValue = 0.4f;
 
                 SwitchActor("Paz", portraits[1], 1.7f);
+
+                break;
+
+            case 0.4f:
+
+                speech = new string[] { "VAI TRABALHAR!!!" };
+
+                dialogue.speechTxt = speech;
+                nextProgressionValue = 0.5f;
+
+                SwitchActor("Paz", portraits[2], 1.7f);
+
+                break;
+
+            case 0.5f:
+
+                speech = new string[] { "...." };
+
+                dialogue.speechTxt = speech;
+                nextProgressionValue = 0.6f;
+
+                SwitchActor("Paz", portraits[1], 1.7f);
+
+                break;
+
+            case 0.6f:
+
+                if (miseryScript.defeatedGhosts < 5)
+                {
+                    speech = new string[] { "Para de enrolar." };
+
+                    dialogue.speechTxt = speech;
+                    nextProgressionValue = 0.6f;
+                }
+
+                else
+                {
+                    speech = new string[] { "Ótimo!", "Agora sugiro que você vá pro bar.", "Os imbecis vão querer te conhecer." };
+
+                    dialogue.speechTxt = speech;
+                    nextProgressionValue = 1;
+                }
+
+                break;
+
+            case 1:
+
+                    speech = new string[] { "Meu contrato não me obriga a falar mais do que eu já falei com você." };
+
+                    dialogue.speechTxt = speech;
+                    nextProgressionValue = 1;
 
                 break;
         }

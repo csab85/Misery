@@ -54,6 +54,7 @@ public class EgoMap : MonoBehaviour
     [SerializeField] GameObject[] spawnersLvl1;
     [SerializeField] GameObject[] spawnersLvl2;
     [SerializeField] GameObject[] spawnersLvl3;
+    [SerializeField] GameObject[] bossObjects;
 
     #endregion
     //========================
@@ -98,7 +99,10 @@ public class EgoMap : MonoBehaviour
 
         if (miseryScript.battleLvl == 4)
         {
-            //ativar chefão?
+            foreach (GameObject @object in bossObjects)
+            {
+                @object.SetActive(true);
+            }
         }
 
         obstacled = true;

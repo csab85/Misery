@@ -15,8 +15,8 @@ public class DefeatCollider : MonoBehaviour
             Destroy(unit);
         }
 
-        miseryScript.defeatedGhosts -= 1;
-        miseryScript.occupied = false;
+        miseryScript.invading = false;
+        miseryScript.talking = false;
         Destroy(GameObject.Find("Base Invasion(Clone)"));
     }
 
