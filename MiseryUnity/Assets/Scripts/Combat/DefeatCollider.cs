@@ -16,7 +16,8 @@ public class DefeatCollider : MonoBehaviour
         }
 
         miseryScript.defeatedGhosts -= 1;
-        SceneManager.UnloadSceneAsync("BaseInvasion");
+        miseryScript.occupied = false;
+        Destroy(GameObject.Find("Base Invasion(Clone)"));
     }
 
     // Start is called before the first frame update

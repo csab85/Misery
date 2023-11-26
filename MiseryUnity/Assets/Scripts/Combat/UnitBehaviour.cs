@@ -12,7 +12,7 @@ public class UnitBehaviour : MonoBehaviour
     public GameObject shot;
     public Shot shotScript;
     public UnitBehaviour self;
-    GameObject enemy;
+    public GameObject enemy;
 
     #endregion
     //========================

@@ -93,6 +93,10 @@ public class Shot : MonoBehaviour
             case "moving":
                 #region
 
+                //point towards enemy
+                transform.LookAt(unitScript.enemy.transform, Vector3.forward);
+
+                //distance
                 float distance = Vector3.Distance(transform.position, transform.parent.transform.position);
 
                 if (distance > 5)

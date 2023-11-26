@@ -35,11 +35,12 @@ public class Spawner : MonoBehaviour
 
     IEnumerator SpawnEnemy()
     {
-        //nexus.GetComponent<Animator>().SetBool("spawning", true);
-        //nexus.GetComponent<Animator>().SetBool("spawning", false);
+        nexus.GetComponent<Animator>().SetBool("spawning", true);
         egomapScript.activeUnits.Add(Instantiate(enemy, transform.position, Quaternion.identity));
         onCoooldown = true;
-        yield return new WaitForSeconds(cooldown);
+        yield return new WaitForSecondsRealtime(1);
+        nexus.GetComponent<Animator>().SetBool("spawning", false);
+        yield return new WaitForSeconds(cooldown - 1);
         onCoooldown = false;
     }
 

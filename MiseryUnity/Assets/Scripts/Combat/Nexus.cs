@@ -67,7 +67,8 @@ public class Nexus : MonoBehaviour
         }
 
         miseryScript.defeatedGhosts += 1;
-        SceneManager.UnloadSceneAsync("BaseInvasion");
+        miseryScript.occupied = false;
+        Destroy(GameObject.Find("Base Invasion(Clone)"));
     }
 
     #endregion
