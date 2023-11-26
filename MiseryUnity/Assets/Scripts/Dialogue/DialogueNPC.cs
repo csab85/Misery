@@ -5,26 +5,28 @@ using UnityEngine;
 public class DialogueNPC : MonoBehaviour
 {
     public Misery miseryScript;
-    public Sprite profile;
+    public GameObject profile;
+    public Sprite profileSprite;
+    public float profileSize;
     public string[] speechTxt;
     public string actorName;
     public LayerMask playerLayer;
     public float radius;
 
     private DialogueControlNPC dcNPC; // Alteração: Usar DialogueControlGhost em vez de DialogueControl
-    private bool onRadius;
+    public bool onRadius; //private
     private bool isDialogueActive = false;
 
-    bool talking = false;
+    public bool talking = false;
     public float nextProgressionValue;
 
-    public void Talk()
+    public void Talk(float funcProfileSize)
     {
         if (!talking && dcNPC.dialogueFinished)
         {
             talking = true;
             miseryScript.occupied = true;
-            dcNPC.Speech(profile, speechTxt, actorName); // Alteração: Chamar dcNPC.Speech em vez de dc.Speech
+            dcNPC.Speech(profileSprite, speechTxt, actorName, funcProfileSize); // Alteração: Chamar dcNPC.Speech em vez de dc.Speech
         }
     }
 
@@ -40,19 +42,21 @@ public class DialogueNPC : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space) && onRadius && !talking && dcNPC.dialogueFinished)
-        {
-            talking = true;
-            miseryScript.occupied = true;
-            dcNPC.Speech(profile, speechTxt, actorName); // Alteração: Chamar dcNPC.Speech em vez de dc.Speech
-        }
-
-        if (Input.GetKeyDown(KeyCode.Space) && onRadius && talking && !dcNPC.dialogueFinished)
+        if (Input.GetKeyDown(KeyCode.Space) && talking && !dcNPC.dialogueFinished)
         {
             dcNPC.NextSentence();
+            print("oie");
         }
 
-        if (Input.GetKeyDown(KeyCode.Space) && onRadius && talking && dcNPC.dialogueFinished)
+        if (Input.GetKeyDown(KeyCode.Space) && onRadius && !talking && dcNPC.dialogueFinished)
+        {
+            print("comecou");
+            miseryScript.occupied = true;
+            talking = true;
+            dcNPC.Speech(profileSprite, speechTxt, actorName, profileSize); // Alteração: Chamar dcNPC.Speech em vez de dc.Speech
+        }
+
+        if (Input.GetKeyDown(KeyCode.Space) && talking && dcNPC.dialogueFinished)
         {
             EndDialogue();
             talking = false;

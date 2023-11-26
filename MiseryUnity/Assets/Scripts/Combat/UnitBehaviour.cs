@@ -197,7 +197,7 @@ public class UnitBehaviour : MonoBehaviour
         damageTaken = 0;
 
         GetComponent<SpriteRenderer>().color = new Color(200, 0, 0);
-        yield return new WaitForSecondsRealtime(0.3f);
+        yield return new WaitForSecondsRealtime(0.1f);
         GetComponent<SpriteRenderer>().color = new Color(255, 255, 255);
 
         tag = selfTag;

@@ -241,13 +241,14 @@ MonoBehaviour:
   shot: {fileID: 6367889166942088148}
   shotScript: {fileID: 6367889166942088149}
   self: {fileID: 6367889166788088359}
+  enemy: {fileID: 0}
   type: Mago
   health: 4
   cost: 1
-  damage: 1
+  damage: 2
   aoe: 1
-  attackSpeed: 5
-  range: 2
+  attackSpeed: 4
+  range: 3
   damageTaken: 0
   maxVelocity: {x: 1, y: 1, z: 0}
   acceleration: 1

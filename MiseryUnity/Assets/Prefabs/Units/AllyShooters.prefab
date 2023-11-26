@@ -181,13 +181,14 @@ MonoBehaviour:
   shot: {fileID: 3402124315054700194}
   shotScript: {fileID: 3402124315054700195}
   self: {fileID: 3402124315034881873}
+  enemy: {fileID: 0}
   type: Atiradores
   health: 2
   cost: 2
-  damage: 2
+  damage: 1
   aoe: 0
-  attackSpeed: 7
-  range: 3
+  attackSpeed: 5
+  range: 2
   damageTaken: 0
   maxVelocity: {x: 1, y: 1, z: 0}
   acceleration: 1

@@ -9,21 +9,23 @@ public class DialogueControlNPC : MonoBehaviour
 {
     [Header("Components")]
     public GameObject DialogueObject;
-    public Image profile;
+    public GameObject profile;
+    public Image profileImage;
     public TextMeshProUGUI speechText;
     public TextMeshProUGUI actorNameText;
 
     [Header("Settings")]
     public float typingSpeed;
-    private string[] sentences;
-    private int index;
+    public string[] sentences; //privado
+    private int index; //privado
 
     public bool dialogueFinished = true;
 
-    public void Speech(Sprite p, string[] txt, string actorName)
+    public void Speech(Sprite p, string[] txt, string actorName, float profileSize)
     {
         DialogueObject.SetActive(true);
-        profile.sprite = p;
+        profileImage.sprite = p;
+        profile.transform.localScale = new Vector3(profileSize, profileSize, profileSize);
         sentences = txt;
         actorNameText.text = actorName;
         dialogueFinished = false;
@@ -41,17 +43,21 @@ public class DialogueControlNPC : MonoBehaviour
 
     public void NextSentence()
     {
+        print(speechText.text);
+        print(sentences[index]);
         if (speechText.text == sentences[index])
         {
             // ainda tem texto
             if (index < sentences.Length - 1)
             {
+                print("tem textp");
                 index++; //pulo para próxima fase
                 speechText.text = ""; //limpo o texto
                 StartCoroutine(TypeSentence()); //chama a próxima frase
             }
             else //lido quando acaba os textos
             {
+                print("n tem texto");
                 speechText.text = ""; //limpeza do texto
                 index = 0; // valor do index 0 para poder voltar ao início do painel, ou poder falar com ele denovo
                 DialogueObject.SetActive(false);
