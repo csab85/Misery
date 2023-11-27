@@ -276,7 +276,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 4
+  m_SortingOrder: 2
   m_Sprite: {fileID: -1245686797, guid: ef4201a7da8d267449c9fee3e51f601f, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -359,7 +359,7 @@ MonoBehaviour:
     m_Bits: 256
   radius: 2
   miseryScript: {fileID: 0}
-  battleLvl: 2
+  battleLvl: 4
 --- !u!1 &6403014385334010046
 GameObject:
   m_ObjectHideFlags: 0
