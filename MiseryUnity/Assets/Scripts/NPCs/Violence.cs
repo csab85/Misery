@@ -179,7 +179,7 @@ public class Violence : MonoBehaviour
 
                 case 1.91f:
 
-                    speech = new string[] { "VOCÊ ESTÁ SENDO IRÔNICO COMIGO, SEU PINGO DE HUMANO CINZA E IRRITANTE?" };
+                    speech = new string[] { "VOCÊ ESTÁ SENDO IRÔNICO COMIGO, SEU PINGO CINZA E IRRITANTE?" };
 
                     dialogue.speechTxt = speech;
                     nextProgressionValue = 1.92f;

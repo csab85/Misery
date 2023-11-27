@@ -26,6 +26,7 @@ public class Rooftop : MonoBehaviour
     //Functions
     bool fade = false;
     public float alpha;
+    Color selfColor;
 
     #endregion
     //========================
@@ -45,7 +46,7 @@ public class Rooftop : MonoBehaviour
 
         alpha -= fadingRate * Time.deltaTime;
 
-        spriteRenderer.color = new Color(1, 1, 1, alpha);
+        spriteRenderer.color = new Color(selfColor.r, selfColor.g, selfColor.b, alpha);
 
         yield return new WaitForSecondsRealtime(0.05f);
     }
@@ -62,6 +63,7 @@ public class Rooftop : MonoBehaviour
     void Start()
     {
         Mathf.Clamp(alpha, 0, 1);
+        selfColor = GetComponent<SpriteRenderer>().color;
     }
 
     //Update

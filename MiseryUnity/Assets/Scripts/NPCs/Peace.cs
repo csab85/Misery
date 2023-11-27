@@ -100,7 +100,7 @@ public class Peace: MonoBehaviour
 
                 case 0.3f:
 
-                    speech = new string[] { "Isso.", "Aí dentro tem um deck de cartas.", "Você vai usar elas pra trabalhar pro Tempo.", "Se você sair daqui, vai ver que tem 3 ruas.", "E nessas ruas tem almas.", "Seu trabalho é invadir essas almas.", "Inclusive, estamos sem Tempo pra conversa.", "Vai invadir 5 almas, depois você volta.", "Só lembrando que as almas dessa rua aqui são mais fortes.", "Então elas valem por 3.", "As da rua do meio valem 2 almas.", "E as da rua de baixo valem por 1 mesmo.", "Se quiser se acostumar primeiro, sugiro ir na rua la em baixo.", "Tá esperando o que?" };
+                    speech = new string[] { "Isso.", "Aí dentro tem um deck de cartas.", "Você vai usar elas pra trabalhar pro Tempo.", "Se você sair daqui, vai ver que tem 3 ruas.", "E nessas ruas têm almas.", "Seu trabalho é invadir essas almas.", "Inclusive, estamos sem Tempo pra conversa.", "Vai invadir 5 almas, depois você volta.", "Só lembrando que as almas dessa rua aqui são mais fortes.", "Então elas valem por 3.", "As da rua do meio valem 2 almas.", "E as da rua de baixo valem por 1 mesmo.", "Se quiser se acostumar primeiro, sugiro ir na rua la em baixo.", "Tá esperando o que?" };
 
                     dialogue.speechTxt = speech;
                     nextProgressionValue = 0.4f;
