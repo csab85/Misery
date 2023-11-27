@@ -20,9 +20,9 @@ public class SoulSpawner: MonoBehaviour
     #region
 
     [SerializeField]
-    int minY;
-    [SerializeField]
-    int maxY;
+    float movement;
+
+    float counter;
 
     [SerializeField]
     int cooldownTime;
@@ -68,12 +68,14 @@ public class SoulSpawner: MonoBehaviour
     void Update()
     {
         //movement up and down
-        if (transform.position.y < minY | transform.position.y > maxY)
+        if (counter >= movement)
         {
             direction *= -1;
+            counter = 0;
         }
 
         transform.position += new Vector3(0, direction * Time.deltaTime, 0);
+        counter += Mathf.Abs(direction * Time.deltaTime);
 
         //spawn souls
         if (!cooldown)

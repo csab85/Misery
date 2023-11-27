@@ -10,6 +10,7 @@ public class Rooftop : MonoBehaviour
 
     //Scripts
     [SerializeField] MainCamera cameraScript;
+    [SerializeField] SpriteRenderer spriteRenderer;
 
     #endregion
     //========================
@@ -24,6 +25,7 @@ public class Rooftop : MonoBehaviour
 
     //Functions
     bool fade = false;
+    public float alpha;
 
     #endregion
     //========================
@@ -37,13 +39,15 @@ public class Rooftop : MonoBehaviour
     /// Fades the rooftop (if positive) or unfades it (if it is negative)
     /// </summary>
     /// <param name="fadingRate">How much alpha the rooftop loses/gains per loop</param>
-    void Fade(float fadingRate)
+    IEnumerator Fade(float fadingRate)
     {
-        float alpha = GetComponent<SpriteRenderer>().color.a;
+        alpha = spriteRenderer.color.a;
 
         alpha -= fadingRate * Time.deltaTime;
 
-        GetComponent<SpriteRenderer>().color = new Color(255, 255, 255, alpha);
+        spriteRenderer.color = new Color(1, 1, 1, alpha);
+
+        yield return new WaitForSecondsRealtime(0.05f);
     }
 
     #endregion
@@ -57,7 +61,7 @@ public class Rooftop : MonoBehaviour
     //Start
     void Start()
     {
-
+        Mathf.Clamp(alpha, 0, 1);
     }
 
     //Update
@@ -65,12 +69,18 @@ public class Rooftop : MonoBehaviour
     {
         if (fade)
         {
-            Fade(1);
+            if (alpha >= 0)
+            {
+                StartCoroutine(Fade(1));
+            }
         }
 
         if (!fade)
         {
-            Fade(-1);
+            if (alpha <= 1)
+            {
+                StartCoroutine(Fade(-1));
+            }
         }
     }
 

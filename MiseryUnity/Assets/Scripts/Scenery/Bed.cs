@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Death : MonoBehaviour
+public class Bed : MonoBehaviour
 {
     //IMPORTS
     //========================
@@ -69,7 +69,7 @@ public class Death : MonoBehaviour
             {
                 case 1:
 
-                    speech = new string[] { "GRRRRRRRR!" };
+                    speech = new string[] { "Acho que vou dor..." };
 
                     dialogue.speechTxt = speech;
                     nextProgressionValue = 1.1f;
@@ -78,51 +78,29 @@ public class Death : MonoBehaviour
 
                 case 1.1f:
 
-                    speech = new string[] { "..." };
+                    speech = new string[] { "Venha pro meu escritório. Agora." };
 
                     dialogue.speechTxt = speech;
                     nextProgressionValue = 1.2f;
 
-                    SwitchActor("Miséria", portraits[0]);
+                    SwitchActor("Tempo", portraits[1], 1.6f);
 
                     break;
 
                 case 1.2f:
 
-                    speech = new string[] { "Hnghh." };
+                    speech = new string[] { "..." };
 
                     dialogue.speechTxt = speech;
-                    nextProgressionValue = 1.3f;
-
-                    SwitchActor("Morte", portraits[1]);
-
-                    break;
-
-                case 1.3f:
-
-                    speech = new string[] { "Hm." };
-
-                    dialogue.speechTxt = speech;
-                    nextProgressionValue = 1.4f;
+                    nextProgressionValue = 2;
 
                     SwitchActor("Miséria", portraits[0]);
 
                     break;
 
-                case 1.4f:
-
-                    speech = new string[] { "Raagh." };
-
-                    dialogue.speechTxt = speech;
-                    nextProgressionValue = 1;
-
-                    SwitchActor("Morte", portraits[1]);
-
-                    break;
-
                 default:
 
-                    speech = new string[] { "..." };
+                    speech = new string[] { "Minha cama." };
 
                     dialogue.speechTxt = speech;
                     nextProgressionValue = miseryScript.progression;

@@ -18,6 +18,11 @@ public class DefeatCollider : MonoBehaviour
         miseryScript.invading = false;
         miseryScript.talking = false;
         Destroy(GameObject.Find("Base Invasion(Clone)"));
+
+        if (miseryScript.battleLvl == 4)
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        }
     }
 
     // Start is called before the first frame update

@@ -32,6 +32,8 @@ public class Nexus : MonoBehaviour
     public float damageTaken = 0;
     string selfTag;
 
+    [SerializeField] bool theTime;
+
     #endregion
     //========================
 
@@ -72,6 +74,20 @@ public class Nexus : MonoBehaviour
         Destroy(GameObject.Find("Base Invasion(Clone)"));
     }
 
+    void WinBossfight()
+    {
+        foreach (GameObject unit in egoMapScript.activeUnits)
+        {
+            Destroy(unit);
+        }
+
+        miseryScript.invading = false;
+        miseryScript.talking = false;
+        Destroy(GameObject.Find("Base Invasion(Clone)"));
+
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
+
     #endregion
     //========================
 
@@ -87,6 +103,11 @@ public class Nexus : MonoBehaviour
         maxHealth = health;
 
         miseryScript = GameObject.Find("Misery").GetComponent<Misery>();
+
+        if (theTime)
+        {
+            GameObject.Find("Nexus").SetActive(false);
+        }
     }
 
     //Update

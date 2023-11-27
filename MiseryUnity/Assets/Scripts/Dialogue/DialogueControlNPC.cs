@@ -43,21 +43,17 @@ public class DialogueControlNPC : MonoBehaviour
 
     public void NextSentence()
     {
-        print(speechText.text);
-        print(sentences[index]);
         if (speechText.text == sentences[index])
         {
             // ainda tem texto
             if (index < sentences.Length - 1)
             {
-                print("tem textp");
                 index++; //pulo para próxima fase
                 speechText.text = ""; //limpo o texto
                 StartCoroutine(TypeSentence()); //chama a próxima frase
             }
             else //lido quando acaba os textos
             {
-                print("n tem texto");
                 speechText.text = ""; //limpeza do texto
                 index = 0; // valor do index 0 para poder voltar ao início do painel, ou poder falar com ele denovo
                 DialogueObject.SetActive(false);

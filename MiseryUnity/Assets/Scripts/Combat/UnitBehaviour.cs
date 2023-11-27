@@ -76,6 +76,7 @@ public class UnitBehaviour : MonoBehaviour
     int left = -2;
 
     string selfTag;
+    Color selfColor;
 
     #endregion
     //========================
@@ -199,7 +200,7 @@ public class UnitBehaviour : MonoBehaviour
 
         GetComponent<SpriteRenderer>().color = new Color(200, 0, 0);
         yield return new WaitForSecondsRealtime(0.1f);
-        GetComponent<SpriteRenderer>().color = new Color(255, 255, 255);
+        GetComponent<SpriteRenderer>().color = selfColor;
 
         tag = selfTag;
         damaging = false;
@@ -222,13 +223,18 @@ public class UnitBehaviour : MonoBehaviour
         if (tag == "Ally")
         {
             movementDirection = up;
+            selfColor = new Color(1, 1, 1, 1);
         }
 
         if (tag == "Enemy")
         {
             movementDirection = down;
 
-            GetComponent<SpriteRenderer>().color = miseryScript.enemyColor;
+            if (miseryScript.battleLvl < 4)
+            {
+                selfColor = miseryScript.enemyColor;
+                GetComponent<SpriteRenderer>().color = new Color(selfColor.r, selfColor.g, selfColor.b, 1);
+            }
         }
 
         //setup targets

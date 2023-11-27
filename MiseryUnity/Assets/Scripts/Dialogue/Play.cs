@@ -16,6 +16,8 @@ public class Play : MonoBehaviour
     {
         dcGhost.NextSentence();
 
+        GameObject.Find("Misery").GetComponent<Misery>().invading = true;
+
         mainCamera.GetComponent<MainCamera>().Fade(0.5f);
 
         Instantiate(baseInvasion, mainCamera.transform);

@@ -5,7 +5,6 @@ using UnityEngine;
 public class DialogueNPC : MonoBehaviour
 {
     public Misery miseryScript;
-    public GameObject profile;
     public Sprite profileSprite;
     public float profileSize;
     public string[] speechTxt;
@@ -26,6 +25,7 @@ public class DialogueNPC : MonoBehaviour
         {
             talking = true;
             miseryScript.talking = true;
+            profileSize = funcProfileSize;
             dcNPC.Speech(profileSprite, speechTxt, actorName, funcProfileSize); // Alteração: Chamar dcNPC.Speech em vez de dc.Speech
         }
     }
@@ -45,15 +45,14 @@ public class DialogueNPC : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space) && talking && !dcNPC.dialogueFinished)
         {
             dcNPC.NextSentence();
-            print("oie");
         }
 
+        //start
         if (Input.GetKeyDown(KeyCode.Space) && onRadius && !talking && dcNPC.dialogueFinished)
         {
-            print("comecou");
             miseryScript.talking = true;
             talking = true;
-            dcNPC.Speech(profileSprite, speechTxt, actorName, profileSize); // Alteração: Chamar dcNPC.Speech em vez de dc.Speech
+            dcNPC.Speech(profileSprite, speechTxt, actorName, profileSize);
         }
 
         if (Input.GetKeyDown(KeyCode.Space) && talking && dcNPC.dialogueFinished)

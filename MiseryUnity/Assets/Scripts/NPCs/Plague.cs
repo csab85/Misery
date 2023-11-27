@@ -10,6 +10,7 @@ public class Plague : MonoBehaviour
 
     public Misery miseryScript;
     public DialogueNPC dialogue;
+    [SerializeField] Sprite[] portraits;
 
     #endregion
     //========================
@@ -30,7 +31,14 @@ public class Plague : MonoBehaviour
     //========================
     #region
 
+    void SwitchActor(string name, Sprite portrait, float funcProfileSize = 1)
+    {
+        dialogue.actorName = name;
 
+        dialogue.profileSprite = portrait;
+
+        dialogue.Talk(funcProfileSize);
+    }
 
     #endregion
     //========================
@@ -49,18 +57,75 @@ public class Plague : MonoBehaviour
     //Update
     void Update()
     {
-        switch (miseryScript.progression)
+        if (dialogue.onRadius)
         {
-            case 4:
-                speech = new string[] { "Tão bom te conhecer finalmente Miséria!", "Tão bom te conhecer finalmente Miséria!", "......", "Você tinha que falar junto comigo?", "Foi mal, maninho, só saiu!", "Olha, Miséria, não liga pra esse carinha aqui, ele é rabugento!", "Rabugento? Eu? Hmpf.", "É de poucas palavras, meu amigo?", "Cuidado pra não acabar virando um estraga prazeres como esse cara aqui.", "Ele teria sorte em ser mais parecido comigo do que com você.", "Pra que essa felicidade exagerada quando o mundo é tão azul...", "Melancólico como sempre, maninho?", "Não desanima o carinha aqui...", "De qualquer jeito, pega uma bebida e senta aqui com a gente.", "Você tinha que falar demais mesmo? Tagarela bocudo.", "Você não achou ele muito diferente do outro...", "Cala a boca, idiota!" };
+            switch (miseryScript.progression)
+            {
+                case 1:
 
-                nextProgressionValue = 4;
+                    speech = new string[] { "E aí,?! Eu sou a Peste!", "E esse aqui do meu lado também é a Peste.", "Ele não é um cara muito agradável...", "Mas a gente tem que conviver né?" };
 
-                break;
+                    dialogue.speechTxt = speech;
+                    nextProgressionValue = 1.1f;
+
+                    break;
+
+                case 1.1f:
+
+                    speech = new string[] { "Cala a boca.", "Ele que é difícil de se conviver.", "Já imaginou alguém falante e feliz o tempo todo?", "É insuportável!" };
+
+                    dialogue.speechTxt = speech;
+                    nextProgressionValue = 1.2f;
+
+                    SwitchActor("Peste Triste", portraits[2], 1.8f);
+
+                    break;
+
+                case 1.2f:
+
+                    speech = new string[] { "..." };
+
+                    dialogue.speechTxt = speech;
+                    nextProgressionValue = 1.3f;
+
+                    SwitchActor("Miséria", portraits[0]);
+
+                    break;
+
+                case 1.3f:
+
+                    speech = new string[] { "É, ele é dos meus." };
+
+                    dialogue.speechTxt = speech;
+                    nextProgressionValue = 1.4f;
+
+                    SwitchActor("Peste Triste", portraits[2], 1.8f);
+
+                    break;
+
+                case 1.4f:
+
+                    speech = new string[] { "Afe, chega de gente chata por aqui." };
+
+                    dialogue.speechTxt = speech;
+                    nextProgressionValue = 1;
+
+                    SwitchActor("Peste Feliz", portraits[1], 1.93f);
+
+                    break;
+
+                default:
+
+                    speech = new string[] { "..." };
+
+                    dialogue.speechTxt = speech;
+                    nextProgressionValue = miseryScript.progression;
+
+                    break;
+            }
+
+            dialogue.nextProgressionValue = nextProgressionValue;
         }
-
-        dialogue.speechTxt = speech;
-        dialogue.nextProgressionValue = nextProgressionValue;
     }
 
     #endregion

@@ -40,6 +40,11 @@ public class DialogueGhost : MonoBehaviour
             miseryScript.enemyColor = GetComponent<SpriteRenderer>().color;
             dcGhost.Speech(profile, speechTxt, actorName); // Alteração: Chamar dcGhost.Speech em vez de dc.Speech
         }
+
+        if (miseryScript.invading)
+        {
+            GetComponent<Soul>().speed = 2;
+        }
     }
 
     public void InteractiveDialogue()

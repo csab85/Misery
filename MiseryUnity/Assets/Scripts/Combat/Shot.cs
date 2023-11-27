@@ -138,7 +138,7 @@ public class Shot : MonoBehaviour
                 state = "exploding";
             }
 
-            if (unitScript.aoe <= 0)
+            if (unitScript.aoe <= 0 && unitScript.type != "Time")
             {
                 state = "static";
             }

@@ -11,6 +11,7 @@ public class Spawner : MonoBehaviour
     public GameObject[] enemiesArray;
     public GameObject enemy;
 
+    Misery miseryScript;
     [SerializeField] EgoMap egomapScript;
     [SerializeField] GameObject nexus;
 
@@ -53,7 +54,12 @@ public class Spawner : MonoBehaviour
 
         onCoooldown = true;
         yield return new WaitForSecondsRealtime(1);
-        nexus.GetComponent<Animator>().SetBool("spawning", false);
+
+        if (miseryScript.battleLvl != 4)
+        {
+            nexus.GetComponent<Animator>().SetBool("spawning", false);
+        }
+        
         yield return new WaitForSeconds(cooldown - 1);
         onCoooldown = false;
     }
@@ -75,6 +81,8 @@ public class Spawner : MonoBehaviour
     //Update
     void Update()
     {
+        miseryScript = GameObject.Find("Misery").GetComponent<Misery>();
+
         if (!onCoooldown)
         {
             StartCoroutine(SpawnEnemy());

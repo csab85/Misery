@@ -19,7 +19,6 @@ public class WorkingMainMenu : MonoBehaviour
     public void Jogar()
     {
         SceneManager.LoadScene(NomeDoLevelDeJogo); 
-        playerSctript.talking = true;
         SceneManager.UnloadSceneAsync("MainMenu"); //descarrega a cena
         AudioManager.instance.PlayMusic("ThemeGame"); //faz com que toque a próxima música quando aperta o play
 
