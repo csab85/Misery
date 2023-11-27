@@ -12,6 +12,9 @@ EditorBuildSettings:
     path: Assets/Scenes/Scenery.unity
     guid: 7e804937836bffa4b9558bb509a42160
   - enabled: 1
+    path: Assets/Scenes/TimeRoom.unity
+    guid: 654b4e87af34b6d4d93b971bdb17f20b
+  - enabled: 1
     path: Assets/Scenes/BaseInvasion.unity
     guid: 1a9fa9ef4226ca249babda50c8850be1
   m_configObjects: {}
