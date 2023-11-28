@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine.UI;
 
 public class WorkingMainMenu : MonoBehaviour
 {
@@ -17,21 +16,12 @@ public class WorkingMainMenu : MonoBehaviour
 
     public Misery playerSctript;
 
-    public Slider volumeSlider; // Adicionando um Slider
-    private const string VolumePrefsKey = "Volume"; // Chave para salvar o valor do slider
-
-    private void Start()
-    {
-        playerSctript = GameObject.Find("Misery").GetComponent<Misery>();
-        // Carregar o valor salvo do slider ao iniciar
-        LoadVolume();
-    }
-
     public void Jogar()
     {
         SceneManager.LoadScene(NomeDoLevelDeJogo);
-        SceneManager.UnloadSceneAsync("MainMenu");
-        AudioManager.instance.PlayMusic("ThemeGame");
+        SceneManager.UnloadSceneAsync("MainMenu"); //descarrega a cena
+        AudioManager.instance.PlayMusic("ThemeGame"); //faz com que toque a próxima música quando aperta o play
+
         playerSctript.talking = false;
     }
 
@@ -46,7 +36,6 @@ public class WorkingMainMenu : MonoBehaviour
         PainelOpçoes.SetActive(false);
         PainelMenuInicial.SetActive(true);
     }
-
     public void AbrirSongs()
     {
         PainelOpçoes.SetActive(false);
@@ -58,27 +47,14 @@ public class WorkingMainMenu : MonoBehaviour
         PainelSounds.SetActive(false);
         PainelOpçoes.SetActive(true);
     }
-
     public void SairJogo()
     {
         Debug.Log("Quit Game");
         Application.Quit();
     }
 
-    // Função para salvar o valor do slider
-    public void SaveVolume()
+    private void Start()
     {
-        PlayerPrefs.SetFloat(VolumePrefsKey, volumeSlider.value);
-        PlayerPrefs.Save();
-    }
-
-    // Função para carregar o valor salvo do slider
-    private void LoadVolume()
-    {
-        if (PlayerPrefs.HasKey(VolumePrefsKey))
-        {
-            float savedVolume = PlayerPrefs.GetFloat(VolumePrefsKey);
-            volumeSlider.value = savedVolume;
-        }
+        playerSctript = GameObject.Find("Misery").GetComponent<Misery>();
     }
 }
