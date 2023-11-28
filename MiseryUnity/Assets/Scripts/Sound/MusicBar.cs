@@ -13,6 +13,7 @@ public class MusicBar : MonoBehaviour
         {
             AudioManager.instance.musicSource.Stop();
             PlayRandomMusic();
+            AudioManager.instance.PlaySfx("door_open");
             isInside = true;
         }
     }
@@ -21,7 +22,9 @@ public class MusicBar : MonoBehaviour
     {
         // Se o jogador sair da área, redefine a flag para permitir a reprodução da música novamente ao entrar
         isInside = false;
+        AudioManager.instance.PlaySfx("door_close");
         AudioManager.instance.PlayMusic("ThemeGame");
+
     }
 
     private void PlayRandomMusic()
