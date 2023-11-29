@@ -17,6 +17,8 @@ public class DefeatCollider : MonoBehaviour
 
         miseryScript.invading = false;
         miseryScript.talking = false;
+        egoMapScript.unfading = true;
+        egoMapScript.fading = false;
         Destroy(GameObject.Find("Base Invasion(Clone)"));
 
         if (miseryScript.battleLvl == 4)

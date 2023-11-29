@@ -10,7 +10,6 @@ public class MainCamera : MonoBehaviour
 
     //Game Objects
     GameObject misery;
-    [SerializeField] SpriteRenderer fadeRectRenderer;
 
     //Components
     Camera cam;
@@ -38,8 +37,6 @@ public class MainCamera : MonoBehaviour
 
     //cam defining vars (defines the camera behaviour)
     public bool following = true;
-
-    float fadeAlpha = 0;
 
     #endregion
     //========================
@@ -82,29 +79,6 @@ public class MainCamera : MonoBehaviour
         {
             cam.orthographicSize = Mathf.MoveTowards(cam.orthographicSize, camSize, camZoomSpeed * Time.deltaTime);
         }
-    }
-
-    /// <summary>
-    /// Fades or unfades the camera to black
-    /// </summary>
-    /// <param name="fadeSpeed">How quick will the camera fade (if positive) or unfade (if negative)</param>
-    public void Fade(float fadeSpeed)
-    {
-        int aimAlpha;
-
-        if (fadeSpeed > 0)
-        {
-            aimAlpha = 255;
-        }
-
-        else
-        {
-            aimAlpha = 0;
-        }
-
-        fadeAlpha = Mathf.MoveTowards(fadeAlpha, aimAlpha, fadeSpeed * Time.deltaTime);
-
-        fadeRectRenderer.color = new Color(0, 0, 0, fadeAlpha);
     }
 
     #endregion

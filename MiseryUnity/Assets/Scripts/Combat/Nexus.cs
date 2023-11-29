@@ -62,7 +62,7 @@ public class Nexus : MonoBehaviour
         print("irrinho");
     }
 
-    void WinInvasion()
+    IEnumerator WinInvasion()
     {
         foreach (GameObject unit in egoMapScript.activeUnits)
         {
@@ -72,6 +72,11 @@ public class Nexus : MonoBehaviour
         miseryScript.defeatedGhosts += miseryScript.battleLvl;
         miseryScript.invading = false;
         miseryScript.talking = false;
+
+        egoMapScript.fading = false;
+        egoMapScript.unfading = true;
+
+        yield return new WaitForEndOfFrame();
         Destroy(GameObject.Find("Base Invasion(Clone)"));
     }
 
