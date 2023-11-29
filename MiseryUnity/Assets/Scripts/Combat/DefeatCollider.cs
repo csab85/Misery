@@ -8,17 +8,27 @@ public class DefeatCollider : MonoBehaviour
     [SerializeField] Misery miseryScript;
     [SerializeField] EgoMap egoMapScript;
 
-    void LoseInvasion()
+    IEnumerator LoseInvasion()
     {
         foreach (GameObject unit in egoMapScript.activeUnits)
         {
             Destroy(unit);
         }
 
-        miseryScript.invading = false;
-        miseryScript.talking = false;
+        egoMapScript.invasionText.text = "TU PERDEU";
+        egoMapScript.textFading = true;
+        egoMapScript.textUnfading = false;
+
+        yield return new WaitForSecondsRealtime(5);
+
         egoMapScript.unfading = true;
         egoMapScript.fading = false;
+
+        yield return new WaitForSecondsRealtime(2);
+
+        miseryScript.invading = false;
+        miseryScript.talking = false;
+
         Destroy(GameObject.Find("Base Invasion(Clone)"));
 
         if (miseryScript.battleLvl == 4)
@@ -38,6 +48,7 @@ public class DefeatCollider : MonoBehaviour
         if (collision.gameObject.tag == "Enemy")
         {
             LoseInvasion();
+            print("aaaa");
         }
     }
 }

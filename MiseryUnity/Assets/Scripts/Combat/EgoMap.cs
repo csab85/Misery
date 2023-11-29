@@ -17,7 +17,7 @@ public class EgoMap : MonoBehaviour
 
     [SerializeField] TimeSlider timeSliderScript;
     [SerializeField] SpriteRenderer fadeRectRenderer;
-    [SerializeField] TextMeshProUGUI invasionText;
+    public TextMeshProUGUI invasionText;
 
     //classes
     public GameObject allyShooter;
