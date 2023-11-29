@@ -2294,7 +2294,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_text: "Sele\xE7\xE3o de tropas no jogo mental = a/s/d \nUso das tropas = Bot\xE3o
-    esquerdo mouse\nIntera\xE7\xE3o: Espa\xE7o\nMovimento w/a/s/d"
+    esquerdo mouse\nIntera\xE7\xE3o = Espa\xE7o\nMovimento = w/a/s/d"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: dec6b3ed77c47d8469d8c6bfe651b7f0, type: 2}
   m_sharedMaterial: {fileID: -8928099505917920317, guid: dec6b3ed77c47d8469d8c6bfe651b7f0, type: 2}
