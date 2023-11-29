@@ -359,7 +359,7 @@ MonoBehaviour:
     m_Bits: 256
   radius: 2
   miseryScript: {fileID: 0}
-  battleLvl: 4
+  battleLvl: 2
 --- !u!1 &6403014385334010046
 GameObject:
   m_ObjectHideFlags: 0

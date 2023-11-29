@@ -59,6 +59,7 @@ public class Nexus : MonoBehaviour
 
         tag = selfTag;
         damaging = false;
+        print("irrinho");
     }
 
     void WinInvasion()
@@ -116,10 +117,12 @@ public class Nexus : MonoBehaviour
         if (tag == "Damaged" && !damaging)
         {
             StartCoroutine(Damage());
+            print("ain");
         }
 
-        if (health < 0)
+        if (health <= 0)
         {
+            print("morre fi");
             GetComponent<Animator>().SetBool("exploding", true);
         }
     }

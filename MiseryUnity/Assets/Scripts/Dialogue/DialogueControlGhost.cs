@@ -56,6 +56,7 @@ public class DialogueControlGhost : MonoBehaviour
                 index = 0; // valor do index 0 para poder voltar ao início do painel, ou poder falar com ele denovo
                 DialogueObject.SetActive(false);
                 dialogueFinished = true;
+                GameObject.Find("Misery").GetComponent<Misery>().talking = false;
             }
         }
     }

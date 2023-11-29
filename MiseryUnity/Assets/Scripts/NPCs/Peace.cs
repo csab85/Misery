@@ -143,7 +143,7 @@ public class Peace: MonoBehaviour
 
                     else
                     {
-                        speech = new string[] { "Ótimo!", "Agora sugiro que você vá pro bar.", "Os imbecis vão querer te conhecer." };
+                        speech = new string[] { "Ótimo!", "Agora sugiro que você vá pro bar.", "Os imbecis vão querer te conhecer.", "Ou só vai direto pra casa dormir, sei lá.", "Só lembra de ir dormir depois.", "O último Miséria foi demitido porque sempre vinha trabalhar virado...", ".......", "Tá esperando o que?", "SOME." };
 
                         dialogue.speechTxt = speech;
                         nextProgressionValue = 1;
