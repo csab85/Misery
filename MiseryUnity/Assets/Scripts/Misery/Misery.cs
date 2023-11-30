@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Misery : MonoBehaviour
 {
@@ -38,6 +39,9 @@ public class Misery : MonoBehaviour
     //Battle
     public int battleLvl;
     public Color enemyColor;
+
+    //menu
+    bool menuOn = true;
 
     #endregion
     //========================
@@ -146,6 +150,16 @@ public class Misery : MonoBehaviour
     // Update
     void Update()
     {
+        if (menuOn)
+        {
+            if (SceneManager.sceneCount == 1)
+            {
+                talking = false;
+                cam.following = true;
+                menuOn = false;
+            }
+        }
+
         switch (state)
         {
             case  "walking":

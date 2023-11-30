@@ -1016,7 +1016,6 @@ MonoBehaviour:
   PainelMenuInicial: {fileID: 744380914}
   "PainelOp\xE7oes": {fileID: 200513807}
   PainelSounds: {fileID: 1197391157}
-  playerSctript: {fileID: 1391977340033278048, guid: b634a0d8e00dddc4293441d376d3ebd0, type: 3}
 --- !u!4 &469555612
 Transform:
   m_ObjectHideFlags: 0

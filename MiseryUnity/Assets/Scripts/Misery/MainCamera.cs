@@ -32,8 +32,8 @@ public class MainCamera : MonoBehaviour
     public float camTravelSpeed;
     public float camZoomSpeed;
 
-    float cameraX = 0;
-    float cameraY = 0;
+    float cameraX = 18.7f;
+    float cameraY = -15.4f;
 
     //cam defining vars (defines the camera behaviour)
     public bool following = true;

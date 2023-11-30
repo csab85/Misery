@@ -14,15 +14,16 @@ public class WorkingMainMenu : MonoBehaviour
     [SerializeField]
     private GameObject PainelSounds;
 
-    public Misery playerSctript;
+    void Start()
+    {
+        
+    }
 
     public void Jogar()
     {
         SceneManager.LoadScene(NomeDoLevelDeJogo);
         SceneManager.UnloadSceneAsync("MainMenu"); //descarrega a cena
         AudioManager.instance.PlayMusic("ThemeGame"); //faz com que toque a próxima música quando aperta o play
-
-        playerSctript.talking = false;
     }
 
     public void AbrirOpçoes()
@@ -51,10 +52,5 @@ public class WorkingMainMenu : MonoBehaviour
     {
         Debug.Log("Quit Game");
         Application.Quit();
-    }
-
-    private void Start()
-    {
-        playerSctript = GameObject.Find("Misery").GetComponent<Misery>();
     }
 }
