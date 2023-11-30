@@ -22,6 +22,7 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IP
     [SerializeField] TextMeshProUGUI health;
     [SerializeField] TextMeshProUGUI avaiableTroops;
     [SerializeField] Image highlight;
+    [SerializeField] Fader fader;
 
     #endregion
     //========================
@@ -148,17 +149,17 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IP
     void Update()
     {
         //check avaiable troops LEMBRA DE VERIFICAR SE OS NOMES TAO IGUAIS AOS DAS CARTAS
-        if (unitScript.type == "Mago" | unitScript.type == "Mago de Elite")
+        if (unitScript.type == "Mago")
         {
             avaiableTroops.text = egoMapScript.magesAvaiable.ToString();
         }
 
-        if (unitScript.type == "Atiradores" | unitScript.type == "Atiradores de Elite")
+        if (unitScript.type == "Atiradores")
         {
             avaiableTroops.text = egoMapScript.shootersAvaiable.ToString();
         }
 
-        if (unitScript.type == "Tanque" | unitScript.type == "Tanque de Elite")
+        if (unitScript.type == "Tanque")
         {
             avaiableTroops.text = egoMapScript.tanksAvaiable.ToString();
         }

@@ -12,6 +12,7 @@ public class Spawner : MonoBehaviour
     public GameObject enemy;
 
     Misery miseryScript;
+    [SerializeField] Fader egoMapFader;
     [SerializeField] EgoMap egomapScript;
     [SerializeField] GameObject nexus;
 

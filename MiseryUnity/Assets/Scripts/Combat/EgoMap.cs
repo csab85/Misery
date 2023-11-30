@@ -16,7 +16,6 @@ public class EgoMap : MonoBehaviour
     public GameObject spawner;
 
     [SerializeField] TimeSlider timeSliderScript;
-    [SerializeField] SpriteRenderer fadeRectRenderer;
     public TextMeshProUGUI invasionText;
 
     //classes
@@ -50,13 +49,6 @@ public class EgoMap : MonoBehaviour
 
     public bool showingCard = false;
 
-    public float fadeAlpha = 0;
-    public bool fading = false;
-    public bool unfading = false;
-    public float textFadeAlpha = 1;
-    public bool textFading = false;
-    public bool textUnfading = false;
-
     //list with units to delete
     public List<GameObject> activeUnits;
 
@@ -81,7 +73,7 @@ public class EgoMap : MonoBehaviour
     /// <param name="minimumPoint">The minimun point x and y in which the obstacles will appear (Max is the map border)</param>
     /// <param name="times">How much times the obstacle will be spawned</param>
     /// <returns></returns>
-    void  AddObstacle(GameObject obstacle, int times)
+    void  AddObstacle()
     {
         if (miseryScript.battleLvl == 1)
         {
@@ -144,49 +136,6 @@ public class EgoMap : MonoBehaviour
         }
     }
 
-
-    /// <summary>
-    /// Fades or unfades the camera to black
-    /// </summary>
-    /// <param name="fadeSpeed">How quick will the camera fade (if positive) or unfade (if negative)</param>
-    public void Fade(float fadeSpeed)
-    {
-        float aimAlpha = 0;
-
-        if (fadeSpeed > 0)
-        {
-            aimAlpha = 1;
-        }
-
-        if (fadeSpeed < 0)
-        {
-            aimAlpha = 0;
-        }
-
-        fadeAlpha = Mathf.MoveTowards(fadeAlpha, aimAlpha, Mathf.Abs(fadeSpeed * Time.deltaTime));
-
-        fadeRectRenderer.color = new Color(0, 0, 0, fadeAlpha);
-    }
-
-    public void TextFade(float fadeSpeed)
-    {
-        float aimAlpha = 0;
-
-        if (fadeSpeed > 0)
-        {
-            aimAlpha = 1;
-        }
-
-        if (fadeSpeed < 0)
-        {
-            aimAlpha = 0;
-        }
-
-        textFadeAlpha = Mathf.MoveTowards(textFadeAlpha, aimAlpha, Mathf.Abs(fadeSpeed * Time.deltaTime));
-
-        invasionText.color = new Color(1, 1, 1, textFadeAlpha);
-    }
-
     #endregion
     //========================
 
@@ -198,38 +147,16 @@ public class EgoMap : MonoBehaviour
     //Start
     void Start()
     {
-        Mathf.Clamp(fadeAlpha, 0, 1);
-        Mathf.Clamp(textFadeAlpha, 0, 1);
         deck = new List<GameObject> { allyShooter, allyMage, allyTank };
         miseryScript = GameObject.Find("Misery").GetComponent<Misery>();
         cam = GameObject.Find("MainCamera");
         ChooseTroops();
-        AddObstacle(spawner, 3);
+        AddObstacle();
     }
 
     //Update
     void Update()
     {
-        if (fading)
-        {
-            Fade(0.5f);
-        }
-
-        if (unfading)
-        {
-            Fade(-0.5f);
-        }
-
-        if (textFading)
-        {
-            TextFade(0.5f);
-        }
-
-        if (textUnfading)
-        {
-            TextFade(-0.5f);
-        }
-
         //Control
         #region
 

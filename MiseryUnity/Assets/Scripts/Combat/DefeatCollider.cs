@@ -8,28 +8,17 @@ public class DefeatCollider : MonoBehaviour
     [SerializeField] Misery miseryScript;
     [SerializeField] EgoMap egoMapScript;
 
-    IEnumerator LoseInvasion()
+    void LoseInvasion()
     {
         foreach (GameObject unit in egoMapScript.activeUnits)
         {
             Destroy(unit);
         }
 
-        egoMapScript.invasionText.text = "TU PERDEU";
-        egoMapScript.textFading = true;
-        egoMapScript.textUnfading = false;
-
-        yield return new WaitForSecondsRealtime(5);
-
-        egoMapScript.unfading = true;
-        egoMapScript.fading = false;
-
-        yield return new WaitForSecondsRealtime(2);
-
         miseryScript.invading = false;
         miseryScript.talking = false;
 
-        Destroy(GameObject.Find("Base Invasion(Clone)"));
+        GameObject.Find("Invasion Text 1").GetComponent<Fader>().progression = 2;
 
         if (miseryScript.battleLvl == 4)
         {
@@ -43,7 +32,7 @@ public class DefeatCollider : MonoBehaviour
         miseryScript = GameObject.Find("Misery").GetComponent<Misery>();
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.tag == "Enemy")
         {
