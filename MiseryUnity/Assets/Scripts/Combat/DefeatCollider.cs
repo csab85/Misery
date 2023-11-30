@@ -21,11 +21,6 @@ public class DefeatCollider : MonoBehaviour
 
         GameObject.Find("Invasion Text 1").GetComponent<Fader>().progression = 2;
         GameObject.Find("Invasion Text 2").GetComponent<TextMeshProUGUI>().text = GameObject.Find("Invasion Text 1").GetComponent<Fader>().chosenStroy[2];
-
-        if (miseryScript.battleLvl == 4)
-        {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-        }
     }
 
     // Start is called before the first frame update

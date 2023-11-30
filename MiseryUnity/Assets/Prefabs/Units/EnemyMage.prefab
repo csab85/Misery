@@ -183,7 +183,7 @@ MonoBehaviour:
   type: Mago
   health: 4
   cost: 1
-  damage: 1
+  damage: 2
   aoe: 0.5
   attackSpeed: 3.5
   range: 3

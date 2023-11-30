@@ -173,8 +173,8 @@ GameObject:
   - component: {fileID: 6405314633940408136}
   - component: {fileID: 1378629845860988662}
   - component: {fileID: 1104705205627319137}
-  - component: {fileID: 1104705205627319136}
   - component: {fileID: 4888338520242904385}
+  - component: {fileID: 1104705205627319136}
   m_Layer: 0
   m_Name: Time Boss
   m_TagString: Enemy
@@ -477,6 +477,24 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 7
+--- !u!114 &4888338520242904385
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1104705205627319151}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 60ba214412166d24a9b8d228cf0953ad, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  egoMapScript: {fileID: 0}
+  miseryScript: {fileID: 0}
+  health: 35
+  defense: 0
+  damageTaken: 0
+  theTime: 1
 --- !u!114 &1104705205627319136
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -495,7 +513,7 @@ MonoBehaviour:
   self: {fileID: 1104705205627319136}
   enemy: {fileID: 0}
   type: Time
-  health: 100
+  health: 60
   cost: 1
   damage: 5
   aoe: 0
@@ -511,24 +529,6 @@ MonoBehaviour:
   targetBuilding: 0
   direction: {x: 0, y: 0, z: 0}
   state: walking
---- !u!114 &4888338520242904385
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1104705205627319151}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 60ba214412166d24a9b8d228cf0953ad, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  egoMapScript: {fileID: 0}
-  miseryScript: {fileID: 0}
-  health: 35
-  defense: 0
-  damageTaken: 0
-  theTime: 1
 --- !u!1 &1104705206176614937
 GameObject:
   m_ObjectHideFlags: 0

@@ -1,6 +1,7 @@
  using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class UnitBehaviour : MonoBehaviour
 {
@@ -219,6 +220,12 @@ public class UnitBehaviour : MonoBehaviour
     {
         miseryScript = GameObject.Find("Misery").GetComponent<Misery>();
 
+        if(miseryScript.battleLvl == 4)
+        {
+            GameObject.Find("Nexus").GetComponent<SpriteRenderer>().enabled = false;
+            GameObject.Find("Nexus").tag = "Untagged";
+        }
+
         //setup if it is enemy or ally
         if (tag == "Ally")
         {
@@ -263,8 +270,24 @@ public class UnitBehaviour : MonoBehaviour
     {
         if (health <= 0)
         {
-            tag = "Dead";
-            gameObject.SetActive(false);
+            if (name != "Time Boss")
+            {
+                tag = "Dead";
+                gameObject.SetActive(false);
+            }
+            else
+            {
+                foreach (GameObject unit in egoMap.activeUnits)
+                {
+                    Destroy(unit);
+                }
+
+                miseryScript.invading = false;
+                miseryScript.talking = false;
+
+                GameObject.Find("Invasion Text 1").GetComponent<Fader>().progression = 2;
+                GameObject.Find("Invasion Text 2").GetComponent<TextMeshProUGUI>().text = GameObject.Find("Invasion Text 1").GetComponent<Fader>().chosenStroy[1];
+            }
         }
 
         if (tag != "Dead" && tag != "Damaged")

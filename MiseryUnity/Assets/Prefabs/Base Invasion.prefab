@@ -1297,7 +1297,7 @@ MonoBehaviour:
   egoMapFader: {fileID: 0}
   egomapScript: {fileID: 865554947619765577}
   nexus: {fileID: 2973750377494666831}
-  cooldown: 35
+  cooldown: 25
 --- !u!60 &419602697663591768
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -3549,6 +3549,37 @@ MonoBehaviour:
   posit: {x: 0, y: 0, z: 0}
   show: 0
   hide: 1
+--- !u!1 &1673455410300130489
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6071070641138260825}
+  m_Layer: 0
+  m_Name: GameObject
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6071070641138260825
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1673455410300130489}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 8.405705, y: 6.0909724, z: 10.841047}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1186955902575623124}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2378745897624789941
 GameObject:
   m_ObjectHideFlags: 0
@@ -3580,6 +3611,7 @@ Transform:
   - {fileID: 865554947619765576}
   - {fileID: 865554948840006787}
   - {fileID: 865554949025200497}
+  - {fileID: 6071070641138260825}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -4344,7 +4376,7 @@ MonoBehaviour:
   isRenderer: 0
   isImage: 0
   isText: 1
-  renderer: {fileID: 0}
+  spriteRenderer: {fileID: 0}
   image: {fileID: 0}
   text: {fileID: 8882273443854056657}
   coverRectFader: {fileID: 8882273444745929726}
@@ -6464,7 +6496,7 @@ MonoBehaviour:
   isRenderer: 0
   isImage: 1
   isText: 0
-  renderer: {fileID: 0}
+  spriteRenderer: {fileID: 0}
   image: {fileID: 8882273444745929727}
   text: {fileID: 0}
   coverRectFader: {fileID: 8882273444745929726}
@@ -6904,7 +6936,7 @@ MonoBehaviour:
   isRenderer: 0
   isImage: 0
   isText: 1
-  renderer: {fileID: 0}
+  spriteRenderer: {fileID: 0}
   image: {fileID: 0}
   text: {fileID: 8882273445029932225}
   coverRectFader: {fileID: 8882273444745929726}
@@ -8026,7 +8058,7 @@ MonoBehaviour:
   egoMapFader: {fileID: 0}
   egomapScript: {fileID: 865554947619765577}
   nexus: {fileID: 2973750377494666831}
-  cooldown: 35
+  cooldown: 25
 --- !u!60 &8882273445393206740
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -9196,6 +9228,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 512438152497450387}
     m_Modifications:
+    - target: {fileID: 1104705205627319136, guid: 66494026ed731e14db653a248ad9bb66, type: 3}
+      propertyPath: egoMap
+      value: 
+      objectReference: {fileID: 865554947619765577}
     - target: {fileID: 1104705205627319138, guid: 66494026ed731e14db653a248ad9bb66, type: 3}
       propertyPath: m_RootOrder
       value: 0

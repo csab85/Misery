@@ -87,11 +87,10 @@ public class Nexus : MonoBehaviour
 
         miseryScript.invading = false;
         miseryScript.talking = false;
-        Destroy(GameObject.Find("Base Invasion(Clone)"));
 
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        GameObject.Find("Invasion Text 1").GetComponent<Fader>().progression = 2;
+        GameObject.Find("Invasion Text 2").GetComponent<TextMeshProUGUI>().text = GameObject.Find("Invasion Text 1").GetComponent<Fader>().chosenStroy[1];
     }
-
     #endregion
     //========================
 
@@ -132,6 +131,4 @@ public class Nexus : MonoBehaviour
 
     #endregion
     //========================
-
-
 }

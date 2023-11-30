@@ -3,9 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class Fader : MonoBehaviour
 {
+    Misery miseryScript;
+
     float fadeInSpeed = 0.5f;
     float fadeOutSpeed = -0.5f;
     public float fadeAlpha = 0;
@@ -17,7 +20,7 @@ public class Fader : MonoBehaviour
     [SerializeField] bool isImage;
     [SerializeField] bool isText;
 
-    [SerializeField] SpriteRenderer renderer;
+    [SerializeField] SpriteRenderer spriteRenderer;
     [SerializeField] Image image;
     [SerializeField] TextMeshProUGUI text;
 
@@ -49,6 +52,8 @@ public class Fader : MonoBehaviour
     string[] story9 = { "Cometi um erro no trabalho...", "Descobriram e fui demitido.", "Fiz outra pessoa ser demitida no meu lugar." };
 
     string[] story10 = { "Quando tinha 15 anos me meti numa furada com um pessoal...", "Acabei em uma enrascada e tive que fugir de casa.", "Consegui pagar o que lhes devia e me deixaram em paz." };
+
+    string[] timeStory = { "Você desafiou o Tempo...", "E venceu, por enquanto...", "Mais um erro que você não vai corrigir" };
 
     string[][] stories;
 
@@ -88,9 +93,11 @@ public class Fader : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+
+        miseryScript = GameObject.Find("Misery").GetComponent<Misery>();
         if (isRenderer)
         {
-            aimColor = renderer.color;
+            aimColor = spriteRenderer.color;
         }
 
         if (isImage)
@@ -106,6 +113,11 @@ public class Fader : MonoBehaviour
 
             chosenStroy = stories[Random.Range(0, 10)];
 
+            if (miseryScript.battleLvl == 4)
+            {
+                chosenStroy = timeStory;
+            }
+
             gameObject.GetComponent<TextMeshProUGUI>().text = chosenStroy[0];
         }
     }
@@ -119,7 +131,7 @@ public class Fader : MonoBehaviour
 
             if (isRenderer)
             {
-                renderer.color = new Color(aimColor.r, aimColor.g, aimColor.b, fadeAlpha);
+                spriteRenderer.color = new Color(aimColor.r, aimColor.g, aimColor.b, fadeAlpha);
             }
 
             if (isImage)
@@ -139,7 +151,7 @@ public class Fader : MonoBehaviour
 
             if (isRenderer)
             {
-                renderer.color = new Color(aimColor.r, aimColor.g, aimColor.b, fadeAlpha);
+                spriteRenderer.color = new Color(aimColor.r, aimColor.g, aimColor.b, fadeAlpha);
             }
 
             if (isImage)
@@ -181,13 +193,18 @@ public class Fader : MonoBehaviour
                 }
             }
 
-            //step 8
+            //step 8 final
             if (progression == 3)
             {
                 fadingOut = true;
 
                 if (fadeAlpha <= 0 && invasionTxt1Fader.fadeAlpha <= 0 && invasionTxt2Fader.fadeAlpha <= 0)
                 {
+                    if (miseryScript.battleLvl == 4)
+                    {
+                        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+                    }
+
                     Destroy(transform.parent.transform.parent.gameObject);
                 }
             }
