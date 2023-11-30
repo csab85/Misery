@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using TMPro;
 
 public class Nexus : MonoBehaviour
 {
@@ -74,6 +75,7 @@ public class Nexus : MonoBehaviour
         miseryScript.talking = false;
 
         GameObject.Find("Invasion Text 1").GetComponent<Fader>().progression = 2;
+        GameObject.Find("Invasion Text 2").GetComponent<TextMeshProUGUI>().text = GameObject.Find("Invasion Text 1").GetComponent<Fader>().chosenStroy[1];
     }
 
     void WinBossfight()

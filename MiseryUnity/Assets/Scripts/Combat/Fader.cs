@@ -29,6 +29,31 @@ public class Fader : MonoBehaviour
 
     Color aimColor;
 
+    //SOUL STORIES
+    string[] story1 = { "Meu tio estava agindo estranho comigo na minha festa de 10 anos...", "Ele conseguiu.", "Mudei-me para outro país com meus pais depois do meu aniversário de 10 anos." };
+
+    string[] story2 = { "Eu estava afundado em dívidas, a empresa da família ia falir...", "E faliu, fui despejado e minha família passa fome.", "E faliu, fui despejado e minha família passa fome." };
+
+    string[] story3 = { "Saí do meu país em busca de uma vida melhor...", "E fui enganada, tive que fazer de tudo para sobreviver.", "Com muito trabalho duro consegui reconstruir minha vida novamente." };
+
+    string[] story4 = { "Acusei outra pessoa por um crime que eu cometi...", "Acabei preso, peguei sentença de 12 anos.", "Safei-me, consegui colocar outra pessoa na cadeia." };
+
+    string[] story5 = { "Após trabalhar duro desde os 12 anos, consegui investir na minha casa própria...", "Mas a perdi para o banco e fui demitido do meu trabalho atual.", "Após muitos empréstimos, tenho casa própria." };
+
+    string[] story6 = { "Encontrei o amor da minha vida, o problema é que sou casado...", "Minha esposa descobriu, me acovardei e deixei ela ir.", "Criei coragem e pedi o divórcio." };
+
+    string[] story7 = { "Meu chefe estava sendo um escroto comigo...", "Mas eu precisava muito do dinheiro, então aguentei.", "Pedi demissão e consegui um emprego muito melhor." };
+
+    string[] story8 = { "Estava me sentindo mal e fui ao médico fazer exames...", "Preciso de dinheiro para um tratamento caro.", "Não teve alteração nenhuma." };
+
+    string[] story9 = { "Cometi um erro no trabalho...", "Descobriram e fui demitido.", "Fiz outra pessoa ser demitida no meu lugar." };
+
+    string[] story10 = { "Quando tinha 15 anos me meti numa furada com um pessoal...", "Acabei em uma enrascada e tive que fugir de casa.", "Consegui pagar o que lhes devia e me deixaram em paz." };
+
+    string[][] stories;
+
+    public string[] chosenStroy;
+
     /// <summary>
     /// Fades or unfades the camera to black
     /// </summary>
@@ -76,6 +101,12 @@ public class Fader : MonoBehaviour
         if (isText)
         {
             aimColor = text.color;
+
+            stories = new string[][] { story1, story2, story3, story4, story5, story6, story7, story8, story9, story10 };
+
+            chosenStroy = stories[Random.Range(0, 10)];
+
+            gameObject.GetComponent<TextMeshProUGUI>().text = chosenStroy[0];
         }
     }
 

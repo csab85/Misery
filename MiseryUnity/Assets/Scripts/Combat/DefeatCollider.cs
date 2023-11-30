@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using TMPro;
 
 public class DefeatCollider : MonoBehaviour
 {
@@ -19,6 +20,7 @@ public class DefeatCollider : MonoBehaviour
         miseryScript.talking = false;
 
         GameObject.Find("Invasion Text 1").GetComponent<Fader>().progression = 2;
+        GameObject.Find("Invasion Text 2").GetComponent<TextMeshProUGUI>().text = GameObject.Find("Invasion Text 1").GetComponent<Fader>().chosenStroy[2];
 
         if (miseryScript.battleLvl == 4)
         {
