@@ -57,6 +57,11 @@ public class DialogueControlGhost : MonoBehaviour
                 DialogueObject.SetActive(false);
                 dialogueFinished = true;
                 GameObject.Find("Misery").GetComponent<Misery>().talking = false;
+
+                if (!GameObject.Find("Misery").GetComponent<Misery>().invading)
+                {
+                    GameObject.Find("Misery").GetComponent<Misery>().enemySoul.GetComponent<Soul>().speed = 2;
+                }
             }
         }
     }

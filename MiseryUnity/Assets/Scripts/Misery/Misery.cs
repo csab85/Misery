@@ -11,6 +11,7 @@ public class Misery : MonoBehaviour
 
     //components
     public MainCamera cam;
+    public GameObject enemySoul;
     Animator animator;
 
     #endregion
@@ -150,7 +151,7 @@ public class Misery : MonoBehaviour
     // Update
     void Update()
     {
-        if (menuOn)
+        if (menuOn && SceneManager.GetActiveScene().name == "Scenery")
         {
             if (SceneManager.sceneCount == 1)
             {

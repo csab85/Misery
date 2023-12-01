@@ -220,12 +220,8 @@ public class Soul : MonoBehaviour
 
                 #endregion
         }
-
-        if (miseryScript.invading)
-        {
-            speed = 2;
-        }
     }
 
     #endregion
+    //========================
 }

@@ -15,6 +15,8 @@ public class Play : MonoBehaviour
 
         GameObject.Find("Misery").GetComponent<Misery>().invading = true;
 
+        GameObject.Find("Misery").GetComponent<Misery>().enemySoul.GetComponent<Soul>().speed = 0;
+
         Instantiate(baseInvasion, mainCamera.transform);
     }
 }

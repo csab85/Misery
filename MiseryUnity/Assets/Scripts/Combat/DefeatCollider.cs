@@ -21,6 +21,8 @@ public class DefeatCollider : MonoBehaviour
 
         GameObject.Find("Invasion Text 1").GetComponent<Fader>().progression = 2;
         GameObject.Find("Invasion Text 2").GetComponent<TextMeshProUGUI>().text = GameObject.Find("Invasion Text 1").GetComponent<Fader>().chosenStroy[2];
+
+        miseryScript.enemySoul.GetComponent<Soul>().speed = 2;
     }
 
     // Start is called before the first frame update
@@ -33,8 +35,7 @@ public class DefeatCollider : MonoBehaviour
     {
         if (collision.gameObject.tag == "Enemy")
         {
-            LoseInvasion();
-            print("aaaa");
+            LoseInvasion();     
         }
     }
 }

@@ -129,10 +129,14 @@ public class Shot : MonoBehaviour
     }
 
     //Collision
-    private void OnTriggerEnter2D(Collider2D collision)
+    private IEnumerator OnTriggerEnter2D(Collider2D collision)
     {
         if (affectedTargets.Contains(collision.tag))
         {
+            GetComponent<AudioSource>().Play();
+            yield return new WaitForSecondsRealtime(0.1f);
+            GetComponent<AudioSource>().Stop();
+
             if (unitScript.aoe > 0)
             {
                 state = "exploding";

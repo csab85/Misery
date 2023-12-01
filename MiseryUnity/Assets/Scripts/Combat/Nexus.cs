@@ -76,6 +76,9 @@ public class Nexus : MonoBehaviour
 
         GameObject.Find("Invasion Text 1").GetComponent<Fader>().progression = 2;
         GameObject.Find("Invasion Text 2").GetComponent<TextMeshProUGUI>().text = GameObject.Find("Invasion Text 1").GetComponent<Fader>().chosenStroy[1];
+
+        miseryScript.enemySoul.GetComponent<Soul>().speed = 0.5f;
+        miseryScript.enemySoul.transform.Find("Light 2D").gameObject.SetActive(false);
     }
 
     void WinBossfight()

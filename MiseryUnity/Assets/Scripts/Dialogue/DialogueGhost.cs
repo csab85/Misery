@@ -34,16 +34,12 @@ public class DialogueGhost : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space) && onRadius && dcGhost.dialogueFinished)
         {
             GetComponent<Soul>().speed = 0;
+            miseryScript.enemySoul = gameObject;
             isDialogueActive = true;
             miseryScript.talking = true;
             miseryScript.battleLvl = battleLvl;
             miseryScript.enemyColor = GetComponent<SpriteRenderer>().color;
             dcGhost.Speech(profile, speechTxt, actorName); // Alteração: Chamar dcGhost.Speech em vez de dc.Speech
-        }
-
-        if (miseryScript.invading)
-        {
-            GetComponent<Soul>().speed = 2;
         }
     }
 
