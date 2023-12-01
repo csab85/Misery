@@ -24,6 +24,7 @@ public class TimeDoorLock : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        AudioManager.instance.musicSource.Stop();
         SceneManager.LoadScene("TimeRoom"); 
     }
 }
