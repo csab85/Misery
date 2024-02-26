@@ -77,7 +77,7 @@ public class UnitBehaviour : MonoBehaviour
     int left = -2;
 
     string selfTag;
-    Color selfColor;
+    public Color selfColor;
 
     #endregion
     //========================
@@ -282,8 +282,7 @@ public class UnitBehaviour : MonoBehaviour
                     Destroy(unit);
                 }
 
-                miseryScript.invading = false;
-                miseryScript.talking = false;
+                miseryScript.battleLvl = 5;
 
                 GameObject.Find("Invasion Text 1").GetComponent<Fader>().progression = 2;
                 GameObject.Find("Invasion Text 2").GetComponent<TextMeshProUGUI>().text = GameObject.Find("Invasion Text 1").GetComponent<Fader>().chosenStroy[1];

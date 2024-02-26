@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class EgoMap : MonoBehaviour
 {
@@ -208,6 +209,11 @@ public class EgoMap : MonoBehaviour
                 timeSliderScript.aimTimeValue = timeSliderScript.timeValue - unitCost;
                 tanksAvaiable -= 1;
             }
+        }
+
+        if (!miseryScript.invading)
+        {
+            Destroy(transform.parent);
         }
         #endregion
     }

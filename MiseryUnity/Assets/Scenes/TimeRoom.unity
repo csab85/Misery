@@ -179,6 +179,10 @@ PrefabInstance:
       value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 1391977340033278048, guid: b634a0d8e00dddc4293441d376d3ebd0, type: 3}
+      propertyPath: enemyColor.a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1391977340033278048, guid: b634a0d8e00dddc4293441d376d3ebd0, type: 3}
       propertyPath: enemyColor.b
       value: 1
       objectReference: {fileID: 0}

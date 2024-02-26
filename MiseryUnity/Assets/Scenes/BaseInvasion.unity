@@ -178,7 +178,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: Base Invasion
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 4766810103701300124, guid: e0470e28dfe55844b89cc5333dae92ae, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: e0470e28dfe55844b89cc5333dae92ae, type: 3}
 --- !u!1 &1658228040
 GameObject:

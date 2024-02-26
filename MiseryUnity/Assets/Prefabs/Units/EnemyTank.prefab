@@ -216,6 +216,7 @@ MonoBehaviour:
   targetBuilding: 0
   direction: {x: 0, y: 0, z: 0}
   state: walking
+  selfColor: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1 &5777290744413324270
 GameObject:
   m_ObjectHideFlags: 0

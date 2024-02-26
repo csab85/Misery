@@ -168,10 +168,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cam: {fileID: 0}
+  enemySoul: {fileID: 0}
   state: walking
   acceleration: 20
   deceleration: 20
   maxVelocity: {x: 2.5, y: 2.5, z: 0}
   velocity: {x: 0, y: 0, z: 0}
-  moving: 1
+  talking: 0
+  invading: 0
   progression: 0
+  defeatedGhosts: 0
+  battleLvl: 0
+  enemyColor: {r: 1, g: 1, b: 1, a: 1}

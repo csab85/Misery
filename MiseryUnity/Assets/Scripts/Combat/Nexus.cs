@@ -71,8 +71,6 @@ public class Nexus : MonoBehaviour
         }
 
         miseryScript.defeatedGhosts += miseryScript.battleLvl;
-        miseryScript.invading = false;
-        miseryScript.talking = false;
 
         GameObject.Find("Invasion Text 1").GetComponent<Fader>().progression = 2;
         GameObject.Find("Invasion Text 2").GetComponent<TextMeshProUGUI>().text = GameObject.Find("Invasion Text 1").GetComponent<Fader>().chosenStroy[1];
@@ -87,9 +85,6 @@ public class Nexus : MonoBehaviour
         {
             Destroy(unit);
         }
-
-        miseryScript.invading = false;
-        miseryScript.talking = false;
 
         GameObject.Find("Invasion Text 1").GetComponent<Fader>().progression = 2;
         GameObject.Find("Invasion Text 2").GetComponent<TextMeshProUGUI>().text = GameObject.Find("Invasion Text 1").GetComponent<Fader>().chosenStroy[1];

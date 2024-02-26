@@ -200,9 +200,17 @@ public class Fader : MonoBehaviour
 
                 if (fadeAlpha <= 0 && invasionTxt1Fader.fadeAlpha <= 0 && invasionTxt2Fader.fadeAlpha <= 0)
                 {
+                    miseryScript.invading = false;
+                    miseryScript.talking = false;
+
                     if (miseryScript.battleLvl == 4)
                     {
-                        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+                        SceneManager.LoadScene("TimeRoom");
+                    }
+
+                    if (miseryScript.battleLvl == 5)
+                    {
+                        SceneManager.LoadScene("Scenery");
                     }
 
                     Destroy(transform.parent.transform.parent.gameObject);
